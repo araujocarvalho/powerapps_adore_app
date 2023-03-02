@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "b2264702-7ee4-49b2-acae-1ab20b34fd5f",
+    "Name": "FlowCISNotificarEmail_Reprovada_ADORE",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": null
+  }
+]

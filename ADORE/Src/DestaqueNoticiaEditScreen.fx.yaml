@@ -1,0 +1,1803 @@
+"DestaqueNoticiaEditScreen As screen.'phoneDetailViewLayout_ver3.0'":
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+    OnVisible: |-
+        =UpdateContext(
+            {
+                varPopUpVisible: false,
+                varInitialFoto: If(
+                    varIsEdit,
+                    varDestaqueEdit.Foto.Full,
+                    Blank()
+                ),
+                varListEmailsString: ""
+            }
+        );
+        ClearCollect(
+            colGroups,
+            {displayName: ""}
+        );
+        If(
+            !varIsEdit,
+            Collect(
+                colGroups,
+                GruposdoOffice365.ListGroupMembers("07982123-b734-4e3e-b0e6-2bad93048e27").value//LPAT - Emp. AT
+            );
+            Collect(
+                colGroups,
+                Filter(
+                    GruposdoOffice365.ListGroupMembers("6a175f73-e11b-48d2-b616-da4041fe8805").value,
+                    ("AT" in displayName) || ("AG" in displayName)
+                )//LPDGT - Emp. DGT
+            );
+            Collect(
+                colGroups,
+                Filter(
+                    GruposdoOffice365.ListGroupMembers("2dcb3457-f27a-4833-83ef-504252f510e5").value,
+                    "AT/CN" in displayName
+                )//LPFROTA
+            );
+            Collect(
+                colGroups,
+                GruposdoOffice365.ListGroupMembers("7b67f568-9367-4ec5-9c48-2c044dede1b4").value//LPAT/CN - Emp. AT/CN
+            );
+            Collect(
+                colGroups,
+                GruposdoOffice365.ListGroupMembers("cbba490f-3314-4462-a3bb-b5c7ad797fe2").value//LPAT/SE - Emp. AT/SE
+            );
+            Collect(
+                colGroups,
+                GruposdoOffice365.ListGroupMembers("53696eb5-74b8-40dd-b515-9883fa7b89bf").value//LPAT/TR - Emp. AT/TR
+            );
+            Collect(
+                colGroups,
+                GruposdoOffice365.ListGroupMembers("f3002375-9da7-4720-9c55-206749978898").value//LPAT/LE - Emp. AT/LE
+            );
+            Collect(
+                colGroups,
+                GruposdoOffice365.ListGroupMembers("b8184e63-ad68-4969-924c-c3c39dd2cbe3").value//LPAT/CP - Emp. AT/CP
+            );
+            UpdateContext(
+                {
+                    varMinutoPublicacao: Text(Minute(varDestaqueEdit.'Publicado em')),
+                    varHoraPublicacao: Text(Hour(varDestaqueEdit.'Publicado em')),
+                    varDataPublicacao: varDestaqueEdit.'Publicado em'
+                }
+            )
+        );
+        ClearCollect(
+            colFabricantes,
+            Sort(
+                Distinct(
+                    colModelosEquipamentos,
+                    Fabricante_Real
+                ),
+                Result,
+                Ascending
+            )
+        );
+        If(
+            varIsEdit && !IsBlank(varDestaqueEdit.'Modelo Equipamento'),
+            ClearCollect(
+                colModelos,
+                Sort(
+                    Distinct(
+                        Filter(
+                            modelos_ativos_v3,
+                            If(
+                                fabricanteEqptoComboBox.Selected.Result = "",
+                                1 = 1,
+                                fabricanteEqptoComboBox.Selected.Result = Fabricante_Real
+                            )
+                        ),
+                        Modelo_Real
+                    ),
+                    Result,
+                    Ascending
+                )
+            ),
+            ClearCollect(
+                colModelos,
+                Sort(
+                    Distinct(
+                        colModelosEquipamentos,
+                        Modelo_Real
+                    ),
+                    Result,
+                    Ascending
+                )
+            )
+        );
+        ResetForm(destaqueForm);
+        Reset(notificarParaComboBox)
+
+    destaqueContainer As groupContainer.verticalAutoLayoutContainer:
+        Height: =1048
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        LayoutOverflowY: =LayoutOverflow.Scroll
+        Width: =640
+        Y: =88
+        ZIndex: =1
+
+        destaqueForm As form:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            BorderColor: =RGBA(135, 190, 82, 1)
+            DataSource: =destaques_noticias
+            DefaultMode: =If(varIsEdit=true,FormMode.Edit,FormMode.New)
+            Height: =1080
+            Item: =If(varIsEdit=true,varDestaqueEdit)
+            LayoutMinHeight: =1925
+            LayoutMinWidth: =320
+            OnFailure: |-
+                =Notify(
+                    "Falha ao inserir destaque na lista. Print este erro e contate o desenvolvedor para mais informações.",
+                    NotificationType.Error
+                );
+            OnSuccess: |-
+                =Notify(
+                    "Destaque publicado com sucesso!",
+                    NotificationType.Success
+                );
+                UpdateContext(
+                    {
+                        varListEmailsString: Concat(
+                            notificarParaComboBox.SelectedItems,
+                            mail,
+                            ";"
+                        )
+                    }
+                );
+                If(
+                    !varIsEdit && notificarToggle.Value,
+                    FlowNotificar_Publicacao_Destaque_ADORE.Run(
+                        destaqueForm.LastSubmit.Assunto,
+                        User().Email,
+                        destaqueForm.LastSubmit.Categoria.Value,
+                        Proper(destaqueForm.LastSubmit.Autor.DisplayName),
+                        varListEmailsString
+                    )
+                );
+                Navigate(
+                    DestaquesNoticiasSearchScreen,
+                    None,
+                    {
+                        varFiltroDestaque_SIOM: "",
+                        varFiltroDestaque_Fabricante: "",
+                        varFiltroDestaque_Modelo: ""
+                    }
+                )
+            Width: =640
+            Y: =88
+            ZIndex: =1
+
+            Title_DataCard1 As typedDataCard.textualEditCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Title"
+                Default: =ThisItem.Title
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"Title")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@destaques_noticias], DataSourceInfo.MaxLength, "Title")
+                Required: =true
+                Update: =titleTextInput.Text
+                Visible: =false
+                Width: =640
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+                DataCardKey28 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =17
+                    Text: ="Item Nº"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                titleTextInput As text:
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    BorderThickness: =2
+                    Color: =RGBA(0, 0, 0, 1)
+                    Default: =If(destaqueForm.Mode = FormMode.New,First(Sort(destaques_noticias,Title,Descending)).Title+1,varDestaqueEdit.Title)
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =DisplayMode.View
+                    FocusedBorderThickness: =4
+                    Height: =52
+                    HoverBorderColor: =RGBA(135, 190, 82, 1)
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    Size: =17
+                    Width: =560
+                    X: =30
+                    Y: =42
+                    ZIndex: =3
+
+            Autor_DataCard2 As typedDataCard.comboBoxEditCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="autor"
+                Default: =ThisItem.Autor
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"autor")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =112
+                Required: =true
+                Update: =autorDataCardValue.Selected
+                Width: =640
+                X: =0
+                Y: =1
+                ZIndex: =1
+
+                DataCardKey41 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    PaddingTop: =20
+                    Size: =17
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                autorDataCardValue As combobox:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    ChevronBackground: =RGBA(12, 126, 44, 1)
+                    ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+                    ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+                    ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+                    ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                    DefaultSelectedItems: |-
+                        =If(
+                           destaqueForm.Mode = FormMode.New,
+                            {
+                                Claims: "i:0#.f|membership|" & Lower(User().Email),
+                                DisplayName: User().FullName,
+                                Email: User().Email,
+                                Department: "",
+                                JobTitle: "",
+                                Picture: ""
+                            },
+                            Parent.Default
+                        )
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayFields: =["DisplayName","Email","Picture"]
+                    DisplayMode: =Parent.DisplayMode
+                    Height: =52
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    Items: =Choices([@destaques_noticias].Autor)
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(135, 190, 82, 1)
+                    SearchFields: =["DisplayName"]
+                    SearchItems: =Choices(destaques_noticias.Autor,autorDataCardValue.SearchText)
+                    SelectionFill: =RGBA(12, 126, 44, 1)
+                    SelectMultiple: =false
+                    Size: =17
+                    Template: =ListItemTemplate.Person
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =56
+                    ZIndex: =2
+
+                ErrorMessage25 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 51, 51, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =17
+                    Text: ="Campo de preenchimento obrigatório"
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit&&IsBlank(autorDataCardValue.Selected)
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =autorDataCardValue.Y + autorDataCardValue.Height
+                    ZIndex: =3
+
+                StarVisible27 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey41.Height
+                    PaddingTop: =20
+                    Size: =21
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey41.Y
+                    ZIndex: =4
+
+            Órgão_DataCard1 As typedDataCard.textualEditCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Ger_x00ea_ncia"
+                Default: =ThisItem.Órgão
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"Ger_x00ea_ncia")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =100
+                MaxLength: =DataSourceInfo([@destaques_noticias], DataSourceInfo.MaxLength, "Ger_x00ea_ncia")
+                Required: =true
+                Update: =órgãoDataCardValue.Text
+                Width: =640
+                X: =0
+                Y: =2
+                ZIndex: =1
+
+                DataCardKey43 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =17
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                órgãoDataCardValue As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    BorderThickness: =2
+                    Color: =RGBA(0, 0, 0, 1)
+                    Default: =If(destaqueForm.Mode = FormMode.New,UsuáriosdoOffice365.UserProfile(User().Email).Department,Parent.Default)
+                    DelayOutput: =true
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    FocusedBorderThickness: =4
+                    Height: =52
+                    HoverBorderColor: =RGBA(135, 190, 82, 1)
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =17
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =46
+                    ZIndex: =2
+
+                ErrorMessage27 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 51, 51, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =17
+                    Text: ="Campo de preenchimento obrigatório"
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit&&IsBlank(órgãoDataCardValue)
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =órgãoDataCardValue.Y + órgãoDataCardValue.Height
+                    ZIndex: =3
+
+                StarVisible29 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey43.Height
+                    Size: =21
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey43.Y
+                    ZIndex: =4
+
+            Assunto_DataCard2 As typedDataCard.textualEditCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Assunto"
+                Default: =ThisItem.Assunto
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"Assunto")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@destaques_noticias], DataSourceInfo.MaxLength, "Assunto")
+                Required: =true    
+                Update: =assuntoDataCardValue.Text
+                Width: =640
+                X: =0
+                Y: =3
+                ZIndex: =1
+
+                DataCardKey40 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =17
+                    Text: ="Título/Assunto"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                assuntoDataCardValue As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    BorderThickness: =2
+                    Color: =RGBA(0, 0, 0, 1)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    FocusedBorderThickness: =4
+                    Height: =52
+                    HoverBorderColor: =RGBA(135, 190, 82, 1)
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    MaxLength: =80
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =17
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey40.Y + DataCardKey40.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage24 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 51, 51, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =17
+                    Text: ="Campo de preenchimento obrigatório"
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit&&IsBlank(assuntoDataCardValue)
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =assuntoDataCardValue.Y + assuntoDataCardValue.Height
+                    ZIndex: =3
+
+                StarVisible26 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey40.Height
+                    Size: =21
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey40.Y
+                    ZIndex: =4
+
+            Conteúdo_DataCard1 As typedDataCard.textualEditCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Descri_x00e7__x00e3_o"
+                Default: =ThisItem.Conteúdo
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"Descri_x00e7__x00e3_o")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =435
+                MaxLength: =DataSourceInfo([@destaques_noticias], DataSourceInfo.MaxLength, "Descri_x00e7__x00e3_o")
+                Required: =true
+                Update: =conteudoRichTextEditor.HtmlText
+                Width: =640
+                X: =0
+                Y: =4
+                ZIndex: =1
+
+                DataCardKey45 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =17
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                ErrorMessage29 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 51, 51, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =17
+                    Text: ="Campo de preenchimento obrigatório"
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit&&IsBlank(conteudoRichTextEditor)
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =conteudoRichTextEditor.Y + conteudoRichTextEditor.Height
+                    ZIndex: =3
+
+                StarVisible31 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey45.Height
+                    Size: =21
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey45.Y
+                    ZIndex: =4
+
+                conteudoRichTextEditor As richTextEditor:
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Default: =Parent.Default
+                    Height: =382
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =45
+                    ZIndex: =5
+
+            Categoria_DataCard2 As typedDataCard.comboBoxEditCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Categoria"
+                Default: =ThisItem.Categoria
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"Categoria")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                Required: =true
+                Update: =categoriaDataCardValue.Selected
+                Width: =640
+                X: =0
+                Y: =5
+                ZIndex: =1
+
+                DataCardKey42 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =17
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                categoriaDataCardValue As combobox:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    ChevronBackground: =RGBA(12, 126, 44, 1)
+                    ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+                    ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+                    ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+                    ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                    DefaultSelectedItems: =Parent.Default
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayFields: =["Value"]
+                    DisplayMode: =Parent.DisplayMode
+                    Height: =52
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    Items: =Choices([@destaques_noticias].Categoria)
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(135, 190, 82, 1)
+                    SearchFields: =["Value"]
+                    SearchItems: =Choices(destaques_noticias.Categoria,categoriaDataCardValue.SearchText)
+                    SelectionFill: =RGBA(12, 126, 44, 1)
+                    SelectMultiple: =false
+                    Size: =17
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =46
+                    ZIndex: =2
+
+                ErrorMessage26 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 51, 51, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =17
+                    Text: ="Campo de preenchimento obrigatório"
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit&&IsBlank(categoriaDataCardValue.Selected)
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =categoriaDataCardValue.Y + categoriaDataCardValue.Height
+                    ZIndex: =3
+
+                StarVisible28 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey42.Height
+                    Size: =21
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey42.Y
+                    ZIndex: =4
+
+            "'Nº PACP_DataCard' As typedDataCard.textualEditCard":
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="N_x00ba_PACP"
+                Default: =ThisItem.'Nº PACP'
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"N_x00ba_PACP")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =97
+                MaxLength: =DataSourceInfo([@destaques_noticias], DataSourceInfo.MaxLength, "N_x00ba_PACP")
+                Required: =false
+                Update: =DataCardValue2.Text
+                Width: =640
+                X: =0
+                Y: =6
+                ZIndex: =1
+
+                DataCardKey37 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =17
+                    Text: ="Nº do PACP Associado"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =2
+                    ZIndex: =1
+
+                DataCardValue2 As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    BorderThickness: =2
+                    Color: =RGBA(0, 0, 0, 1)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    FocusedBorderThickness: =4
+                    Height: =52
+                    HoverBorderColor: =RGBA(135, 190, 82, 1)
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =17
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =48
+                    ZIndex: =2
+
+                ErrorMessage20 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 51, 51, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    FontWeight: =FontWeight.Semibold
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =24
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue2.Y + DataCardValue2.Height
+                    ZIndex: =3
+
+                StarVisible22 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey37.Height
+                    Size: =21
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey37.Y
+                    ZIndex: =4
+
+            "'Equipamento (SIOM)_DataCard1' As typedDataCard.textualEditCard":
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Equipamento_x0028_SIOM_x0029_"
+                Default: =ThisItem.'Equipamento (SIOM)'
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"Equipamento_x0028_SIOM_x0029_")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =128
+                MaxLength: =DataSourceInfo([@destaques_noticias], DataSourceInfo.MaxLength, "Equipamento_x0028_SIOM_x0029_")
+                Required: =false
+                Update: =DataCardValue1.Text
+                Width: =640
+                X: =0
+                Y: =7
+                ZIndex: =1
+
+                DataCardKey27 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =70
+                    Size: =17
+                    Text: ="Nº SIOM dos Equipamentos Associados"
+                    Width: =Parent.Width - 60
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue1 As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    BorderThickness: =2
+                    Color: =RGBA(0, 0, 0, 1)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    FocusedBorderThickness: =4
+                    Height: =52
+                    HoverBorderColor: =RGBA(135, 190, 82, 1)
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =17
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =65
+                    ZIndex: =2
+
+                ErrorMessage9 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 51, 51, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    FontWeight: =FontWeight.Semibold
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =24
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue1.Y + DataCardValue1.Height
+                    ZIndex: =3
+
+                StarVisible18 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey27.Height
+                    Size: =21
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey27.Y
+                    ZIndex: =4
+
+                DataCardKey27_1 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(102, 182, 227, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =25
+                    Size: =12
+                    Text: ="(Separados por ';')"
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =30
+                    ZIndex: =5
+
+            Fabricante_DataCard1 As typedDataCard.textualEditCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Fabricante"
+                Default: =ThisItem.'Fabricante Equipamento'
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"Fabricante")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =100
+                MaxLength: =DataSourceInfo([@destaques_noticias], DataSourceInfo.MaxLength, "Fabricante")
+                Required: =false
+                Update: =If(IsBlank(fabricanteEqptoComboBox.Selected.Result),"",fabricanteEqptoComboBox.Selected.Result)
+                Width: =640
+                X: =0
+                Y: =8
+                ZIndex: =1
+
+                DataCardKey30 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =17
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =1
+                    ZIndex: =1
+
+                ErrorMessage17 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 51, 51, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    FontWeight: =FontWeight.Semibold
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =24
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    ZIndex: =3
+
+                StarVisible19 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey30.Height
+                    Size: =21
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey30.Y
+                    ZIndex: =4
+
+                fabricanteEqptoComboBox As combobox:
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    ChevronBackground: =RGBA(12, 126, 44, 1)
+                    ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+                    ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+                    ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+                    ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                    DefaultSelectedItems: =If(varIsEdit,Filter(colFabricantes,Result=varDestaqueEdit.'Fabricante Equipamento'))
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayFields: =["Result"]
+                    Height: =52
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    Items: =colFabricantes
+                    OnChange: |
+                        =If(
+                            !IsBlank(modeloEqptoComboBox.Selected.Result),
+                            Reset(modeloEqptoComboBox)
+                        );
+                        ClearCollect(
+                            colModelos,
+                            Sort(
+                                Distinct(
+                                    Filter(
+                                        modelos_ativos_v3,
+                                        If(
+                                            fabricanteEqptoComboBox.Selected.Result = "" || IsBlank(fabricanteEqptoComboBox.Selected.Result),
+                                            1 = 1,
+                                            fabricanteEqptoComboBox.Selected.Result = Fabricante_Real
+                                        )
+                                    ),
+                                    Modelo_Real
+                                ),
+                                Result,
+                                Ascending
+                            )
+                        );
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(135, 190, 82, 1)
+                    SearchFields: =["Result"]
+                    SearchItems: =Search(colFabricantes,fabricanteEqptoComboBox.SearchText,"Result")
+                    SelectionFill: =RGBA(12, 126, 44, 1)
+                    SelectMultiple: =false
+                    Size: =17
+                    Width: =580
+                    X: =30
+                    Y: =40
+                    ZIndex: =5
+
+                DataCardValue13_1 As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    BorderThickness: =2
+                    Color: =RGBA(0, 0, 0, 1)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    FocusedBorderThickness: =4
+                    Height: =52
+                    HoverBorderColor: =RGBA(135, 190, 82, 1)
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =17
+                    Tooltip: =Parent.DisplayName
+                    Visible: =false
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =42
+                    ZIndex: =6
+
+            Modelo_DataCard1 As typedDataCard.textualEditCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Modelo"
+                Default: =ThisItem.'Modelo Equipamento'
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"Modelo")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =127
+                MaxLength: =DataSourceInfo([@destaques_noticias], DataSourceInfo.MaxLength, "Modelo")
+                Required: =!IsBlank(fabricanteEqptoComboBox.Selected)
+                Update: =If(IsBlank(modeloEqptoComboBox.Selected.Result),"",modeloEqptoComboBox.Selected.Result)
+                Visible: =true
+                Width: =640
+                X: =0
+                Y: =9
+                ZIndex: =1
+
+                DataCardKey36 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =17
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =1
+                    ZIndex: =1
+
+                ErrorMessage19 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 51, 51, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =17
+                    Text: ="Selecione o modelo do equipamento"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit,IsBlank(modeloEqptoComboBox.Selected))
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =92
+                    ZIndex: =3
+
+                StarVisible21 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey36.Height
+                    Size: =21
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey36.Y
+                    ZIndex: =4
+
+                modeloEqptoComboBox As combobox:
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    ChevronBackground: =RGBA(12, 126, 44, 1)
+                    ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+                    ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+                    ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+                    ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                    DefaultSelectedItems: =If(varIsEdit,Filter(colModelos,Result=varDestaqueEdit.'Modelo Equipamento'))
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayFields: =["Result"]
+                    Height: =52
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    Items: =colModelos
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(135, 190, 82, 1)
+                    SearchFields: =["Result"]
+                    SearchItems: =Search(colModelos,modeloEqptoComboBox.SearchText,"Result")
+                    SelectionFill: =RGBA(12, 126, 44, 1)
+                    SelectMultiple: =false
+                    Size: =17
+                    Width: =580
+                    X: =30
+                    Y: =40
+                    ZIndex: =5
+
+            Foto_DataCard2 As typedDataCard.addLargePictureCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Foto"
+                Default: =ThisItem.Foto
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"Foto")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =155
+                Required: =true
+                Update: =anexoImage.Image
+                Width: =640
+                X: =0
+                Y: =10
+                ZIndex: =1
+
+                DataCardKey48 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =17
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                anexoImage As image:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    Height: =AddPicture2.Height
+                    Image: =varInitialFoto
+                    Tooltip: =Parent.DisplayName
+                    Width: =AddPicture2.Width
+                    X: =AddPicture2.X
+                    Y: =AddPicture2.Y
+                    ZIndex: =2
+
+                AddPicture2 As addMedia:
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    BorderThickness: =2
+                    ChangePictureText: =If(IsBlank(varInitialFoto),"Clique para adicionar uma imagem","Trocar imagem")
+                    Color: =RGBA(39, 113, 194, 1)
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =98
+                    OnSelect: |-
+                        =UpdateContext({varInitialFoto: AddPicture2.Media})
+                    Text: =If(IsBlank(varInitialFoto),"Clique para adicionar uma imagem","Trocar imagem")
+                    UseMobileCamera: =true
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey48.Y + DataCardKey48.Height + 5
+                    ZIndex: =3
+
+                ErrorMessage31 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 51, 51, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =17
+                    Text: ="Campo de preenchimento obrigatório"
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit&&IsBlank(anexoImage)
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =anexoImage.Y + anexoImage.Height
+                    ZIndex: =4
+
+                StarVisible33 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey48.Height
+                    Size: =21
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey48.Y
+                    ZIndex: =5
+
+            Link_DataCard2 As typedDataCard.urlEditCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Link"
+                Default: =ThisItem.Link
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"Link")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                Required: =false
+                Update: =DataCardValue13.Text
+                Width: =640
+                X: =0
+                Y: =11
+                ZIndex: =1
+
+                DataCardKey44 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =17
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue13 As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    BorderThickness: =2
+                    Color: =RGBA(0, 0, 0, 1)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    FocusedBorderThickness: =4
+                    Height: =52
+                    HoverBorderColor: =RGBA(135, 190, 82, 1)
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =17
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey44.Y + DataCardKey44.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage28 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 51, 51, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    FontWeight: =FontWeight.Semibold
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =24
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue13.Y + DataCardValue13.Height
+                    ZIndex: =3
+
+                StarVisible30 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey44.Height
+                    Size: =21
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey44.Y
+                    ZIndex: =4
+
+            Anexos_DataCard1 As typedDataCard.attachmentsEditCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="{Attachments}"
+                Default: =ThisItem.Anexos
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"{Attachments}")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                Required: =false
+                Update: =DataCardValue15.Attachments
+                Width: =640
+                X: =0
+                Y: =12
+                ZIndex: =1
+
+                DataCardKey47 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =17
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue15 As attachments:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    BorderThickness: =2
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    FocusedBorderThickness: =4
+                    Font: =Font.'Lato Light'
+                    Height: =156
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    IsInDataCard: =true
+                    ItemColor: =RGBA(255, 255, 255, 1)
+                    ItemFill: =RGBA(12, 126, 44, 1)
+                    ItemHoverColor: =RGBA(255, 255, 255, 1)
+                    ItemHoverFill: =RGBA(53, 74, 36, 1)
+                    Items: =Parent.Default
+                    PaddingBottom: =5
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    PaddingRight: =5
+                    PaddingTop: =5
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(135, 190, 82, 1)
+                    Size: =17
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey47.Y + DataCardKey47.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage30 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 51, 51, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    FontWeight: =FontWeight.Semibold
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =24
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue15.Y + DataCardValue15.Height
+                    ZIndex: =3
+
+                StarVisible32 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey47.Height
+                    Size: =21
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey47.Y
+                    ZIndex: =4
+
+            "'Publicado em_DataCard1' As typedDataCard.dateTimeEditCard":
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Publicadoem"
+                Default: =ThisItem.'Publicado em'
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@destaques_noticias],DataSourceInfo.DisplayName,"Publicadoem")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                Required: =false
+                Update: =DateValue1.SelectedDate + Time(Value(HourValue1.Selected.Value), Value(MinuteValue1.Selected.Value), 0)
+                Visible: =false
+                Width: =640
+                X: =0
+                Y: =13
+                ZIndex: =1
+
+                DataCardKey29 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =21
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DateValue1 As datepicker:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    CalendarHeaderFill: =RGBA(12, 126, 44, 1)
+                    Color: =RGBA(255, 255, 255, 1)
+                    DefaultDate: =varDataPublicacao
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    EndYear: =Year(Today())+100
+                    Fill: =RGBA(0, 0, 0, 1)
+                    Height: =70
+                    HoverDateFill: =RGBA(53, 74, 36, 1)
+                    IconBackground: =RGBA(12, 126, 44, 1)
+                    IsEditable: =true
+                    PaddingBottom: =0
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    SelectedDateFill: =RGBA(12, 126, 44, 1)
+                    Size: =24
+                    StartYear: =1899
+                    Tooltip: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) / 2
+                    X: =30
+                    Y: =DataCardKey29.Y + DataCardKey29.Height + 5
+                    ZIndex: =2
+
+                HourValue1 As dropdown:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    ChevronBackground: =RGBA(12, 126, 44, 1)
+                    ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+                    ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+                    ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+                    ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: =varHoraPublicacao
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    Fill: =RGBA(0, 0, 0, 1)
+                    Height: =DateValue1.Height
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    Items: =["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"]
+                    PaddingBottom: =5
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    PaddingRight: =5
+                    PaddingTop: =5
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(135, 190, 82, 1)
+                    SelectionFill: =RGBA(12, 126, 44, 1)
+                    Size: =21
+                    Tooltip: =Parent.DisplayName
+                    Width: =DateValue1.Width / 2 - 10
+                    X: =DateValue1.X + DateValue1.Width + 10
+                    Y: =DateValue1.Y
+                    ZIndex: =3
+
+                Separator5 As label:
+                    Align: =Align.Center
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(255, 255, 255, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    FontWeight: =FontWeight.Bold
+                    Height: =HourValue1.Height
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =21
+                    Text: |-
+                        =":"
+                    Width: =10
+                    Wrap: =false
+                    X: =HourValue1.X + HourValue1.Width
+                    Y: =HourValue1.Y
+                    ZIndex: =4
+
+                MinuteValue1 As dropdown:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    ChevronBackground: =RGBA(12, 126, 44, 1)
+                    ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+                    ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+                    ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+                    ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: =varMinutoPublicacao
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    Fill: =RGBA(0, 0, 0, 1)
+                    Height: =HourValue1.Height
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    Items: =["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"]
+                    PaddingBottom: =5
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    PaddingRight: =5
+                    PaddingTop: =5
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(135, 190, 82, 1)
+                    SelectionFill: =RGBA(12, 126, 44, 1)
+                    Size: =21
+                    Tooltip: =Parent.DisplayName
+                    Width: =HourValue1.Width
+                    X: =HourValue1.X + HourValue1.Width + Separator5.Width
+                    Y: =HourValue1.Y
+                    ZIndex: =5
+
+                ErrorMessage18 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(255, 51, 51, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    FontWeight: =FontWeight.Semibold
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =24
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =HourValue1.Y + HourValue1.Height
+                    ZIndex: =6
+
+                StarVisible20 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey29.Height
+                    Size: =21
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey29.Y
+                    ZIndex: =7
+
+        notificarDestaqueContainer As groupContainer.verticalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            FillPortions: =0
+            Height: =300
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =15
+            LayoutMinHeight: =200
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Visible: =!varIsEdit
+            Width: =640
+            X: =40
+            Y: =40
+            ZIndex: =2
+
+            notificarToggle As toggleSwitch:
+                AlignInContainer: =AlignInContainer.Center
+                BorderColor: =RGBA(135, 190, 82, 1)
+                Color: =RGBA(152, 208, 70, 1)
+                Default: =true
+                FalseFill: =RGBA(128, 130, 133, 1)
+                FalseText: ="Notificar publicação do destaque via e-mail"
+                HandleFill: =RGBA(255, 255, 255, 1)
+                Height: =49
+                LayoutMinHeight: =49
+                LayoutMinWidth: =154
+                OnChange: =If(!notificarToggle.Value,Reset(notificarParaComboBox))
+                Size: =17
+                TextPosition: =TextPosition.Left
+                TrueFill: =RGBA(12, 126, 44, 1)
+                TrueText: ="Notificar publicação do destaque via e-mail"
+                Width: =580
+                ZIndex: =1
+
+            DataCardKey27_2 As label:
+                AlignInContainer: =AlignInContainer.Center
+                AutoHeight: =true
+                Color: =RGBA(102, 182, 227, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                Height: =25
+                LayoutMinHeight: =70
+                LayoutMinWidth: =560
+                Size: =12
+                Text: ="(Selecione um ou mais e-mails)"
+                Visible: =notificarToggle.Value&&IsBlank(notificarParaComboBox.Selected)
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =30
+                ZIndex: =2
+
+            notificarParaHorizontalContainer As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =0
+                Height: =55
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutMinHeight: =40
+                LayoutMinWidth: =640
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =3
+
+                notificarParaStarVisible As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =DataCardKey48.Height
+                    LayoutMinHeight: =70
+                    LayoutMinWidth: =560
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    Size: =21
+                    Text: ="*"
+                    Visible: =notificarToggle.Value
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey48.Y
+                    ZIndex: =1
+
+                notificarParaComboBox As combobox:
+                    BorderColor: =If(IsBlank(notificarParaComboBox.Selected),RGBA(255, 51, 51, 1),RGBA(135, 190, 82, 1))
+                    ChevronBackground: =RGBA(12, 126, 44, 1)
+                    ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+                    ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+                    ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+                    ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayFields: =["displayName"]
+                    Font: =Font.'Lato Light'
+                    Height: =52
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(53, 74, 36, 1)
+                    InputTextPlaceholder: ="Enviar e-mail para"
+                    Items: =Sort(colGroups,displayName,Ascending)
+                    LayoutMinHeight: =70
+                    LayoutMinWidth: =575
+                    PaddingTop: =10
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(135, 190, 82, 1)
+                    SearchFields: =["displayName"]
+                    SearchItems: =Search(Sort(colGroups,displayName,Ascending),notificarParaComboBox.SearchText,"displayName")
+                    SelectionFill: =RGBA(12, 126, 44, 1)
+                    Size: =17
+                    Visible: =notificarToggle.Value
+                    Width: =580
+                    ZIndex: =2
+
+            notificarParaErrorMessage As label:
+                AlignInContainer: =AlignInContainer.Center
+                AutoHeight: =true
+                Color: =RGBA(255, 51, 51, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                Height: =10
+                LayoutMinHeight: =70
+                LayoutMinWidth: =560
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =17
+                Text: ="Campo de preenchimento obrigatório"
+                Visible: =notificarToggle.Value&&IsBlank(notificarParaComboBox.Selected)
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =anexoImage.Y + anexoImage.Height
+                ZIndex: =4
+
+    RectQuickActionBar2_9 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =2
+
+    IconBackarrow1_12 As icon.ChevronLeft:
+        AccessibleLabel: =Self.Tooltip
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =88
+        Icon: =Icon.ChevronLeft
+        OnSelect: |-
+            =Navigate(DestaquesNoticiasSearchScreen,None,{varFiltroDestaque_SIOM:"",varFiltroDestaque_Fabricante:"",varFiltroDestaque_Modelo:""})
+        PaddingBottom: =24
+        PaddingLeft: =24
+        PaddingRight: =24
+        PaddingTop: =24
+        PressedFill: =RGBA(255, 255, 255, 0.3)
+        TabIndex: =0
+        Tooltip: ="Voltar para a lista"
+        Width: =88
+        ZIndex: =3
+
+    LblAppName2_8 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        Height: =88
+        Size: =25
+        Text: =If(varIsEdit,"Editar Destaque/Notícia","Publicar Destaque/Notícia")
+        Width: =Parent.Width - Self.X
+        Wrap: =false
+        X: =80
+        ZIndex: =4
+
+    salvarIcon_2 As icon.Edit:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =54
+        Icon: =Icon.Check
+        OnSelect: |-
+            =If(
+                (!varIsEdit && (IsBlank(autorDataCardValue.Selected) || IsBlank(órgãoDataCardValue.Text) || IsBlank(assuntoDataCardValue.Text) || IsBlank(conteudoRichTextEditor.HtmlText) || IsBlank(categoriaDataCardValue.Selected) || IsBlank(anexoImage) || (notificarToggle.Value && IsBlank(notificarParaComboBox.Selected.mail) || (!IsBlank(fabricanteEqptoComboBox.Selected) && IsBlank(modeloEqptoComboBox.Selected))))),
+                Notify(
+                    "Preencha todos os campos obrigatórios para publicar o destaque",
+                    NotificationType.Error
+                ),
+                UpdateContext({varPopUpVisible: true})
+            )
+        Tooltip: ="Clique para publicar o destaque."
+        Width: =52
+        X: =573
+        Y: =17
+        ZIndex: =5
+
+    popUpGroup2_3 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =18
+
+        popUpBackGroundRectangle_5 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 0.1)
+            Height: =1136
+            Visible: =varPopUpVisible
+            Width: =640
+            ZIndex: =6
+
+        popUpRectangle_5 As rectangle:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =242
+            Visible: =varPopUpVisible
+            Width: =445
+            X: =88
+            Y: =425
+            ZIndex: =7
+
+        yesPopUpButton_4 As button:
+            Color: =RGBA(8, 88, 31, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Semibold
+            Height: =55
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+            OnSelect: |-
+                =UpdateContext({varPopUpVisible: false});
+                If(
+                    !varIsEdit,
+                    UpdateContext(
+                        {
+                            varMinutoPublicacao: Text(Minute(Now())),
+                            varHoraPublicacao: Text(Hour(Now())),
+                            varDataPublicacao: Now()
+                        }
+                    )
+                );
+                SubmitForm(destaqueForm)
+            Size: =21
+            Text: ="Sim"
+            Visible: =varPopUpVisible
+            Width: =155
+            X: =147
+            Y: =584
+            ZIndex: =8
+
+        cancelPopUpButton_4 As button:
+            Color: =RGBA(39, 113, 194, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Semibold
+            Height: =55
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(102, 182, 227, 1)
+            OnSelect: |-
+                =UpdateContext({varPopUpVisible:false})
+            Size: =21
+            Text: ="Cancelar"
+            Visible: =varPopUpVisible
+            Width: =155
+            X: =327
+            Y: =584
+            ZIndex: =9
+
+        popupMessageLabel_5 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            Height: =111
+            Size: =21
+            Text: =If(varIsEdit,"Confirma a edição do destaque?","Confirma a publicação do destaque?")
+            Visible: =varPopUpVisible
+            Width: =410
+            X: =104
+            Y: =437
+            ZIndex: =10
+

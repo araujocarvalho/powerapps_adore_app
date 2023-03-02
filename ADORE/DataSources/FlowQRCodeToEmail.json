@@ -1,0 +1,9 @@
+[
+  {
+    "AddinConnectorId": "3418e183-9af0-4270-ad0c-d8f0b8a86d58",
+    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
+    "Name": "FlowQRCodeToEmail",
+    "ServiceKind": "AddinWadl",
+    "Type": "ServiceInfo"
+  }
+]

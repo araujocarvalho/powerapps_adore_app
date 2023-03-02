@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "da622c32-3dd8-4e75-ac45-d8966881b8c2",
+    "Name": "FlowCriarCISeNotificarEmail_SESMT_1050B_ADORE",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": null
+  }
+]

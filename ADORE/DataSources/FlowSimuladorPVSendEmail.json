@@ -1,0 +1,9 @@
+[
+  {
+    "AddinConnectorId": "4f4cbb09-7296-43d7-a8ce-b44e23de9ad8",
+    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
+    "Name": "FlowSimuladorPVSendEmail",
+    "ServiceKind": "AddinWadl",
+    "Type": "ServiceInfo"
+  }
+]

@@ -1,0 +1,1278 @@
+"Ativo_T_DetailScreen As screen.'phoneDetailViewLayout_ver3.0'":
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+    OnVisible: |-
+        =UpdateContext({
+            varLinkPastaModelo:
+            First(
+                Filter(colModelosEquipamentos,Modelo_Real=varAtivoT.ativo_modelo,Fabricante_Real=varAtivoT.ativo_fabricante)).Link_Sharepoint
+        });
+        UpdateContext({
+            varLinkPastaSubestacao:
+            First(
+                Filter(subestacoes_AT_v1,local_nome=varAtivoT.ativo_local_nome)).link_sharepoint
+        })
+
+    RectQuickActionBar2 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =1
+
+    IconBackarrow1 As icon.ChevronLeft:
+        AccessibleLabel: =Self.Tooltip
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =88
+        Icon: =Icon.ChevronLeft
+        OnSelect: =If(varIsSearchScreen, Navigate(Ativos_T_SearchScreen, ScreenTransition.None),Navigate(HomeScreen, ScreenTransition.None))
+        PaddingBottom: =24
+        PaddingLeft: =24
+        PaddingRight: =24
+        PaddingTop: =24
+        PressedFill: =RGBA(255, 255, 255, 0.3)
+        TabIndex: =0
+        Tooltip: ="Voltar para a lista"
+        Width: =88
+        ZIndex: =2
+
+    LblAppName2 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        Height: =88
+        Size: =25
+        Text: ="Detalhes do ativo"
+        Width: =Parent.Width - Self.X
+        Wrap: =false
+        X: =IconBackarrow1.X + IconBackarrow1.Width
+        ZIndex: =3
+
+    detalheAtivoVerticalContainer As groupContainer.verticalAutoLayoutContainer:
+        Height: =1048
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =640
+        Y: =88
+        ZIndex: =5
+
+        docFormViewer As formViewer:
+            AcceptsFocus: =false
+            BorderColor: =RGBA(135, 190, 82, 1)
+            DataSource: =ativos_AT_v3
+            FillPortions: =0
+            Height: =238
+            Item: =varAtivoT
+            LayoutMinHeight: =100
+            LayoutMinWidth: =320
+            Width: =640
+            Y: =86
+            ZIndex: =1
+
+            ativo_links_DataCard As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_3"
+                Default: =ThisItem.ativo_link_novo
+                DisplayMode: =DisplayMode.Edit
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_3")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =238
+                Required: =false
+                Visible: =If(IsBlank(varAtivoT.ativo_link_novo) || varAtivoT.ativo_link_novo = "" || StartsWith(varAtivoT.ativo_link_novo,"ainda carregando"),false,true)
+                Width: =640
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+                docAtivoLabel As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =74
+                    Size: =16
+                    Text: ="Documentos do ativo"
+                    Width: =163
+                    X: =43
+                    Y: =145
+                    ZIndex: =3
+
+                documentosAtivoButtonGroup As group:
+                    Height: =5
+                    Width: =5
+                    X: =40
+                    Y: =40
+                    ZIndex: =4
+
+                    Image6 As image:
+                        BorderColor: =RGBA(135, 190, 82, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        Height: =94
+                        Image: ='folder_sharepoint-removebg-preview'
+                        OnSelect: =Launch(ThisItem.ativo_link_novo)
+                        Tooltip: ="Clique para abrir a pasta de documentos do ativo no Sharepoint"
+                        Width: =126
+                        X: =62
+                        Y: =64
+                        ZIndex: =1
+
+                    Button6 As button:
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        FontWeight: =FontWeight.Semibold
+                        Height: =81
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =
+                        OnSelect: =Launch(ThisItem.ativo_link_novo)
+                        Size: =24
+                        Text: =""
+                        Tooltip: ="Clique para abrir a pasta de documentos do ativo no Sharepoint"
+                        Width: =91
+                        X: =76
+                        Y: =64
+                        ZIndex: =2
+
+                docModeloLabel As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =74
+                    Size: =16
+                    Text: ="Documentos do modelo"
+                    Visible: =IsBlank(varLinkPastaModelo)=false
+                    Width: =168
+                    X: =435
+                    Y: =145
+                    ZIndex: =6
+
+                documentosModeloButtonGroup As group:
+                    Height: =5
+                    Width: =5
+                    X: =-35
+                    Y: =-47
+                    ZIndex: =6
+
+                    Image6_1 As image:
+                        BorderColor: =RGBA(135, 190, 82, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        Height: =95
+                        Image: ='folder_sharepoint-removebg-preview'
+                        OnSelect: =Launch(varLinkPastaModelo)
+                        Tooltip: ="Clique para abrir a pasta de documentos do modelo deste ativo no Sharepoint"
+                        Visible: =IsBlank(varLinkPastaModelo)=false
+                        Width: =126
+                        X: =460
+                        Y: =64
+                        ZIndex: =4
+
+                    Button6_1 As button:
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        FontWeight: =FontWeight.Semibold
+                        Height: =82
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =
+                        OnSelect: =Launch(varLinkPastaModelo)
+                        Size: =24
+                        Text: =""
+                        Tooltip: ="Clique para abrir a pasta de documentos do modelo deste ativo no Sharepoint"
+                        Visible: =IsBlank(varLinkPastaModelo)=false
+                        Width: =91
+                        X: =474
+                        Y: =64
+                        ZIndex: =5
+
+                docSubestacaoLabel As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =74
+                    Size: =16
+                    Text: ="Documentos da subestação"
+                    Visible: =IsBlank(varLinkPastaSubestacao)=false
+                    Width: =163
+                    X: =242
+                    Y: =146
+                    ZIndex: =9
+
+                criarPastaModeloLabel As label:
+                    Align: =Align.Center
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =70
+                    Size: =12
+                    Text: ="Criar Pasta para Modelo do Equipamento"
+                    Visible: =IsBlank(varLinkPastaModelo)&&!IsBlank(varAtivoT.ativo_modelo)&&!IsBlank(varAtivoT.ativo_fabricante)
+                    Width: =184
+                    X: =456
+                    Y: =87
+                    ZIndex: =10
+
+                novaPastaModeloIcon As icon.Edit:
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(255, 191, 0, 1)
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(244, 244, 244, 1)
+                    Height: =54
+                    Icon: =Icon.AddDocument
+                    OnSelect: |-
+                        =UpdateContext({varPopUpVisible:true})
+                    Tooltip: ="Clique para criar uma nova pasta padrão para armazenar documentos comuns do modelo deste equipamento"
+                    Visible: =IsBlank(varLinkPastaModelo)&&!IsBlank(varAtivoT.ativo_modelo)&&!IsBlank(varAtivoT.ativo_fabricante)
+                    Width: =52
+                    X: =522
+                    Y: =33
+                    ZIndex: =11
+
+                documentosSubestacaoButtonGroup As group:
+                    Height: =5
+                    Width: =5
+                    X: =-407
+                    Y: =-53
+                    ZIndex: =11
+
+                    Image6_2 As image:
+                        BorderColor: =RGBA(135, 190, 82, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        Height: =95
+                        Image: ='folder_sharepoint-removebg-preview'
+                        OnSelect: =Launch(varLinkPastaSubestacao)
+                        Tooltip: ="Clique para abrir a pasta de documentos da subestação deste ativo no Sharepoint"
+                        Visible: =IsBlank(varLinkPastaSubestacao)=false
+                        Width: =126
+                        X: =261
+                        Y: =64
+                        ZIndex: =7
+
+                    Button6_2 As button:
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        FontWeight: =FontWeight.Semibold
+                        Height: =82
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =
+                        OnSelect: =Launch(varLinkPastaSubestacao)
+                        Size: =24
+                        Text: =""
+                        Tooltip: ="Clique para abrir a pasta de documentos da subestação deste ativo no Sharepoint"
+                        Visible: =IsBlank(varLinkPastaSubestacao)=false
+                        Width: =91
+                        X: =275
+                        Y: =64
+                        ZIndex: =8
+
+        destaquesHorizontalContainer As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =150
+            LayoutGap: =20
+            LayoutMinHeight: =112
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =20
+            PaddingRight: =20
+            Visible: =destaquesAtivoContainer.Visible||destaquesModeloContainer.Visible
+            ZIndex: =3
+
+            destaquesAtivoContainer As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Center
+                Height: =150
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutJustifyContent: =LayoutJustifyContent.Center
+                LayoutMinHeight: =60
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =20
+                PaddingTop: =20
+                Visible: =!IsBlank(First(Filter(destaques_noticias,varAtivoT.ativo_SIOM in 'Equipamento (SIOM)')))
+                ZIndex: =1
+
+                lampadaDestaqueAtivoIcon As icon.Lightbulb:
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(255, 191, 0, 1)
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(244, 244, 244, 1)
+                    Height: =50
+                    Icon: =Icon.Lightbulb
+                    OnSelect: |-
+                        =Navigate(DestaquesNoticiasSearchScreen,None,{varFiltroDestaque_SIOM: varAtivoT.ativo_SIOM,varFiltroDestaque_Fabricante:"",varFiltroDestaque_Modelo:""})
+                    Tooltip: ="Este ativo possui destaques associados. Clique na lâmpada para visualizá-los"
+                    ZIndex: =1
+
+                Label5 As label:
+                    Align: =Align.Center
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(255, 191, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    FillPortions: =1
+                    Font: =Font.'Lato Light'
+                    FontWeight: =FontWeight.Bold
+                    Height: =70
+                    LayoutMinHeight: =70
+                    LayoutMinWidth: =560
+                    Text: ="Este ativo possui destaques associados. Clique na lâmpada para visualizá-los"
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =250
+                    ZIndex: =2
+
+            destaquesModeloContainer As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.Center
+                Height: =150
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutJustifyContent: =LayoutJustifyContent.Center
+                LayoutMinHeight: =60
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =20
+                PaddingTop: =20
+                Visible: |-
+                    =!IsBlank(varAtivoT.ativo_fabricante) && !IsBlank(varAtivoT.ativo_modelo) && !IsBlank(
+                        First(
+                            Filter(
+                                destaques_noticias,
+                                varAtivoT.ativo_fabricante = 'Fabricante Equipamento',
+                                varAtivoT.ativo_modelo = 'Modelo Equipamento'
+                            )
+                        )
+                    )
+                ZIndex: =2
+
+                lampadaDestaqueModeloIcon As icon.Lightbulb:
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(109, 49, 162, 1)
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(109, 49, 162, 1)
+                    Height: =50
+                    Icon: =Icon.Lightbulb
+                    OnSelect: |-
+                        =Navigate(DestaquesNoticiasSearchScreen,None,{varFiltroDestaque_SIOM: "",varFiltroDestaque_Fabricante:varAtivoT.ativo_fabricante,varFiltroDestaque_Modelo:varAtivoT.ativo_modelo})
+                    Tooltip: ="O modelo deste ativo possui destaques associados. Clique na lâmpada para visualizá-los"
+                    ZIndex: =1
+
+                Label5_1 As label:
+                    Align: =Align.Center
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(109, 49, 162, 1)
+                    DisabledColor: =RGBA(109, 49, 162, 1)
+                    FillPortions: =1
+                    Font: =Font.'Lato Light'
+                    FontWeight: =FontWeight.Bold
+                    Height: =70
+                    LayoutMinHeight: =70
+                    LayoutMinWidth: =560
+                    Text: ="O modelo deste ativo possui destaques associados. Clique na lâmpada para visualizá-los"
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =250
+                    ZIndex: =2
+
+        DetailForm As formViewer:
+            AcceptsFocus: =false
+            BorderColor: =RGBA(135, 190, 82, 1)
+            DataSource: =[@ativos_AT_v3]
+            Height: =723
+            Item: =varAtivoT
+            LayoutMinHeight: =250
+            LayoutMinWidth: =320
+            NumberOfColumns: =2
+            Width: =Parent.Width
+            X: =
+            Y: =docFormViewer.Height + docFormViewer.Y
+            ZIndex: =4
+
+            ativo_SIOM_DataCard1 As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_2"
+                Default: =ThisItem.ativo_SIOM
+                DisplayMode: =DisplayMode.View
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_2")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =40
+                Required: =false
+                Width: =320
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+                DataCardKey17 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =16
+                    Text: |-
+                        ="Código SIOM:"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue16 As label:
+                    AutoHeight: =true
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =Parent.Default
+                    Width: =Parent.Width - 60
+                    X: =40
+                    Y: =DataCardKey17.Y + DataCardKey17.Height + 5
+                    ZIndex: =2
+
+            ativo_nome_DataCard1 As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_10"
+                Default: =ThisItem.ativo_nome
+                DisplayMode: =DisplayMode.View
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_10")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =40
+                Required: =false
+                Width: =320
+                X: =1
+                Y: =0
+                ZIndex: =1
+
+                DataCardKey18 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =16
+                    Text: |-
+                        ="Identificação:"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue17 As label:
+                    AutoHeight: =true
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =Parent.Default
+                    Width: =Parent.Width - 60
+                    X: =40
+                    Y: =DataCardKey18.Y + DataCardKey18.Height + 5
+                    ZIndex: =2
+
+            ativo_tipo_DataCard1 As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_17"
+                Default: =ThisItem.ativo_tipo
+                DisplayMode: =DisplayMode.View
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_17")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =40
+                Required: =false
+                Width: =320
+                X: =0
+                Y: =1
+                ZIndex: =1
+
+                DataCardKey20 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =16
+                    Text: |-
+                        ="Tipo:"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue19 As label:
+                    AutoHeight: =true
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =Parent.Default
+                    Width: =Parent.Width - 60
+                    X: =40
+                    Y: =DataCardKey20.Y + DataCardKey20.Height + 5
+                    ZIndex: =2
+
+            ativo_denominacao_DataCard2 As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_4"
+                Default: =ThisItem.ativo_denominacao
+                DisplayMode: =DisplayMode.View
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"ativo_tem_acidente")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =40
+                Required: =false
+                Width: =320
+                X: =1
+                Y: =1
+                ZIndex: =1
+
+                DataCardKey21 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =16
+                    Text: ="Denominação"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue20 As label:
+                    AutoHeight: =true
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =Parent.Default
+                    Width: =Parent.Width - 60
+                    X: =40
+                    Y: =DataCardKey21.Y + DataCardKey21.Height + 5
+                    ZIndex: =2
+
+            ativo_numero_serie_DataCard2 As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_12"
+                Default: =ThisItem.ativo_numero_serie
+                DisplayMode: =DisplayMode.View
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_12")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =40
+                Required: =false
+                Width: =320
+                X: =0
+                Y: =2
+                ZIndex: =1
+
+                DataCardKey22 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =16
+                    Text: |-
+                        ="Número de Série:"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue21 As label:
+                    AutoHeight: =true
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =Parent.Default
+                    Width: =Parent.Width - 60
+                    X: =40
+                    Y: =DataCardKey22.Y + DataCardKey22.Height + 5
+                    ZIndex: =2
+
+            ativo_local_nome_DataCard1 As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_5"
+                Default: =ThisItem.ativo_local_nome
+                DisplayMode: =DisplayMode.View
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_5")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =40
+                Required: =false
+                Width: =320
+                X: =1
+                Y: =2
+                ZIndex: =1
+
+                DataCardKey23 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =16
+                    Text: |-
+                        ="Localização:"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue22 As label:
+                    AutoHeight: =true
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =Parent.Default
+                    Width: =Parent.Width - 60
+                    X: =40
+                    Y: =DataCardKey23.Y + DataCardKey23.Height + 5
+                    ZIndex: =2
+
+            ativo_local_instalacao_DataCard1 As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_7"
+                Default: =ThisItem.ativo_local_instalacao
+                DisplayMode: =DisplayMode.View
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_7")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =40
+                Required: =false
+                Width: =320
+                X: =0
+                Y: =3
+                ZIndex: =1
+
+                DataCardKey24 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =16
+                    Text: |-
+                        ="Local de Instalação:"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue23 As label:
+                    AutoHeight: =true
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =Parent.Default
+                    Width: =Parent.Width - 60
+                    X: =40
+                    Y: =DataCardKey24.Y + DataCardKey24.Height + 5
+                    ZIndex: =2
+
+            ativo_gerencia_DataCard1 As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_8"
+                Default: =ThisItem.ativo_gerencia
+                DisplayMode: =DisplayMode.View
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_8")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =40
+                Required: =false
+                Width: =320
+                X: =1
+                Y: =3
+                ZIndex: =1
+
+                DataCardKey25 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =16
+                    Text: |-
+                        ="Gerência:"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue24 As label:
+                    AutoHeight: =true
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =Parent.Default
+                    Width: =Parent.Width - 60
+                    X: =40
+                    Y: =DataCardKey25.Y + DataCardKey25.Height + 5
+                    ZIndex: =2
+
+            ativo_centro_trab_responsavel_DataCard2 As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_9"
+                Default: =ThisItem.ativo_centro_trab_responsavel
+                DisplayMode: =DisplayMode.View
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_9")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =40
+                Required: =false
+                Width: =320
+                X: =0
+                Y: =4
+                ZIndex: =1
+
+                DataCardKey31 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =16
+                    Text: |-
+                        ="Centro de Trab. Resp.:"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue30 As label:
+                    AutoHeight: =true
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =Parent.Default
+                    Width: =Parent.Width - 60
+                    X: =40
+                    Y: =DataCardKey31.Y + DataCardKey31.Height + 5
+                    ZIndex: =2
+
+            ativo_modelo_DataCard3 As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_13"
+                Default: =ThisItem.ativo_modelo
+                DisplayMode: =DisplayMode.View
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_13")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =40
+                Required: =false
+                Width: =320
+                X: =1
+                Y: =4
+                ZIndex: =1
+
+                DataCardKey32 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =16
+                    Text: |-
+                        ="Modelo:"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue31 As label:
+                    AutoHeight: =true
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =Parent.Default
+                    Width: =Parent.Width - 60
+                    X: =40
+                    Y: =DataCardKey32.Y + DataCardKey32.Height + 5
+                    ZIndex: =2
+
+            ativo_fabricante_DataCard3 As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_11"
+                Default: =ThisItem.ativo_fabricante
+                DisplayMode: =DisplayMode.View
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_11")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =40
+                Required: =false
+                Width: =320
+                X: =0
+                Y: =5
+                ZIndex: =1
+
+                DataCardKey33 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =16
+                    Text: |-
+                        ="Fabricante:"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue32 As label:
+                    AutoHeight: =true
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =Parent.Default
+                    Width: =Parent.Width - 60
+                    X: =40
+                    Y: =DataCardKey33.Y + DataCardKey33.Height + 5
+                    ZIndex: =2
+
+            ativo_ano_fabricacao_DataCard3 As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_14"
+                Default: =ThisItem.ativo_ano_fabricacao
+                DisplayMode: =DisplayMode.View
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_14")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =40
+                Required: =false
+                Width: =320
+                X: =1
+                Y: =5
+                ZIndex: =1
+
+                DataCardKey34 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =16
+                    Text: |-
+                        ="Ano de Fabricação:"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue33 As label:
+                    AutoHeight: =true
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =Parent.Default
+                    Width: =Parent.Width - 60
+                    X: =40
+                    Y: =DataCardKey34.Y + DataCardKey34.Height + 5
+                    ZIndex: =2
+
+            ativo_data_entrada_servico_DataCard3 As typedDataCard.textualViewCard:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="field_15"
+                Default: =ThisItem.ativo_data_entrada_servico
+                DisplayMode: =DisplayMode.View
+                DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_15")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =68
+                Required: =false
+                Width: =320
+                X: =0
+                Y: =6
+                ZIndex: =1
+
+                DataCardKey35 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(135, 190, 82, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Height: =48
+                    Size: =16
+                    Text: |-
+                        ="Data de Ent. em Serviço:"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue34 As label:
+                    AutoHeight: =true
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(0, 0, 0, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisplayMode: =Parent.DisplayMode
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =Text(ThisItem.ativo_data_entrada_servico,"dd/mm/yyyy")
+                    Width: =Parent.Width - 60
+                    X: =40
+                    Y: =DataCardKey35.Y + DataCardKey35.Height + 5
+                    ZIndex: =2
+
+    exclamationImage_2 As image:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Height: =60
+        Image: ='exclamacao icone'
+        Visible: =varAtivoT.ativo_tem_acidente
+        Width: =107
+        X: =266
+        Y: =1027
+        ZIndex: =7
+
+    warningLabel As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(0, 0, 0, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Height: =43
+        Text: ="Este ativo possui documento de Saúde e Segurança. Acesse a pasta de documentos do mesmo para visualizá-lo."
+        Visible: =varAtivoT.ativo_tem_acidente
+        Width: =560
+        X: =40
+        Y: =1087
+        ZIndex: =8
+
+    editarIcon As icon.Edit:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =54
+        Icon: =Icon.Edit
+        OnSelect: |-
+            =Navigate(Ativo_T_EditScreen,None,{varAtivoEdit:varAtivoT})
+        Tooltip: ="Clique para editar ativo"
+        Visible: =_varUserIsAdmin
+        Width: =52
+        X: =496
+        Y: =17
+        ZIndex: =9
+
+    simularPVIcon As icon.Money:
+        BorderColor: =RGBA(0, 134, 208, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =59
+        Icon: =Icon.Money
+        OnSelect: |-
+            =Navigate(
+                SimuladorDPVScreen,
+                None,
+                {
+                    varAtivoT: varAtivoT
+                }
+            )
+        Tooltip: ="Clique para simular DPV deste ativo."
+        Width: =49
+        X: =569
+        Y: =15
+        ZIndex: =10
+
+    popUpGroup2_2 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =22
+
+        popUpBackGroundRectangle_4 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 0.1)
+            Height: =1136
+            Visible: =varPopUpVisible
+            Width: =640
+            ZIndex: =12
+
+        popUpRectangle_4 As rectangle:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =242
+            Visible: =varPopUpVisible
+            Width: =445
+            X: =88
+            Y: =425
+            ZIndex: =13
+
+        yesPopUpButton_3 As button:
+            Color: =RGBA(8, 88, 31, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Semibold
+            Height: =55
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+            OnSelect: |-
+                =If(
+                    FlowAtivoCriarNovaPastaModelo_ADORE.Run(
+                        First(
+                            Sort(
+                                colModelosEquipamentos,
+                                ID_ESPELHO,
+                                Descending
+                            )
+                        ).ID_ESPELHO + 1,
+                        varAtivoT.ativo_tipo_sigla,
+                        varAtivoT.ativo_tipo,
+                        varAtivoT.ativo_fabricante,
+                        varAtivoT.ativo_modelo,
+                        Concat(
+                            Split(
+                                varAtivoT.ativo_modelo,
+                                ""
+                            ),
+                            If(
+                                IsMatch(
+                                    Result,
+                                    "([/])"
+                                ),
+                                "_",
+                                Result
+                            )
+                        )//troca '/' por '_'
+                    ).failed,
+                        //Se o fluxo falhar
+                    Notify(
+                        "Falha na execução do fluxo do Power Automate. Tente novamente mais tarde ou reporte o erro a henrique.carvalho@cemig.com.br",
+                        NotificationType.Error
+                    ),
+                        //Se sucesso
+                    Notify(
+                        "Pasta criada com sucesso!",
+                        NotificationType.Success
+                    );
+                    ClearCollect(
+                        colAtivos_T,
+                        Filter(
+                            ativos_AT_v3,
+                            ID_ESPELHO >= 1 && ID_ESPELHO < 2000
+                        )
+                    );
+                    Collect(
+                        colAtivos_T,
+                        Filter(
+                            ativos_AT_v3,
+                            ID_ESPELHO >= 2000 && ID_ESPELHO < 4000
+                        )
+                    );
+                    Collect(
+                        colAtivos_T,
+                        Filter(
+                            ativos_AT_v3,
+                            ID_ESPELHO >= 4000 && ID_ESPELHO < 6000
+                        )
+                    );
+                    Collect(
+                        colAtivos_T,
+                        Filter(
+                            ativos_AT_v3,
+                            ID_ESPELHO >= 6000 && ID_ESPELHO < 8000
+                        )
+                    );
+                    Collect(
+                        colAtivos_T,
+                        Filter(
+                            ativos_AT_v3,
+                            ID_ESPELHO >= 8000 && ID_ESPELHO < 10000
+                        )
+                    );
+                    Collect(
+                        colAtivos_T,
+                        Filter(
+                            ativos_AT_v3,
+                            ID_ESPELHO >= 10000 && ID_ESPELHO < 12000
+                        )
+                    );
+                    Collect(
+                        colAtivos_T,
+                        Filter(
+                            ativos_AT_v3,
+                            ID_ESPELHO >= 12000 && ID_ESPELHO < 14000
+                        )
+                    );
+                    Collect(
+                        colAtivos_T,
+                        Filter(
+                            ativos_AT_v3,
+                            ID_ESPELHO >= 14000 && ID_ESPELHO < 16000
+                        )
+                    );
+                    Collect(
+                        colAtivos_T,
+                        Filter(
+                            ativos_AT_v3,
+                            ID_ESPELHO >= 16000 && ID_ESPELHO < 18000
+                        )
+                    );
+                    Collect(
+                        colAtivos_T,
+                        Filter(
+                            ativos_AT_v3,
+                            ID_ESPELHO >= 18000 && ID_ESPELHO < 20000
+                        )
+                    );
+                    ClearCollect(
+                        colGerencias_T,
+                        Sort(
+                            Distinct(
+                                colAtivos_T,
+                                ativo_gerencia
+                            ),
+                            Result,
+                            Ascending
+                        )
+                    );
+                    ClearCollect(
+                        colLocalizacoes_T,
+                        Sort(
+                            Distinct(
+                                colAtivos_T,
+                                ativo_local_nome
+                            ),
+                            Result,
+                            Ascending
+                        )
+                    );
+                    ClearCollect(
+                        colTiposEqptos_T,
+                        Sort(
+                            Distinct(
+                                colAtivos_T,
+                                ativo_tipo
+                            ),
+                            Result,
+                            Ascending
+                        )
+                    );
+                    ClearCollect(
+                        colFases,
+                        "VM",
+                        "AZ",
+                        "BR",
+                        "RM",
+                        "TR"
+                    );
+                    Refresh(modelos_ativos_v3);
+                    ClearCollect(
+                        colModelosEquipamentos,
+                        Filter(
+                            modelos_ativos_v3,
+                            ID_ESPELHO >= 1 && ID_ESPELHO < 2000
+                        )
+                    );
+                    Collect(
+                        colModelosEquipamentos,
+                        Filter(
+                            modelos_ativos_v3,
+                            ID_ESPELHO >= 2000 && ID_ESPELHO < 3000
+                        )
+                    );
+                    Navigate(
+                        HomeScreen,
+                        ScreenTransition.None
+                    )
+                );
+                UpdateContext({varPopUpVisible: false})
+            Size: =21
+            Text: ="Sim"
+            Visible: =varPopUpVisible
+            Width: =155
+            X: =147
+            Y: =584
+            ZIndex: =14
+
+        cancelPopUpButton_3 As button:
+            Color: =RGBA(39, 113, 194, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Semibold
+            Height: =55
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(102, 182, 227, 1)
+            OnSelect: |-
+                =UpdateContext({varPopUpVisible:false})
+            Size: =21
+            Text: ="Cancelar"
+            Visible: =varPopUpVisible
+            Width: =155
+            X: =327
+            Y: =584
+            ZIndex: =15
+
+        popupMessageLabel_4 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            Height: =111
+            Size: =21
+            Text: ="Confirma a criação de uma pasta padrão para o modelo deste equipamento?"
+            Visible: =varPopUpVisible
+            Width: =410
+            X: =104
+            Y: =437
+            ZIndex: =16
+

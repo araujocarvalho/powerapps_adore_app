@@ -1,0 +1,1540 @@
+"HomeScreen As screen.'phoneBrowseLayout_ver3.0'":
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+    OnHidden: =
+    OnVisible: |-
+        =UpdateContext({varRefreshGifVisible: true});
+        UpdateContext({varSideMenuVisible: false});
+        UpdateContext({varOrgao: UsuáriosdoOffice365.UserProfile(User().Email).Department});
+        UpdateContext({varAlertIconVisible: false});
+        UpdateContext({varCarrosselIndex: 1});
+        UpdateContext({varCarrosselTimerStart: true});
+        UpdateContext({varSubmenuAtivosVisible: false});
+        ClearCollect(
+            colCarrossel,
+            ShowColumns(
+                FirstN(
+                    Sort(
+                        destaques_noticias,
+                        'Publicado em',
+                        Descending
+                    ),
+                    5
+                ),
+                "Foto",
+                "Assunto",
+                "Title"
+            )
+        );
+        UpdateContext({varRefreshGifVisible: false});
+
+    appBarRectangle As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =1
+
+    appNameLabel As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Fill: =RGBA(58, 58, 58, 0)
+        Font: =Font.'Lato Light'
+        Height: =88
+        Size: =27
+        Text: ="ADORE"
+        Width: =540
+        Wrap: =false
+        X: =100
+        ZIndex: =2
+
+    barCodeScanner As barcodeScanner:
+        BarcodeType: =BarcodeType.QRCode
+        Color: =RGBA(0, 0, 0, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayMode: |-
+            =If(
+                _varLoading,
+                DisplayMode.Disabled,
+                DisplayMode.Edit
+            )
+        Fill: =RGBA(210, 217, 215, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Semibold
+        Height: =274
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(153, 207, 236, 1), -20%)
+        OnScan: |-
+            =UpdateContext(
+                {
+                    varAtivoGScan: First(
+                        Filter(
+                            colAtivos_G,
+                            ativo_SIOM = barCodeScanner.Value
+                        )
+                    ),
+                    varAtivoTScan: First(
+                        Filter(
+                            colAtivos_T,
+                            ativo_SIOM = barCodeScanner.Value
+                        )
+                    )
+                }
+            );
+            If(
+                barCodeScanner.Value = "Valor de exemplo",
+                //true
+                UpdateContext({varErrorText: "Função disponível somente para dispositivos móveis"});
+                UpdateContext({varStartTimer: true}),
+                //else
+                If(
+                    IsBlank(varAtivoGScan) && IsBlank(varAtivoTScan),
+                    //if true
+                    UpdateContext({varErrorText: Text("Nenhum registro encontrado para o código SIOM '" & barCodeScanner.Value & "'.")});
+                    UpdateContext({varStartTimer: true}),
+                    //else
+                    If(
+                        !IsBlank(varAtivoTScan),
+                        //Encontrou ativo da Transmissão
+                        Navigate(
+                            Ativo_T_DetailScreen,
+                            None,
+                            {
+                                varAtivoT: varAtivoTScan,
+                                varIsSearchScreen: false
+                            }
+                        );
+                        UpdateContext({varErrorText: ""});
+                        UpdateContext({varAlertIconVisible: false}),
+                        //Encontrou ativo da Geração
+                        Navigate(
+                            Ativo_G_DetailScreen,
+                            None,
+                            {
+                                varAtivoT: varAtivoGScan,
+                                varIsSearchScreen: false
+                            }
+                        );
+                        UpdateContext({varErrorText: ""});
+                        UpdateContext({varAlertIconVisible: false})
+                    )
+                )
+            )
+        OnSelect: =
+        PaddingBottom: =20
+        PaddingRight: =15
+        RadiusBottomLeft: =70
+        RadiusBottomRight: =70
+        RadiusTopLeft: =70
+        RadiusTopRight: =70
+        Size: =14
+        Text: ="ESCANEAR QR CODE"
+        Tooltip: ="Escanear QR code do ativo (função não disponível para computador)"
+        VerticalAlign: =VerticalAlign.Bottom
+        Width: =278
+        X: =31
+        Y: =128
+        ZIndex: =3
+
+    sideMenuIcon As icon.More:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =54
+        Icon: =Icon.OptionsList
+        OnSelect: |-
+            =UpdateContext(
+                {
+                    varSideMenuVisible: !varSideMenuVisible,
+                    varSubmenuAtivosVisible: false
+                }
+            )
+        Tooltip: =If(varSideMenuVisible=false,"Expandir menu lateral","Esconder menu lateral")
+        Width: =50
+        X: =572
+        Y: =17
+        ZIndex: =4
+
+    adoreImage As image:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Height: =90
+        Image: =adore_code_icon
+        Width: =68
+        X: =17
+        ZIndex: =5
+
+    buscarDocRectangle As rectangle:
+        BorderColor: =RGBA(39, 113, 194, 1)
+        BorderThickness: =0.5
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =328
+        Width: =605
+        X: =17
+        Y: =101
+        ZIndex: =6
+
+    modelosSearchButton As button:
+        Align: =Align.Left
+        BorderStyle: =BorderStyle.None
+        Color: =RGBA(0, 134, 208, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Fill: =RGBA(0, 0, 0, 0)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =45
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        Italic: =true
+        OnSelect: |-
+            =UpdateContext({varRefreshGifVisible: true});Navigate(ModelosSearchScreen,ScreenTransition.None)
+        PaddingLeft: =10
+        PaddingRight: =1
+        PaddingTop: =1
+        PressedColor: =RGBA(0, 134, 208, 100)
+        PressedFill: =RGBA(255, 255, 255, 1)
+        RadiusBottomLeft: =20
+        RadiusBottomRight: =20
+        RadiusTopLeft: =20
+        RadiusTopRight: =20
+        Size: =20
+        Text: ="- Modelos Equipamentos"
+        Tooltip: ="Clique para fazer uma busca por modelos de equipamentos com filtros específicos"
+        Width: =290
+        X: =320
+        Y: =267
+        ZIndex: =12
+
+    subestacoesSearchButton As button:
+        Align: =Align.Left
+        BorderStyle: =BorderStyle.None
+        Color: =RGBA(0, 134, 208, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Fill: =RGBA(0, 0, 0, 0)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =45
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        Italic: =true
+        OnSelect: |-
+            =UpdateContext({varRefreshGifVisible: true});Navigate(SubestacoesSearchScreen,ScreenTransition.None)
+        PaddingLeft: =10
+        PaddingRight: =1
+        PaddingTop: =1
+        PressedColor: =RGBA(0, 134, 208, 100)
+        PressedFill: =RGBA(255, 255, 255, 1)
+        RadiusBottomLeft: =20
+        RadiusBottomRight: =20
+        RadiusTopLeft: =20
+        RadiusTopRight: =20
+        Size: =20
+        Text: ="- Subestações"
+        Tooltip: ="Clique para fazer uma busca por subestações."
+        Width: =170
+        X: =320
+        Y: =334
+        ZIndex: =13
+
+    ativosSearchButton As button:
+        Align: =Align.Left
+        BorderStyle: =BorderStyle.None
+        Color: =RGBA(0, 134, 208, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Fill: =RGBA(0, 0, 0, 0)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =43
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        Italic: =true
+        OnSelect: |-
+            =UpdateContext({varSubmenuAtivosVisible: !varSubmenuAtivosVisible})
+        PaddingLeft: =10
+        PaddingRight: =1
+        PaddingTop: =1
+        PressedColor: =RGBA(0, 134, 208, 100)
+        PressedFill: =RGBA(255, 255, 255, 1)
+        RadiusBottomLeft: =20
+        RadiusBottomRight: =20
+        RadiusTopLeft: =20
+        RadiusTopRight: =20
+        Size: =20
+        Text: ="- Ativos"
+        Tooltip: ="Clique para fazer uma busca por ativos com filtros específicos"
+        Width: =110
+        X: =320
+        Y: =203
+        ZIndex: =14
+
+    simuladorPVButtonGroup As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =14
+
+        Button2 As button:
+            Align: =Align.Right
+            BorderColor: =RGBA(0, 134, 208, 1)
+            Color: =RGBA(0, 134, 208, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(0, 0, 0, 0)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Lighter
+            Height: =66
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+            OnSelect: |-
+                =Launch("https://apps.powerapps.com/play/e/default-97ce2340-9c1d-45b1-a835-7ea811b6fe9a/a/bf0820bc-3be9-4088-9149-0ace1d8b9431?tenantId=97ce2340-9c1d-45b1-a835-7ea811b6fe9a&source=portal&screenColor=RGBA%280%2c176%2c240%2c1%29&skipAppMetadata=true")
+            PaddingRight: =40
+            RadiusBottomLeft: =40
+            RadiusBottomRight: =40
+            RadiusTopLeft: =40
+            RadiusTopRight: =40
+            Size: =24
+            Text: ="Simulador de PV"
+            Tooltip: ="Clique para abrir o simulador de PV"
+            Width: =349
+            X: =146
+            Y: =531
+            ZIndex: =8
+
+        Icon1 As icon.Money:
+            BorderColor: =RGBA(0, 134, 208, 1)
+            Color: =RGBA(0, 134, 208, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(244, 244, 244, 1)
+            Icon: =Icon.Money
+            OnSelect: |-
+                =Launch("https://apps.powerapps.com/play/e/default-97ce2340-9c1d-45b1-a835-7ea811b6fe9a/a/bf0820bc-3be9-4088-9149-0ace1d8b9431?tenantId=97ce2340-9c1d-45b1-a835-7ea811b6fe9a&source=portal&screenColor=RGBA%280%2c176%2c240%2c1%29&skipAppMetadata=true")
+            Tooltip: ="Clique para abrir o simulador de PV"
+            Width: =37
+            X: =172
+            Y: =533
+            ZIndex: =9
+
+    lupaIcon As icon.Add:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(39, 113, 194, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        DisplayMode: =DisplayMode.View
+        Height: =40
+        Icon: =Icon.Search
+        Width: =40
+        X: =330
+        Y: =140
+        ZIndex: =16
+
+    indicadoresButtonGroup As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =16
+
+        Button2_1 As button:
+            Align: =Align.Right
+            BorderColor: =RGBA(0, 134, 208, 1)
+            Color: =RGBA(0, 134, 208, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(0, 0, 0, 0)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Lighter
+            Height: =66
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+            OnSelect: |-
+                =Launch("https://app.powerbi.com/reportEmbed?reportId=5a9ea2bf-ae5a-48fc-91d6-2fe0d1fd657b&autoAuth=true&ctid=97ce2340-9c1d-45b1-a835-7ea811b6fe9a&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWJyYXppbC1zb3V0aC1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D")
+            PaddingRight: =85
+            RadiusBottomLeft: =40
+            RadiusBottomRight: =40
+            RadiusTopLeft: =40
+            RadiusTopRight: =40
+            Size: =24
+            Text: ="Indicadores"
+            Tooltip: ="Clique para abrir o BI de indicadores estratégicos da AT"
+            Width: =349
+            X: =146
+            Y: =623
+            ZIndex: =10
+
+        Icon1_1 As icon.Money:
+            BorderColor: =RGBA(0, 134, 208, 1)
+            Color: =RGBA(0, 134, 208, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(244, 244, 244, 1)
+            Icon: =Icon.Trending
+            OnSelect: |-
+                =Launch("https://app.powerbi.com/reportEmbed?reportId=5a9ea2bf-ae5a-48fc-91d6-2fe0d1fd657b&autoAuth=true&ctid=97ce2340-9c1d-45b1-a835-7ea811b6fe9a&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWJyYXppbC1zb3V0aC1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D")
+            Tooltip: ="Clique para abrir o BI de indicadores estratégicos da AT"
+            Width: =37
+            X: =172
+            Y: =625
+            ZIndex: =11
+
+    destaquesRectangle As rectangle:
+        BorderColor: =RGBA(39, 113, 194, 1)
+        BorderThickness: =0.5
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =328
+        Width: =605
+        X: =17
+        Y: =782
+        ZIndex: =17
+
+    destaquesNoticiasLabelButton As button:
+        Align: =Align.Left
+        BorderStyle: =BorderStyle.None
+        Color: =RGBA(0, 134, 208, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Fill: =RGBA(0, 0, 0, 0)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =37
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        Italic: =true
+        OnSelect: |-
+            =Navigate(DestaquesNoticiasSearchScreen,ScreenTransition.None,{varFiltroDestaque_SIOM:"",varFiltroDestaque_Fabricante:"",varFiltroDestaque_Modelo:""})
+        PaddingLeft: =13
+        PaddingRight: =1
+        PaddingTop: =1
+        PressedColor: =RGBA(0, 134, 208, 100)
+        PressedFill: =RGBA(255, 255, 255, 1)
+        RadiusBottomLeft: =20
+        RadiusBottomRight: =20
+        RadiusTopLeft: =20
+        RadiusTopRight: =20
+        Size: =20
+        Text: ="Destaques/Notícias"
+        Tooltip: ="Clique para ver todos os destaques e notícias"
+        Width: =237
+        X: =230
+        Y: =784
+        ZIndex: =18
+
+    lampadaIcon As icon.NextArrow:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 191, 0, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        DisplayMode: =DisplayMode.View
+        Height: =40
+        Icon: =Icon.Lightbulb
+        Width: =25
+        X: =200
+        Y: =784
+        ZIndex: =19
+
+    assuntoCarrosselLabel As label:
+        Align: =Align.Center
+        AutoHeight: =true
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(99, 139, 44, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =70
+        Size: =21
+        Text: =Index(colCarrossel,varCarrosselIndex).Assunto
+        Width: =560
+        X: =40
+        Y: =1110-assuntoCarrosselLabel.Height
+        ZIndex: =22
+
+    qrCodeImageGroup As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =22
+
+        codigoQRImage As image:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            DisplayMode: |-
+                =If(
+                    _varLoading,
+                    DisplayMode.Disabled,
+                    DisplayMode.Edit
+                )
+            Height: =240
+            Image: ='QR CODE - LINKEDIN'
+            OnSelect: =Select(barCodeScanner)
+            Tooltip: ="Escanear QR code do ativo (função não disponível para computador)"
+            Width: =294
+            X: =23
+            Y: =137
+            ZIndex: =7
+
+        invisibleButton As button:
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(0, 0, 0, 0)
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(0, 0, 0, 0)
+            FontWeight: =FontWeight.Semibold
+            Height: =249
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(0, 0, 0, 0)
+            OnSelect: =Select(barCodeScanner)
+            PressedFill: =RGBA(0, 0, 0, 0)
+            Size: =24
+            Text: =""
+            Tooltip: ="Escanear QR code do ativo (função não disponível para computador)"
+            Width: =280
+            X: =30
+            Y: =128
+            ZIndex: =15
+
+    retornarCarrosselIcon As icon.BackArrow:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(153, 207, 236, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        HoverColor: =RGBA(39,113,194,1)
+        Icon: =Icon.BackArrow
+        OnSelect: |-
+            =UpdateContext({varCarrosselIndex:If(varCarrosselIndex=1,CountRows(colCarrossel),varCarrosselIndex-1)});
+            UpdateContext({varCarrosselTimerStart:false});
+            Reset(carrosselTimer);
+            UpdateContext({varCarrosselTimerStart:true});
+        X: =22
+        Y: =911
+        ZIndex: =23
+
+    avançarCarrosselIcon As icon.BackArrow:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(153, 207, 236, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        HoverColor: =RGBA(39,113,194,1)
+        Icon: =Icon.NextArrow
+        OnSelect: |-
+            =UpdateContext({varCarrosselIndex:If(varCarrosselIndex=CountRows(colCarrossel),1,varCarrosselIndex+1)});
+            UpdateContext({varCarrosselTimerStart:false});
+            Reset(carrosselTimer);
+            UpdateContext({varCarrosselTimerStart:true});
+        X: =552
+        Y: =911
+        ZIndex: =24
+
+    carrosselBolaContainer As groupContainer.horizontalAutoLayoutContainer:
+        Height: =25
+        LayoutAlignItems: =LayoutAlignItems.Center
+        LayoutGap: =10
+        LayoutJustifyContent: =LayoutJustifyContent.Center
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =2
+        PaddingLeft: =5
+        PaddingRight: =5
+        PaddingTop: =2
+        Width: =140
+        X: =250
+        Y: =1110
+        ZIndex: =25
+
+        carrosselBola1Circle As circle:
+            BorderColor: =RGBA(39, 113, 194, 1)
+            BorderThickness: =1
+            Fill: =If(varCarrosselIndex=1,RGBA(39, 113, 194, 1),RGBA(255, 255, 255, 1))
+            Height: =18
+            OnSelect: |-
+                =UpdateContext({varCarrosselIndex:1});
+                UpdateContext({varCarrosselTimerStart:false});
+                Reset(carrosselTimer);
+                UpdateContext({varCarrosselTimerStart:true});
+            Visible: =CountRows(colCarrossel)>=1
+            Width: =18
+            X: =256
+            Y: =1113
+            ZIndex: =1
+
+        carrosselBola2Circle As circle:
+            BorderColor: =RGBA(39, 113, 194, 1)
+            BorderThickness: =1
+            Fill: =If(varCarrosselIndex=2,RGBA(39, 113, 194, 1),RGBA(255, 255, 255, 1))
+            Height: =18
+            OnSelect: |-
+                =UpdateContext({varCarrosselIndex:2});
+                UpdateContext({varCarrosselTimerStart:false});
+                Reset(carrosselTimer);
+                UpdateContext({varCarrosselTimerStart:true});
+            Visible: =CountRows(colCarrossel)>=2
+            Width: =18
+            X: =28
+            Y: =1113
+            ZIndex: =2
+
+        carrosselBola3Circle As circle:
+            BorderColor: =RGBA(39, 113, 194, 1)
+            BorderThickness: =1
+            DisplayMode: =Edit
+            Fill: =If(varCarrosselIndex=3,RGBA(39, 113, 194, 1),RGBA(255, 255, 255, 1))
+            Height: =18
+            OnSelect: |-
+                =UpdateContext({varCarrosselIndex:3});
+                UpdateContext({varCarrosselTimerStart:false});
+                Reset(carrosselTimer);
+                UpdateContext({varCarrosselTimerStart:true});
+            Visible: =CountRows(colCarrossel)>=3
+            Width: =18
+            X: =57
+            Y: =1113
+            ZIndex: =3
+
+        carrosselBola4Circle As circle:
+            BorderColor: =RGBA(39, 113, 194, 1)
+            BorderThickness: =1
+            Fill: =If(varCarrosselIndex=4,RGBA(39, 113, 194, 1),RGBA(255, 255, 255, 1))
+            Height: =18
+            OnSelect: |-
+                =UpdateContext({varCarrosselIndex:4});
+                UpdateContext({varCarrosselTimerStart:false});
+                Reset(carrosselTimer);
+                UpdateContext({varCarrosselTimerStart:true});
+            Visible: =CountRows(colCarrossel)>=4
+            Width: =18
+            X: =86
+            Y: =1113
+            ZIndex: =4
+
+        carrosselBola5Circle As circle:
+            BorderColor: =RGBA(39, 113, 194, 1)
+            BorderThickness: =1
+            Fill: =If(varCarrosselIndex=5,RGBA(39, 113, 194, 1),RGBA(255, 255, 255, 1))
+            Height: =18
+            OnSelect: |-
+                =UpdateContext({varCarrosselIndex:5});
+                UpdateContext({varCarrosselTimerStart:false});
+                Reset(carrosselTimer);
+                UpdateContext({varCarrosselTimerStart:true});
+            Visible: =CountRows(colCarrossel)>=5
+            Width: =18
+            X: =115
+            Y: =1113
+            ZIndex: =5
+
+    buscarDocumentosLabel As label:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(0, 134, 208, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =46
+        Italic: =true
+        Size: =21
+        Text: ="Buscar Documentos"
+        Width: =249
+        X: =371
+        Y: =139
+        ZIndex: =26
+
+    loadingGif As image:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Height: =91
+        Image: ='_21_loading-gif-transparent-background_All-Loading-Gif-Image-Transparent-Background-Best-Studio-'
+        Visible: =varRefreshGifVisible
+        Width: =151
+        X: =245
+        Y: =900
+        ZIndex: =27
+
+    sideMenu As groupContainer.verticalAutoLayoutContainer:
+        BorderColor: =RGBA(53, 74, 36, 1)
+        BorderThickness: =0.1
+        Fill: =RGBA(152, 208, 70, 1)
+        Height: =1048
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Visible: =varSideMenuVisible
+        Width: =555
+        X: =85
+        Y: =88
+        ZIndex: =28
+
+        blankLabel As label:
+            Align: =Align.Center
+            AlignInContainer: =AlignInContainer.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            Height: =30
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            Size: =15
+            Text: =""
+            VerticalAlign: =VerticalAlign.Bottom
+            Width: =350
+            ZIndex: =1
+
+        profileImage_1 As image:
+            AlignInContainer: =AlignInContainer.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(29, 29, 29, 1)
+            Height: =70
+            Image: =User().Image
+            LayoutMinHeight: =320
+            LayoutMinWidth: =320
+            RadiusBottomLeft: =80
+            RadiusBottomRight: =80
+            RadiusTopLeft: =80
+            RadiusTopRight: =80
+            Width: =70
+            ZIndex: =2
+
+        fullNameLabel_1 As label:
+            Align: =Align.Center
+            AlignInContainer: =AlignInContainer.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            Height: =30
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            Size: =15
+            Text: =Proper(User().FullName)
+            VerticalAlign: =VerticalAlign.Bottom
+            Width: =350
+            ZIndex: =3
+
+        gerenciaLabel_1 As label:
+            Align: =Align.Center
+            AlignInContainer: =AlignInContainer.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            Height: =60
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            PaddingBottom: =15
+            Size: =15
+            Text: |-
+                =If(
+                    varOrgao = "" || IsBlank(varOrgao),
+                    "",
+                    "Órgão: " & varOrgao
+                )
+            VerticalAlign: =VerticalAlign.Top
+            Width: =350
+            ZIndex: =4
+
+        separador7 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 1)
+            Height: =1
+            Width: =555
+            X: =40
+            Y: =40
+            ZIndex: =5
+
+        buscaAvancadaAtivosContainer As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =112
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =6
+
+            lupaIcon2 As icon.Search:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                Color: =RGBA(0, 134, 208, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(244, 244, 244, 1)
+                Height: =70
+                Icon: =Icon.Search
+                OnSelect: |-
+                    =UpdateContext({varSubmenuAtivosVisible:!varSubmenuAtivosVisible})
+                PaddingBottom: =10
+                PaddingLeft: =50
+                PaddingRight: =10
+                PaddingTop: =10
+                Tooltip: ="Clique para fazer uma busca por ativo com filtros específicos"
+                Width: =100
+                X: =202
+                Y: =595
+                ZIndex: =1
+
+            buscaAvancadaAtivosButton As button:
+                Align: =Align.Left
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =0
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FillPortions: =1
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Lighter
+                Height: =70
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: |-
+                    =UpdateContext({varSubmenuAtivosVisible:!varSubmenuAtivosVisible})
+                PaddingBottom: =0
+                PaddingRight: =10
+                PaddingTop: =0
+                PressedFill: =RGBA(0,0,0,0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =22
+                Text: ="Busca - Ativos"
+                Tooltip: ="Clique para fazer uma busca por ativo com filtros específicos"
+                Width: =280
+                ZIndex: =2
+
+        separador As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 1)
+            Height: =1
+            Width: =555
+            X: =40
+            Y: =40
+            ZIndex: =7
+
+        buscaAvancadaModelosContainer As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =112
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =8
+
+            lupaIcon2_1 As icon.Search:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                Color: =RGBA(0, 134, 208, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(244, 244, 244, 1)
+                Height: =70
+                Icon: =Icon.Search
+                OnSelect: |-
+                    =UpdateContext({varRefreshGifVisible: true});Navigate(ModelosSearchScreen,ScreenTransition.None)
+                PaddingBottom: =10
+                PaddingLeft: =50
+                PaddingRight: =10
+                PaddingTop: =10
+                Tooltip: ="Clique para fazer uma busca por modelos de equipamentos com filtros específicos"
+                Width: =100
+                X: =202
+                Y: =595
+                ZIndex: =1
+
+            buscaAvancadaModelosButton As button:
+                Align: =Align.Left
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =0
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FillPortions: =1
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Lighter
+                Height: =70
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: |-
+                    =UpdateContext({varRefreshGifVisible: true});Navigate(ModelosSearchScreen,ScreenTransition.None)
+                PaddingBottom: =0
+                PaddingRight: =10
+                PaddingTop: =0
+                PressedFill: =RGBA(0,0,0,0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =22
+                Text: ="Busca - Modelos Equipamentos"
+                Tooltip: ="Clique para fazer uma busca por modelos de equipamentos com filtros específicos"
+                Width: =280
+                ZIndex: =2
+
+        separador6 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 1)
+            Height: =1
+            Width: =555
+            X: =40
+            Y: =40
+            ZIndex: =9
+
+        buscaAvancadaSubestacoesContainer As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =112
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =10
+
+            lupaIcon2_2 As icon.Search:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                Color: =RGBA(0, 134, 208, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(244, 244, 244, 1)
+                Height: =70
+                Icon: =Icon.Search
+                OnSelect: |-
+                    =UpdateContext({varRefreshGifVisible: true});Navigate(ModelosSearchScreen,ScreenTransition.None)
+                PaddingBottom: =10
+                PaddingLeft: =50
+                PaddingRight: =10
+                PaddingTop: =10
+                Tooltip: ="Clique para fazer uma busca por subestações com filtros específicos"
+                Width: =100
+                X: =202
+                Y: =595
+                ZIndex: =1
+
+            buscaAvancadaSubestacoesButton As button:
+                Align: =Align.Left
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =0
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FillPortions: =1
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Lighter
+                Height: =70
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: |-
+                    =UpdateContext({varRefreshGifVisible: true});Navigate(SubestacoesSearchScreen,ScreenTransition.None)
+                PaddingBottom: =0
+                PaddingRight: =10
+                PaddingTop: =0
+                PressedFill: =RGBA(0,0,0,0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =22
+                Text: ="Busca - Subestações"
+                Tooltip: ="Clique para fazer uma busca por subestações com filtros específicos"
+                Width: =280
+                ZIndex: =2
+
+        separador8 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 1)
+            Height: =1
+            Width: =555
+            X: =40
+            Y: =40
+            ZIndex: =11
+
+        simuladorPVContainer As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =112
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =12
+
+            simuladorPVIcon As icon.Search:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                Color: =RGBA(0, 134, 208, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(244, 244, 244, 1)
+                Height: =70
+                Icon: =Icon.Money
+                OnSelect: |-
+                    =Launch("https://apps.powerapps.com/play/e/default-97ce2340-9c1d-45b1-a835-7ea811b6fe9a/a/bf0820bc-3be9-4088-9149-0ace1d8b9431?tenantId=97ce2340-9c1d-45b1-a835-7ea811b6fe9a&source=portal&screenColor=RGBA%280%2c176%2c240%2c1%29&skipAppMetadata=true")
+                PaddingBottom: =10
+                PaddingLeft: =50
+                PaddingRight: =10
+                PaddingTop: =10
+                Tooltip: ="Clique para abrir o simulador de PV"
+                Width: =100
+                X: =202
+                Y: =595
+                ZIndex: =1
+
+            simuladorPVButton As button:
+                Align: =Align.Left
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =0
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FillPortions: =1
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Lighter
+                Height: =70
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: |-
+                    =Launch("https://apps.powerapps.com/play/e/default-97ce2340-9c1d-45b1-a835-7ea811b6fe9a/a/bf0820bc-3be9-4088-9149-0ace1d8b9431?tenantId=97ce2340-9c1d-45b1-a835-7ea811b6fe9a&source=portal&screenColor=RGBA%280%2c176%2c240%2c1%29&skipAppMetadata=true")
+                PaddingBottom: =0
+                PaddingRight: =10
+                PaddingTop: =0
+                PressedFill: =RGBA(0,0,0,0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =22
+                Text: ="Simulador de PV"
+                Tooltip: ="Clique para abrir o simulador de PV"
+                Width: =280
+                ZIndex: =2
+
+        separador2 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 1)
+            Height: =1
+            Width: =555
+            X: =40
+            Y: =40
+            ZIndex: =13
+
+        indicadoresContainer As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =112
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =14
+
+            indicadoresIcon As icon.Search:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                Color: =RGBA(0, 134, 208, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(244, 244, 244, 1)
+                Height: =70
+                Icon: =Icon.Trending
+                OnSelect: |-
+                    =Launch("https://app.powerbi.com/reportEmbed?reportId=5a9ea2bf-ae5a-48fc-91d6-2fe0d1fd657b&autoAuth=true&ctid=97ce2340-9c1d-45b1-a835-7ea811b6fe9a&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWJyYXppbC1zb3V0aC1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D")
+                PaddingBottom: =10
+                PaddingLeft: =50
+                PaddingRight: =10
+                PaddingTop: =10
+                Tooltip: ="Clique para abrir o BI de indicadores estratégicos da AT"
+                Width: =100
+                X: =202
+                Y: =595
+                ZIndex: =1
+
+            indicadoresButton As button:
+                Align: =Align.Left
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =0
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FillPortions: =1
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Lighter
+                Height: =70
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: |-
+                    =Launch("https://app.powerbi.com/reportEmbed?reportId=5a9ea2bf-ae5a-48fc-91d6-2fe0d1fd657b&autoAuth=true&ctid=97ce2340-9c1d-45b1-a835-7ea811b6fe9a&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWJyYXppbC1zb3V0aC1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D")
+                PaddingBottom: =0
+                PaddingRight: =10
+                PaddingTop: =0
+                PressedFill: =RGBA(0,0,0,0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =22
+                Text: ="Indicadores"
+                Tooltip: ="Clique para abrir o BI de indicadores estratégicos da AT"
+                Width: =280
+                ZIndex: =2
+
+        separador3 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 1)
+            Height: =1
+            Width: =555
+            X: =40
+            Y: =40
+            ZIndex: =15
+
+        cadastrarCISContainer As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =112
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Visible: =_varUserIsAdmin
+            ZIndex: =16
+
+            cadastrarCISIcon As icon.Search:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                Color: =RGBA(0, 134, 208, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(244, 244, 244, 1)
+                Height: =70
+                Icon: =Icon.DocumentWithContent
+                OnSelect: =Navigate(CISSearchScreen,None)
+                PaddingBottom: =10
+                PaddingLeft: =50
+                PaddingRight: =10
+                PaddingTop: =10
+                Tooltip: ="Clique para cadastrar nova CIS"
+                Width: =100
+                X: =202
+                Y: =595
+                ZIndex: =1
+
+            cadastrarCISButton As button:
+                Align: =Align.Left
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =0
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FillPortions: =1
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Lighter
+                Height: =70
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: =Navigate(CISSearchScreen,None)
+                PaddingBottom: =0
+                PaddingRight: =10
+                PaddingTop: =0
+                PressedFill: =RGBA(0,0,0,0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =22
+                Text: ="Registro de CIS"
+                Tooltip: ="Clique para cadastrar nova CIS"
+                Width: =280
+                ZIndex: =2
+
+        separador4 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 1)
+            Height: =1
+            Visible: =_varUserIsAdmin
+            Width: =555
+            X: =40
+            Y: =40
+            ZIndex: =17
+
+        destaquesNoticiasContainer As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =112
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =18
+
+            destaquesNoticiasIcon As icon.Search:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                Color: =RGBA(0, 134, 208, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(244, 244, 244, 1)
+                Height: =70
+                Icon: =Icon.Lightbulb
+                OnSelect: |-
+                    =Navigate(DestaquesNoticiasSearchScreen,None,{varFiltroDestaque_SIOM:"",varFiltroDestaque_Fabricante:"",varFiltroDestaque_Modelo:""})
+                PaddingBottom: =10
+                PaddingLeft: =50
+                PaddingRight: =10
+                PaddingTop: =10
+                Tooltip: ="Clique para ver todos os destaques e notícias"
+                Width: =100
+                X: =202
+                Y: =595
+                ZIndex: =1
+
+            destaquesNoticiasButton As button:
+                Align: =Align.Left
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =0
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FillPortions: =1
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Lighter
+                Height: =70
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: |-
+                    =Navigate(DestaquesNoticiasSearchScreen,None,{varFiltroDestaque_SIOM:"",varFiltroDestaque_Fabricante:"",varFiltroDestaque_Modelo:""})
+                PaddingBottom: =0
+                PaddingRight: =10
+                PaddingTop: =0
+                PressedFill: =RGBA(0,0,0,0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =22
+                Text: ="Destaques/Notícias"
+                Tooltip: ="Clique para ver todos os destaques e notícias"
+                Width: =280
+                ZIndex: =2
+
+        separador9 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 1)
+            Height: =1
+            Width: =555
+            X: =40
+            Y: =40
+            ZIndex: =19
+
+        sobreContainer As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =112
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =20
+
+            sobreButton As button:
+                Align: =Align.Left
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =0
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FillPortions: =1
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Lighter
+                Height: =70
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: =Navigate(AboutScreen,None)
+                PaddingBottom: =0
+                PaddingLeft: =105
+                PaddingRight: =10
+                PaddingTop: =0
+                PressedFill: =RGBA(0, 0, 0, 0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =22
+                Text: ="Sobre"
+                Tooltip: ="Clique para abrir tela de informações sobre o aplicativo"
+                Width: =280
+                ZIndex: =3
+
+        separador5 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 1)
+            Height: =1
+            Width: =555
+            X: =40
+            Y: =40
+            ZIndex: =21
+
+    errorMessageTimer As timer:
+        Duration: =3000
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =70
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        OnTimerEnd: |-
+            =UpdateContext({varAlertIconVisible: false, varStartTimer: false})
+        OnTimerStart: |-
+            =UpdateContext({varAlertIconVisible: true})
+        Start: =varStartTimer
+        Visible: =false
+        Width: =280
+        X: =-300
+        Y: =315
+        ZIndex: =35
+
+    carrosselImageGroup As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =35
+
+        carrosselImage As image:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Height: =196
+            Image: =Index(colCarrossel,varCarrosselIndex).Foto
+            OnSelect: |-
+                =Navigate(
+                    DestaqueNoticiaViewScreen,
+                    None,
+                {varDestaque: First(Filter(destaques_noticias,Index(colCarrossel,varCarrosselIndex).Title = Title))
+                })
+            Tooltip: ="Clique para visualizar esta notícia completa"
+            Width: =600
+            X: =20
+            Y: =841
+            ZIndex: =20
+
+        carrosselInvisibleButton As button:
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(0, 0, 0, 0)
+            FontWeight: =FontWeight.Semibold
+            Height: =196
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(0,0,0,0)
+            OnSelect: |-
+                =Navigate(
+                    DestaqueNoticiaViewScreen,
+                    None,
+                {varDestaque: First(Filter(destaques_noticias,Index(colCarrossel,varCarrosselIndex).Title = Title))
+                })
+            Size: =24
+            Text: =""
+            Tooltip: ="Clique para visualizar esta notícia completa"
+            Width: =600
+            X: =20
+            Y: =841
+            ZIndex: =21
+
+    carrosselTimer As timer:
+        AutoPause: =false
+        AutoStart: =true
+        Duration: =8000
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =70
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        OnTimerEnd: |-
+            =UpdateContext({varCarrosselIndex:If(varCarrosselIndex=CountRows(colCarrossel),1,varCarrosselIndex+1)})
+        Repeat: =true
+        Start: =varCarrosselTimerStart
+        Visible: =false
+        Width: =280
+        X: =-300
+        Y: =334
+        ZIndex: =36
+
+    subMenuAtivos As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =37
+
+        subMenuBackButton As button:
+            BorderColor: =RGBA(39, 113, 194, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            DisplayMode: =DisplayMode.Disabled
+            Fill: =RGBA(237, 237, 237, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =96
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+            Size: =24
+            Text: =""
+            Visible: =varSubmenuAtivosVisible
+            Width: =205
+            X: =332
+            Y: =242
+            ZIndex: =29
+
+        ativosGTContainer As groupContainer.verticalAutoLayoutContainer:
+            Height: =96
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMode: =LayoutMode.Auto
+            Visible: =varSubmenuAtivosVisible
+            Width: =205
+            X: =332
+            Y: =242
+            ZIndex: =30
+
+            ativos_G_Button As button:
+                Align: =Align.Left
+                AlignInContainer: =AlignInContainer.Center
+                BorderColor: =RGBA(39, 113, 194, 1)
+                BorderThickness: =0
+                Color: =RGBA(0, 134, 208, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(237, 237, 237, 1)
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Lighter
+                Height: =45
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+                Italic: =true
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: |-
+                    =UpdateContext(
+                        {
+                            varRefreshGifVisible: true,
+                            varSubmenuAtivosVisible: false
+                        }
+                    );
+                    Navigate(
+                        Ativos_G_SearchScreen,
+                        ScreenTransition.None
+                    )
+                PaddingLeft: =20
+                Size: =20
+                Text: ="• Geração"
+                Visible: =varSubmenuAtivosVisible
+                Width: =200
+                ZIndex: =1
+
+            ativos_T_Button As button:
+                Align: =Align.Left
+                AlignInContainer: =AlignInContainer.Center
+                BorderColor: =RGBA(39, 113, 194, 1)
+                BorderThickness: =0
+                Color: =RGBA(0, 134, 208, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(237, 237, 237, 1)
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Lighter
+                Height: =45
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+                Italic: =true
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: |-
+                    =UpdateContext(
+                        {
+                            varRefreshGifVisible: true,
+                            varSubmenuAtivosVisible: false
+                        }
+                    );
+                    Navigate(
+                        Ativos_T_SearchScreen,
+                        ScreenTransition.None
+                    )
+                PaddingLeft: =20
+                Size: =20
+                Text: ="• Transmissão"
+                Visible: =varSubmenuAtivosVisible
+                Width: =200
+                ZIndex: =2
+
+    alertPopUpGroup As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =39
+
+        alertpopUpBackGroundRectangle As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 0.1)
+            Height: =1136
+            Visible: =varAlertIconVisible
+            Width: =640
+            ZIndex: =31
+
+        alertPopUpRectangle As rectangle:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =242
+            Visible: =varAlertIconVisible
+            Width: =605
+            X: =17
+            Y: =485
+            ZIndex: =32
+
+        alertIcon As icon.Warning:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(255, 191, 0, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(244, 244, 244, 1)
+            DisplayMode: =DisplayMode.View
+            Height: =78
+            Icon: =Icon.Warning
+            Visible: =varAlertIconVisible
+            Width: =73
+            X: =283
+            Y: =626
+            ZIndex: =33
+
+        errorMessageLabel As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Lighter
+            Height: =108
+            Overflow: =Overflow.Scroll
+            PaddingBottom: =10
+            Size: =18
+            Text: |-
+                =If(
+                    _varLoading,
+                    If(
+                        _varExporting,
+                        "Aguarde a exportação de dados",
+                        "Aguarde o carregamento dos ativos"
+                    ),
+                    varErrorText
+                )
+            Visible: =varAlertIconVisible
+            Width: =579
+            X: =30
+            Y: =504
+            ZIndex: =34
+

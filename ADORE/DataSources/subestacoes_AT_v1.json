@@ -1,0 +1,46 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+    "CdpRevision": {
+      "BaseUrl": "/",
+      "LastChangedTimeString": "2022-11-09T20:26:15.6720000Z",
+      "RevisionNumber": 1
+    },
+    "ConnectedDataSourceInfoNameMapping": {
+      "{Attachments}": "Anexos",
+      "{Attachments}@odata.type": "{Attachments} ({Attachments}@odata.type)",
+      "{FilenameWithExtension}": "Nome de arquivo com extensão",
+      "{FullPath}": "Caminho Completo",
+      "{HasAttachments}": "Tem anexos",
+      "{Identifier}": "Identificador",
+      "{IsFolder}": "ÉPasta",
+      "{Link}": "Link para o item",
+      "{ModerationComment}": "Comentários associados à aprovação de conteúdo deste item de lista",
+      "{ModerationStatus}": "Status de aprovação de conteúdo",
+      "{Name}": "Nome",
+      "{Path}": "Caminho da pasta",
+      "{Thumbnail}": "Miniatura",
+      "{TriggerWindowEndToken}": "Token de Fim da Janela de Acionamento",
+      "{TriggerWindowStartToken}": "Token de Início da Janela de Acionamento",
+      "{VersionNumber}": "Número da versão",
+      "Author": "Criado por",
+      "Author#Claims": "Criado por Claims",
+      "ComplianceAssetId": "ID de Ativo de Conformidade",
+      "Created": "Criado",
+      "Editor": "Modificado por",
+      "Editor#Claims": "Modificado por Claims",
+      "field_1": "local_nome",
+      "ID": "ID",
+      "link_sharepoint": "link_sharepoint",
+      "local_gerencia": "local_gerencia",
+      "Modified": "Modificado",
+      "Title": "ID_ESPELHO"
+    },
+    "DatasetName": "https://cemigbr.sharepoint.com/sites/QRCODE",
+    "EncodeDataset": true,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "Name": "subestacoes_AT_v1",
+    "Type": "ConnectedDataSourceInfo"
+  }
+]

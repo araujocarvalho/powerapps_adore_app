@@ -1,0 +1,419 @@
+"QrCodeScreen As screen.'phoneLayout_FluidGridWithHeaderPageLayout_ver3.0'":
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+    OnVisible: |-
+        =UpdateContext({varQRContent: ""});
+        UpdateContext({varEmailEnviado: false});
+        Set(
+            _varLoading,
+            true
+        );
+        //UpdateContext(
+            //{
+              //  varQRContent: FlowQRCodeGenerate.Run(
+               //     varSiom;
+                 //   ""
+               //).qrcontent
+           // }
+        //);;
+        Set(
+            _varLoading,
+            false
+        );
+
+    RectQuickActionBar1 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =2
+
+    LblAppName1 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        Height: =88
+        Size: =25
+        Text: =//"QR CODE - "&varSiom
+        Width: =552
+        X: =88
+        ZIndex: =3
+
+    IconBackarrow1_3 As icon.ChevronLeft:
+        AccessibleLabel: =Self.Tooltip
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =88
+        Icon: =Icon.ChevronLeft
+        OnSelect: =Navigate(Ativo_T_DetailScreen, ScreenTransition.None)
+        PaddingBottom: =24
+        PaddingLeft: =24
+        PaddingRight: =24
+        PaddingTop: =24
+        PressedFill: =RGBA(255, 255, 255, 0.3)
+        TabIndex: =0
+        Tooltip: ="Voltar para a lista"
+        Width: =88
+        ZIndex: =4
+
+    loadingGif2_1 As image:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Height: =91
+        Image: ='_21_loading-gif-transparent-background_All-Loading-Gif-Image-Transparent-Background-Best-Studio-'
+        Visible: =If(_varLoading,true,false)
+        Width: =151
+        X: =244
+        Y: =769
+        ZIndex: =5
+
+    messageLabel As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(0, 0, 0, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =110
+        Overflow: =Overflow.Scroll
+        PaddingBottom: =10
+        Size: =18
+        Text: ="Um e-mail foi enviado para a caixa de mensagens de "&User().Email&" e chegará em instantes."
+        VerticalAlign: =VerticalAlign.Bottom
+        Visible: =varEmailEnviado
+        Width: =640
+        Y: =1026
+        ZIndex: =8
+
+    sendEmailButtonGroup As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =8
+
+        sendEmailButton As button:
+            Align: =Align.Left
+            BorderColor: =RGBA(39, 113, 194, 1)
+            Color: =RGBA(29, 29, 29, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            DisplayMode: =If(varEmailEnviado,DisplayMode.Disabled,DisplayMode.Edit)
+            Fill: =RGBA(0, 0, 0, 0)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Lighter
+            Height: =64
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+            OnSelect: |-
+                =UpdateContext({varEmailEnviado: true});
+                UpdateContext(
+                    {
+                        varQRCodeImageJson: Substitute(
+                            JSON(
+                                qrCodeImage.Image,
+                                IncludeBinaryData
+                            ),
+                            "appres://blobmanager/",
+                            ""
+                        )
+                    }
+                );
+                //FlowQRCodeToEmail.Run(
+                //    "<!DOCTYPE html>
+                //<head>
+                //  <meta charset='utf-8'>
+                //  <meta name='viewport' content='width=device-width, initial-scale=1'>
+                //  <style>
+                //    * {
+                //      box-sizing: border-box;
+                //    }
+                //    body {
+                  //    font-family: Arial, Helvetica, sans-serif;
+                    //  display:flex; flex-direction:row; justify-content:center;
+                    //}
+                    //table {
+                    //  font-family: arial, sans-serif;
+                    //  border: 1px solid;
+                //    }
+                  //  td {
+                    //  text-align: center;
+                      //font-size: 13px;
+                   //   padding-right: 10px;
+                     // height: 18px;
+                   // }
+                   // th {
+                   //   text-align: center;
+                    //  padding-top: 4px;
+                    //  padding-right: 20px;
+                    //  padding-left: 20px;
+                    //  font-size: 20px;
+                    //  height: 25px;
+                    //}
+                    //.crop {
+                    //    width: 145px;
+                    //    height: 160px;
+                    //    overflow: hidden;
+                   // }
+                   // .crop img {
+                   //     width: 200px;
+                   //     height: 200px;
+                   //     margin: -30px 0px 0px -30px;
+                   // }
+                  //</style>
+                //</head>
+                //<body>
+                //<section>
+                 //   <br>
+                  //  <table>
+                   //   <tr>
+                   //     <td></td> 
+                   //   </tr>
+                     // <tr>
+                       // <td></td> 
+                      //  <td rowspan = 6>
+                        //	<div class='crop'>
+                        //		<img src=" & varQRCodeImageJson & " width='200' height='200'></img>
+                          //  </div>
+                    //    </td>
+                    //  </tr>
+                    //  <tr>
+                    //    <td>Identificação</td>
+                    //  </tr>
+                    //  <tr>
+                    //    <td>Equipamento</td> 
+                    //  </tr>
+                    //  <tr>
+                    //    <th>CEMIG GT</th>
+                    //  </tr>
+                     // <tr>
+                     //   <th>" & varSiom & "</th>
+                     // </tr>
+                     // <tr>
+                     //   <td></td> 
+                     // </tr>
+                  	//</table>
+                //</section>
+                //</body>
+                //</html>";
+                 //   User().Email;
+                 //   varSiom
+                //)
+            PaddingLeft: =80
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Size: =18
+            Text: ="Enviar para meu e-mail"
+            Tooltip: ="Clique para enviar o QR CODE para seu e-mail"
+            Visible: =!_varLoading
+            Width: =359
+            X: =140
+            Y: =566
+            ZIndex: =6
+
+        sendIcon As icon.Share:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 134, 208, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(153, 207, 236, 1)
+            DisplayMode: =If(varEmailEnviado,DisplayMode.Disabled,DisplayMode.Edit)
+            Height: =51
+            Icon: =Icon.Share
+            OnSelect: |-
+                =UpdateContext({varEmailEnviado: true});
+                UpdateContext(
+                    {
+                        varQRCodeImageJson: Substitute(
+                            JSON(
+                                qrCodeImage.Image,
+                                IncludeBinaryData
+                            ),
+                            "appres://blobmanager/",
+                            ""
+                        )
+                    }
+                );
+                //FlowQRCodeToEmail.Run(
+                //    "<!DOCTYPE html>
+                //<head>
+                //  <meta charset='utf-8'>
+                //  <meta name='viewport' content='width=device-width, initial-scale=1'>
+                //  <style>
+                //    * {
+                //      box-sizing: border-box;
+                //    }
+                //    body {
+                  //    font-family: Arial, Helvetica, sans-serif;
+                    //  display:flex; flex-direction:row; justify-content:center;
+                    //}
+                    //table {
+                    //  font-family: arial, sans-serif;
+                    //  border: 1px solid;
+                //    }
+                  //  td {
+                    //  text-align: center;
+                      //font-size: 13px;
+                   //   padding-right: 10px;
+                     // height: 18px;
+                   // }
+                   // th {
+                   //   text-align: center;
+                    //  padding-top: 4px;
+                    //  padding-right: 20px;
+                    //  padding-left: 20px;
+                    //  font-size: 20px;
+                    //  height: 25px;
+                    //}
+                    //.crop {
+                    //    width: 145px;
+                    //    height: 160px;
+                    //    overflow: hidden;
+                   // }
+                   // .crop img {
+                   //     width: 200px;
+                   //     height: 200px;
+                   //     margin: -30px 0px 0px -30px;
+                   // }
+                  //</style>
+                //</head>
+                //<body>
+                //<section>
+                 //   <br>
+                  //  <table>
+                   //   <tr>
+                   //     <td></td> 
+                   //   </tr>
+                     // <tr>
+                       // <td></td> 
+                      //  <td rowspan = 6>
+                        //	<div class='crop'>
+                        //		<img src=" & varQRCodeImageJson & " width='200' height='200'></img>
+                          //  </div>
+                    //    </td>
+                    //  </tr>
+                    //  <tr>
+                    //    <td>Identificação</td>
+                    //  </tr>
+                    //  <tr>
+                    //    <td>Equipamento</td> 
+                    //  </tr>
+                    //  <tr>
+                    //    <th>CEMIG GT</th>
+                    //  </tr>
+                     // <tr>
+                     //   <th>" & varSiom & "</th>
+                     // </tr>
+                     // <tr>
+                     //   <td></td> 
+                     // </tr>
+                  	//</table>
+                //</section>
+                //</body>
+                //</html>";
+                 //   User().Email;
+                 //   varSiom
+                //)
+            Tooltip: ="Clique para enviar o QR CODE para seu e-mail"
+            Visible: =!_varLoading
+            Width: =44
+            X: =161
+            Y: =572
+            ZIndex: =7
+
+    qrCodePanelGroup As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =14
+
+        qrCodeImage As image:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Height: =314
+            Image: =varQRContent
+            Visible: =!_varLoading
+            Width: =332
+            X: =272
+            Y: =173
+            ZIndex: =1
+
+        Label4 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.Arial
+            Height: =36
+            Size: =19
+            Text: ="Identificação"
+            Visible: =!_varLoading
+            Width: =274
+            X: =46
+            Y: =238
+            ZIndex: =9
+
+        Label4_1 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.Arial
+            Height: =36
+            Size: =19
+            Text: ="Equipamento"
+            Visible: =!_varLoading
+            Width: =274
+            X: =46
+            Y: =274
+            ZIndex: =10
+
+        Rectangle3 As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =288
+            Visible: =!_varLoading
+            Width: =534
+            X: =55
+            Y: =187
+            ZIndex: =11
+
+        Label4_2 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.Arial
+            FontWeight: =FontWeight.Bold
+            Height: =36
+            Size: =25
+            Text: ="CEMIG GT"
+            Visible: =!_varLoading
+            Width: =274
+            X: =46
+            Y: =334
+            ZIndex: =12
+
+        Label4_3 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.Arial
+            FontWeight: =FontWeight.Bold
+            Height: =36
+            Size: =25
+            Text: =//varSiom
+            Visible: =!_varLoading
+            Width: =274
+            X: =46
+            Y: =386
+            ZIndex: =13
+

@@ -1,0 +1,155 @@
+SplashScreen As screen:
+    Fill: =RGBA(152, 208, 70, 1)
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+    OnVisible: |
+        =Set(
+            _varLoading,
+            true
+        );
+        Set(
+            _varJaMostrouDicaDestaque,
+            false
+        );
+        Set(
+            _varLoaded_ativos_T,
+            false
+        );
+        Set(
+            _varLoaded_ativos_G,
+            false
+        );
+        ClearCollect(
+            colFases,
+            "VM",
+            "AZ",
+            "BR",
+            "RM",
+            "TR"
+        );
+        Refresh(modelos_ativos_v3);
+        ClearCollect(
+            colModelosEquipamentos,
+            Filter(
+                modelos_ativos_v3,
+                ID_ESPELHO >= 1 && ID_ESPELHO < 2000
+            )
+        );
+        Collect(
+            colModelosEquipamentos,
+            Filter(
+                modelos_ativos_v3,
+                ID_ESPELHO >= 2000 && ID_ESPELHO < 3000
+            )
+        );
+        Set(
+            _varUserIsAdmin,
+            !IsBlank(
+                LookUp(
+                    users_admin_adore_app,
+                    Usuario.Email = User().Email,
+                    Usuario
+                )
+            )
+        );
+        Set(
+            _varLoading,
+            false
+        );
+
+    logoImage As image:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Height: =522
+        Image: =adore_code_image
+        Width: =572
+        X: =34
+        Y: =170
+        ZIndex: =1
+
+    descriptionLabel As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =70
+        Italic: =true
+        Size: =17
+        Text: ="ACESSO A DOCUMENTOS EM REDE"
+        Width: =560
+        X: =40
+        Y: =571
+        ZIndex: =2
+
+    nameLabel As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =70
+        Size: =25
+        Text: ="ADORE"
+        Width: =560
+        X: =40
+        Y: =519
+        ZIndex: =3
+
+    sinceLabel As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =70
+        Size: =17
+        Text: ="Desde 2021"
+        Width: =560
+        X: =34
+        Y: =1010
+        ZIndex: =4
+
+    companyNameLabel As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =70
+        Size: =18
+        Text: ="Cemig Geração e Transmissão S.A."
+        Width: =560
+        X: =39
+        Y: =1042
+        ZIndex: =5
+
+    Timer As timer:
+        AutoStart: =true
+        Duration: =1000
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =70
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        OnTimerEnd: =Navigate(HomeScreen,ScreenTransition.Fade)
+        Visible: =false
+        Width: =280
+        X: =180
+        Y: =926
+        ZIndex: =7
+
+    Gif As image:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Height: =91
+        Image: ='_21_loading-gif-transparent-background_All-Loading-Gif-Image-Transparent-Background-Best-Studio-'
+        Width: =151
+        X: =244
+        Y: =769
+        ZIndex: =8
+

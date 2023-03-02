@@ -1,0 +1,632 @@
+"DestaquesNoticiasSearchScreen As screen.'phoneBrowseLayout_ver3.0'":
+    Fill: =RGBA(210, 210, 210, 1)
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+    OnVisible: |
+        =Reset(categoriaFiltroComboBox);
+        Reset(tituloAssuntoTextSearchBox);
+        Reset(siomEquipamentoTextSearchBox);
+        Reset(fabricanteDestaqueTextSearchBox);
+        Reset(modeloDestaqueTextSearchBox);
+        UpdateContext({varDicaTimerStart: true})
+
+    Rectangle11_4 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(210, 210, 210, 1)
+        Height: =261
+        Width: =Parent.Width
+        Y: =88
+        ZIndex: =1
+
+    tituloAssuntoTextSearchBox As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Clear: =true
+        Color: =RGBA(29, 29, 29, 1)
+        Default: =""
+        DelayOutput: =true
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        FocusedBorderThickness: =4
+        Height: =52
+        HintText: ="Título/Assunto"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        OnChange: =
+        PaddingLeft: =15
+        Reset: =
+        Size: =17
+        Width: =614
+        X: =14
+        Y: =96
+        ZIndex: =2
+
+    siomEquipamentoTextSearchBox As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Clear: =true
+        Color: =RGBA(29, 29, 29, 1)
+        Default: =varFiltroDestaque_SIOM
+        DelayOutput: =true
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        FocusedBorderThickness: =4
+        Height: =52
+        HintText: ="Equipamentos Associados (Nº SIOM)"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        OnChange: =
+        PaddingLeft: =15
+        Reset: =
+        Size: =17
+        Width: =614
+        X: =13
+        Y: =225
+        ZIndex: =3
+
+    fabricanteDestaqueTextSearchBox As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Clear: =true
+        Color: =RGBA(29, 29, 29, 1)
+        Default: =varFiltroDestaque_Fabricante
+        DelayOutput: =true
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        FocusedBorderThickness: =4
+        Height: =52
+        HintText: ="Fabricante"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        OnChange: =
+        PaddingLeft: =15
+        Reset: =
+        Size: =17
+        Width: =300
+        X: =14
+        Y: =287
+        ZIndex: =4
+
+    categoriaFiltroComboBox As combobox:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        ChevronBackground: =RGBA(12, 126, 44, 1)
+        ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+        ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayFields: =["Value"]
+        Height: =52
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        InputTextPlaceholder: ="Categoria"
+        Items: =Choices([@destaques_noticias].Categoria)
+        PaddingLeft: =14
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(135, 190, 82, 1)
+        SearchFields: =["Value"]
+        SearchItems: =Choices(destaques_noticias.Categoria,categoriaFiltroComboBox.SearchText)
+        SelectionFill: =RGBA(12, 126, 44, 1)
+        SelectMultiple: =false
+        Size: =17
+        Width: =611
+        X: =14
+        Y: =160
+        ZIndex: =5
+
+    RectQuickActionBar2_8 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =6
+
+    subTituloLabel As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        Height: =24
+        Text: ="Divulgue aqui um assunto importante para o seu time"
+        Width: =441
+        X: =128
+        Y: =47
+        ZIndex: =7
+
+    IconBackarrow1_10 As icon.ChevronLeft:
+        AccessibleLabel: =Self.Tooltip
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =88
+        Icon: =Icon.ChevronLeft
+        OnSelect: =Navigate(HomeScreen)
+        PaddingBottom: =24
+        PaddingLeft: =24
+        PaddingRight: =24
+        PaddingTop: =24
+        PressedFill: =RGBA(255, 255, 255, 0.3)
+        TabIndex: =0
+        Tooltip: ="Voltar para a lista"
+        Width: =88
+        ZIndex: =8
+
+    totalRegistrosLabel_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(29, 29, 29, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Semibold
+        Height: =38
+        Size: =18
+        Text: |-
+            ="Total de Registros: "& CountRows(destaquesNoticiasGallery.AllItems)
+        Width: =560
+        X: =40
+        Y: =1097
+        ZIndex: =9
+
+    separadorInferiorRectangle_1 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =4
+        Width: =640
+        Y: =1093
+        ZIndex: =10
+
+    separadorSuperiorRectangle_1 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =4
+        Width: =640
+        Y: =349
+        ZIndex: =11
+
+    criarDestaqueIcon As icon.Edit:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =54
+        Icon: =Icon.Add
+        OnSelect: |-
+            =Navigate(
+                DestaqueNoticiaEditScreen,
+                None,
+                {varIsEdit: false}
+            );
+            NewForm(destaqueForm)
+        Tooltip: ="Clique para criar um novo Destaque"
+        Width: =52
+        X: =573
+        Y: =17
+        ZIndex: =12
+
+    labelNomeTela_2 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Bold
+        Height: =30
+        Size: =19
+        Text: ="Destaques e Notícias"
+        Width: =331
+        X: =128
+        Y: =17
+        ZIndex: =13
+
+    "destaquesNoticiasGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =741
+        Items: |-
+            =Sort(
+                Filter(
+                    destaques_noticias,
+                    If(
+                        tituloAssuntoTextSearchBox.Text = "",
+                        1 = 1,
+                        tituloAssuntoTextSearchBox.Text in Assunto
+                    ),
+                    If(
+                        categoriaFiltroComboBox.Selected.Value = "" || IsBlank(categoriaFiltroComboBox.Selected.Value),
+                        1 = 1,
+                        categoriaFiltroComboBox.Selected.Value = Categoria.Value
+                    ),
+                    If(
+                         siomEquipamentoTextSearchBox.Text = "",
+                        1 = 1,
+                        siomEquipamentoTextSearchBox.Text in 'Equipamento (SIOM)'
+                    ),
+                    If(
+                         fabricanteDestaqueTextSearchBox.Text = "",
+                        1 = 1,
+                        fabricanteDestaqueTextSearchBox.Text in 'Fabricante Equipamento'
+                    ),
+                    If(
+                         modeloDestaqueTextSearchBox.Text = "",
+                        1 = 1,
+                        modeloDestaqueTextSearchBox.Text in 'Modelo Equipamento'
+                    )
+                ),
+                'Publicado em',
+                Descending
+            )
+        Layout: =Layout.Vertical
+        OnSelect: =
+        TemplatePadding: =0
+        TemplateSize: =229
+        Y: =351
+        ZIndex: =14
+
+        Separator3 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(135, 190, 82, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =228
+            ZIndex: =1
+
+        Foto As image:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Height: =228
+            Image: =ThisItem.Foto
+            OnSelect: =Select(Parent)
+            PaddingBottom: =5
+            PaddingTop: =5
+            Visible: =!IsBlank(ThisItem.Foto)
+            Width: =128
+            X: =16
+            ZIndex: =2
+
+        itemDestaqueContainer As groupContainer.verticalAutoLayoutContainer:
+            Height: =228
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMode: =LayoutMode.Auto
+            Width: =473
+            X: =167
+            ZIndex: =3
+
+            Assunto As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 0, 0, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =33
+                LayoutMinHeight: =10
+                LayoutMinWidth: =560
+                OnSelect: =
+                PaddingBottom: =10
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =16
+                Text: =ThisItem.Assunto
+                Width: =446
+                X: =If(IsBlank(ThisItem.Foto),30,167)
+                Y: =11
+                ZIndex: =1
+
+            DataPublicacao As label:
+                Color: =RGBA(0, 0, 0, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FontWeight: =FontWeight.Lighter
+                Height: =25
+                LayoutMinHeight: =70
+                LayoutMinWidth: =560
+                OnSelect: =
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =ThisItem.'Publicado em'
+                VerticalAlign: =VerticalAlign.Top
+                Width: =200
+                X: =If(IsBlank(ThisItem.Foto),30,167)
+                Y: =36
+                ZIndex: =2
+
+            Autor As label:
+                Color: =RGBA(0, 0, 0, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FontWeight: =FontWeight.Lighter
+                Height: =25
+                LayoutMinHeight: =70
+                LayoutMinWidth: =560
+                OnSelect: =
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =Proper(ThisItem.Autor.DisplayName)
+                VerticalAlign: =VerticalAlign.Top
+                Width: =359
+                X: =If(IsBlank(ThisItem.Foto),30,167)
+                Y: =62
+                ZIndex: =3
+
+            Categoria As label:
+                Color: =RGBA(0, 0, 0, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FontWeight: =FontWeight.Lighter
+                Height: =25
+                LayoutMinHeight: =70
+                LayoutMinWidth: =560
+                OnSelect: =
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: |-
+                    ="Categoria: "&ThisItem.Categoria.Value
+                VerticalAlign: =VerticalAlign.Top
+                Width: =359
+                X: =If(IsBlank(ThisItem.Foto),30,167)
+                Y: =88
+                ZIndex: =4
+
+            Órgão As label:
+                Color: =RGBA(0, 0, 0, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FontWeight: =FontWeight.Lighter
+                Height: =25
+                LayoutMinHeight: =70
+                LayoutMinWidth: =560
+                OnSelect: =
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: |-
+                    ="Órgão: "&ThisItem.Órgão
+                VerticalAlign: =VerticalAlign.Top
+                Width: =359
+                X: =If(IsBlank(ThisItem.Foto),30,167)
+                Y: =114
+                ZIndex: =5
+
+            eqptoSiom As label:
+                Color: =RGBA(0, 0, 0, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FontWeight: =FontWeight.Lighter
+                Height: =25
+                LayoutMinHeight: =70
+                LayoutMinWidth: =560
+                OnSelect: =
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: |-
+                    ="Eqpto(s).: "&ThisItem.'Equipamento (SIOM)'
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =!IsBlank(ThisItem.'Equipamento (SIOM)')
+                Width: =410
+                Wrap: =false
+                X: =If(IsBlank(ThisItem.Foto),30,167)
+                Y: =136
+                ZIndex: =6
+
+            fabricante As label:
+                Color: =RGBA(0, 0, 0, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FontWeight: =FontWeight.Lighter
+                Height: =25
+                LayoutMinHeight: =70
+                LayoutMinWidth: =560
+                OnSelect: =
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: |-
+                    ="Fabricante: "&ThisItem.'Fabricante Equipamento'
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =!IsBlank(ThisItem.'Fabricante Equipamento')
+                Width: =410
+                Wrap: =false
+                X: =If(IsBlank(ThisItem.Foto),30,167)
+                Y: =149
+                ZIndex: =7
+
+            modelo As label:
+                Color: =RGBA(0, 0, 0, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FontWeight: =FontWeight.Lighter
+                Height: =25
+                LayoutMinHeight: =70
+                LayoutMinWidth: =560
+                OnSelect: =
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: |-
+                    ="Modelo: "&ThisItem.'Modelo Equipamento'
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =!IsBlank(ThisItem.'Fabricante Equipamento')
+                Width: =410
+                Wrap: =false
+                X: =If(IsBlank(ThisItem.Foto),30,167)
+                Y: =149
+                ZIndex: =8
+
+        NextArrow3 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(135, 190, 82, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(244, 244, 244, 1)
+            Height: =60
+            Icon: =Icon.ChevronRight
+            OnSelect: |-
+                =Navigate(DestaqueNoticiaViewScreen,None,{varDestaque:ThisItem})
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="Exibir Destaque/Notícia"
+            Width: =60
+            X: =Parent.TemplateWidth - Self.Width - 5
+            Y: =84
+            ZIndex: =4
+
+        LinkDestaqueIcon As icon.Share:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(39, 113, 194, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(244, 244, 244, 1)
+            Height: =49
+            Icon: =Icon.Share
+            OnSelect: =Launch(ThisItem.Link)
+            Tooltip: ="Clique para abrir o link disponibilizado neste Destaque/Notícia"
+            Visible: =!IsBlank(ThisItem.Link)
+            Width: =34
+            X: =576
+            Y: =161
+            ZIndex: =5
+
+    lampada2Icon As icon.Lightbulb:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 191, 0, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        DisplayMode: =DisplayMode.View
+        Height: =48
+        Icon: =Icon.Lightbulb
+        Width: =37
+        X: =91
+        Y: =20
+        ZIndex: =15
+
+    loadingGif2_6 As image:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Height: =91
+        Image: ='_21_loading-gif-transparent-background_All-Loading-Gif-Image-Transparent-Background-Best-Studio-'
+        Visible: =_varLoading
+        Width: =151
+        X: =244
+        Y: =769
+        ZIndex: =16
+
+    loadingRectangle_5 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(169, 169, 169,.55)
+        Height: =1048
+        Visible: =_varLoading
+        Width: =640
+        Y: =88
+        ZIndex: =17
+
+    dicaTimer As timer:
+        AutoStart: =true
+        Duration: =5000
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =70
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        OnTimerEnd: |-
+            =UpdateContext({varDicaTimerStart: false});
+            Set(_varJaMostrouDicaDestaque, true);
+            Reset(dicaTimer)
+        Repeat: =true
+        Start: =!_varJaMostrouDicaDestaque&&varDicaTimerStart
+        Visible: =false
+        Width: =280
+        X: =-300
+        Y: =225
+        ZIndex: =18
+
+    dicaPopUpGroup As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =20
+
+        dicaRectangle As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(237, 206, 31, 0.76)
+            Visible: =!_varJaMostrouDicaDestaque&&varDicaTimerStart
+            Width: =354
+            X: =260
+            Y: =153
+            ZIndex: =19
+
+        dicaTriangle As triangle:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(237, 206, 31, 0.76)
+            Height: =94
+            Visible: =!_varJaMostrouDicaDestaque&&varDicaTimerStart
+            Width: =30
+            X: =584
+            Y: =59
+            ZIndex: =20
+
+        dicaLabel As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.Lato
+            FontWeight: =FontWeight.Lighter
+            Height: =70
+            Size: =17
+            Text: ="Clique aqui para publicar um novo destaque!"
+            Visible: =!_varJaMostrouDicaDestaque&&varDicaTimerStart
+            Width: =354
+            X: =260
+            Y: =168
+            ZIndex: =21
+
+    modeloDestaqueTextSearchBox As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Clear: =true
+        Color: =RGBA(29, 29, 29, 1)
+        Default: =varFiltroDestaque_Modelo
+        DelayOutput: =true
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        FocusedBorderThickness: =4
+        Height: =52
+        HintText: ="Modelo"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        OnChange: =
+        PaddingLeft: =15
+        Reset: =
+        Size: =17
+        Width: =300
+        X: =327
+        Y: =287
+        ZIndex: =22
+

@@ -1,0 +1,404 @@
+"CISSearchScreen As screen.'phoneBrowseLayout_ver3.0'":
+    Fill: =RGBA(210, 210, 210, 1)
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+    OnVisible: =
+
+    Rectangle11_1 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(210, 210, 210, 1)
+        Height: =77
+        Width: =Parent.Width
+        Y: =88
+        ZIndex: =1
+
+    incidenteTextSearchBox As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Color: =RGBA(29, 29, 29, 1)
+        Default: =""
+        DelayOutput: =true
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        FocusedBorderThickness: =4
+        Height: =55
+        HintText: ="Incidente"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        OnChange: =
+        PaddingLeft: =15
+        Reset: =
+        Size: =18
+        Width: =601
+        X: =24
+        Y: =97
+        ZIndex: =2
+
+    RectQuickActionBar2_4 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =3
+
+    labelNomeTela As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        Height: =32
+        Size: =15
+        Text: ="Comunicação de Incidente de Saúde e Segurança"
+        Width: =466
+        X: =IconBackarrow1_1.X + IconBackarrow1_1.Width
+        Y: =47
+        ZIndex: =4
+
+    IconBackarrow1_5 As icon.ChevronLeft:
+        AccessibleLabel: =Self.Tooltip
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =88
+        Icon: =Icon.ChevronLeft
+        OnSelect: =Navigate(HomeScreen)
+        PaddingBottom: =24
+        PaddingLeft: =24
+        PaddingRight: =24
+        PaddingTop: =24
+        PressedFill: =RGBA(255, 255, 255, 0.3)
+        TabIndex: =0
+        Tooltip: ="Voltar para a lista"
+        Width: =88
+        ZIndex: =5
+
+    totalRegistrosLabel As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(29, 29, 29, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Semibold
+        Height: =38
+        Size: =18
+        Text: |-
+            ="Total de Registros: "& CountRows(registrosCISGallery.AllItems)
+        Width: =560
+        X: =40
+        Y: =1097
+        ZIndex: =6
+
+    separadorInferiorRectangle As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =4
+        Width: =640
+        Y: =1093
+        ZIndex: =7
+
+    separadorSuperiorRectangle As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =4
+        Width: =640
+        Y: =161
+        ZIndex: =8
+
+    cadastrarCISIcon2 As icon.Edit:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =54
+        Icon: =Icon.Add
+        OnSelect: |-
+            =Navigate(
+                CISEditScreen,
+                None,
+                {varIsEdit: false}
+            );
+            NewForm(CISForm)
+        Width: =52
+        X: =573
+        Y: =17
+        ZIndex: =9
+
+    "registrosCISGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =928
+        Items: |-
+            =Sort(
+                Filter(
+                    Registros_CIS,
+                    User().Email = Pessoa_Envolvido.Email || 
+                    User().Email = Pessoa_Supervisor.Email || 
+                    User().Email = Pessoa_TST.Email || 
+                    User().Email = Pessoa_Coordenador.Email || 
+                    User().Email = Pessoa_Gerente.Email,
+                    If(incidenteTextSearchBox.Text="",1=1,incidenteTextSearchBox.Text in Incidente)
+                ),
+                Data_Incidente,
+                Descending
+            )
+        Layout: =Layout.Vertical
+        OnSelect: |-
+            =Navigate(CISEditScreen,None,{varCIS: ThisItem, varIsEdit: true})
+        TemplatePadding: =0
+        TemplateSize: =197
+        Y: =165
+        ZIndex: =10
+
+        incidenteLabel As label:
+            Color: =RGBA(29, 29, 29, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =35
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =18
+            Text: |-
+                ="Cód. "&ThisItem.Código_Registro&" - Incidente: "&ThisItem.Incidente
+            VerticalAlign: =VerticalAlign.Top
+            Width: =591
+            Wrap: =false
+            X: =24
+            Y: =13
+            ZIndex: =1
+
+        dataLabel As label:
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =36
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =16
+            Text: |-
+                ="Data: "&ThisItem.Data_Incidente
+            VerticalAlign: =VerticalAlign.Top
+            Width: =241
+            X: =incidenteLabel.X
+            Y: =82
+            ZIndex: =2
+
+        NextArrow1 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(135, 190, 82, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(244, 244, 244, 1)
+            Height: =60
+            Icon: =Icon.ChevronRight
+            OnSelect: =Select(Parent)
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="Exibir detalhes do item"
+            Width: =60
+            X: =Parent.TemplateWidth - Self.Width - 5
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =3
+
+        Separator1 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(135, 190, 82, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =4
+
+        localLabel As label:
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =31
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =16
+            Text: |-
+                ="Local: "&ThisItem.Local_Incidente
+            VerticalAlign: =VerticalAlign.Top
+            Width: =551
+            X: =24
+            Y: =118
+            ZIndex: =5
+
+        rotuloStatusButton As button:
+            AutoDisableOnSelect: =false
+            BorderColor: =RGBA(0, 0, 0, 1)
+            DisabledBorderColor: =
+            DisabledColor: =
+            DisabledFill: =RGBA(201, 161, 38, 1)
+            DisplayMode: =DisplayMode.View
+            Fill: |-
+                =If(
+                    ThisItem.Status.Value = "Em Edição",
+                    RGBA(
+                        184,
+                        0,
+                        0,
+                        1
+                    ),
+                    If(
+                        ThisItem.Status.Value = "Aguardando Aprovação",
+                        RGBA(
+                            201,
+                            161,
+                            38,
+                            1
+                        ),
+                        If(
+                            ThisItem.Status.Value = "Concluída",
+                            RGBA(
+                                118,
+                                160,
+                                20,
+                                1
+                            ),
+                            If(
+                                ThisItem.Status.Value = "Aprovada",
+                                RGBA(
+                                    0,
+                                    110,
+                                    240,
+                                    1
+                                ),
+                                If(
+                                    ThisItem.Status.Value = "Reprovada - Revisar",
+                                    RGBA(
+                                        255,
+                                        133,
+                                        133,
+                                        1
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            FontWeight: =FontWeight.Semibold
+            Height: =31
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =30
+            RadiusBottomRight: =30
+            RadiusTopLeft: =30
+            RadiusTopRight: =30
+            Size: =24
+            Text: =""
+            Width: |-
+                =If(
+                    ThisItem.Status.Value = "Em Edição",
+                    121,
+                    If(
+                        ThisItem.Status.Value = "Aguardando Aprovação",
+                        253,
+                        If(
+                            ThisItem.Status.Value = "Concluída" || ThisItem.Status.Value = "Aprovada",
+                            120,
+                            If(
+                                ThisItem.Status.Value = "Reprovada - Revisar",
+                                220
+                            )
+                        )
+                    )
+                )
+            X: =97
+            Y: =149
+            ZIndex: =6
+
+        statusFieldLabel As label:
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =35
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =16
+            Text: =ThisItem.Status.Value
+            Width: =297
+            X: =106
+            Y: =145
+            ZIndex: =7
+
+        statusLabel As label:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =35
+            OnSelect: =Select(Parent)
+            Size: =16
+            Text: |-
+                ="Status:"
+            Width: =86
+            X: =19
+            Y: =147
+            ZIndex: =8
+
+        dataLabel_1 As label:
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =34
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =16
+            Text: |-
+                ="Tipo: "&ThisItem.'Tipo de Incidente'.Value
+            VerticalAlign: =VerticalAlign.Top
+            Width: =534
+            X: =incidenteLabel.X
+            Y: =48
+            ZIndex: =9
+
+    labelNomeTela_1 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        Height: =32
+        Size: =19
+        Text: ="CIS"
+        Width: =466
+        X: =IconBackarrow1_1.X + IconBackarrow1_1.Width
+        Y: =17
+        ZIndex: =11
+
+    loadingGif2_2 As image:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Height: =91
+        Image: ='_21_loading-gif-transparent-background_All-Loading-Gif-Image-Transparent-Background-Best-Studio-'
+        Visible: =If(_varLoading,true,false)
+        Width: =151
+        X: =244
+        Y: =769
+        ZIndex: =12
+
+    loadingRectangle_1 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(169, 169, 169,.55)
+        Height: =1048
+        Visible: =_varLoading
+        Width: =640
+        Y: =88
+        ZIndex: =13
+

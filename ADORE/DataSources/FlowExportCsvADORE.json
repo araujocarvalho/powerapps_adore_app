@@ -1,0 +1,9 @@
+[
+  {
+    "AddinConnectorId": "f7ba3255-0c9b-4c6f-ac5e-1fe21a061fd3",
+    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
+    "Name": "FlowExportCsvADORE",
+    "ServiceKind": "AddinWadl",
+    "Type": "ServiceInfo"
+  }
+]

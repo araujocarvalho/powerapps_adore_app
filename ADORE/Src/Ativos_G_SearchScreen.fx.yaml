@@ -1,0 +1,1330 @@
+"Ativos_G_SearchScreen As screen.'phoneBrowseLayout_ver3.0'":
+    Fill: =RGBA(210, 210, 210, 1)
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+    OnVisible: |-
+        =If(
+            !_varLoaded_ativos_G || _varAtivo_G_WasEdited,
+            UpdateContext({varLoading_G: true});
+            Refresh(ativos_AG_v1);
+            //Divide a busca dos ativos em subcoleções provisórias que rodam no servidor simultaneamente, otimizando o processamento
+            Concurrent(
+                ClearCollect(
+                    colAtivos_G_provisorio_1,
+                    ShowColumns(
+                        Filter(
+                            ativos_AG_v1,
+                            ID_ESPELHO >= 1 && ID_ESPELHO < 2000
+                        ),
+                        "field_1",
+                        "field_2",
+                        "field_3",
+                        "field_4",
+                        "field_5",
+                        "field_6",
+                        "field_7",
+                        "field_8",
+                        "field_9",
+                        "field_10",
+                        "field_11",
+                        "field_12",
+                        "field_13",
+                        "field_14",
+                        "field_15",
+                        "field_16",
+                        "field_17",
+                        "field_18",
+                        "field_19",
+                        "field_20",
+                        "field_21",
+                        "field_22",
+                        "field_23",
+                        "ID_pasta_geracaoQA",
+                        "ativo_link_geracaoQA",
+                        "Title"
+                    )
+                ),
+                ClearCollect(
+                    colAtivos_G_provisorio_2,
+                    ShowColumns(
+                        Filter(
+                            ativos_AG_v1,
+                            ID_ESPELHO >= 2000 && ID_ESPELHO < 4000
+                        ),
+                        "field_1",
+                        "field_2",
+                        "field_3",
+                        "field_4",
+                        "field_5",
+                        "field_6",
+                        "field_7",
+                        "field_8",
+                        "field_9",
+                        "field_10",
+                        "field_11",
+                        "field_12",
+                        "field_13",
+                        "field_14",
+                        "field_15",
+                        "field_16",
+                        "field_17",
+                        "field_18",
+                        "field_19",
+                        "field_20",
+                        "field_21",
+                        "field_22",
+                        "field_23",
+                        "ID_pasta_geracaoQA",
+                        "ativo_link_geracaoQA",
+                        "Title"
+                    )
+                ),
+                ClearCollect(
+                    colAtivos_G_provisorio_3,
+                    ShowColumns(
+                        Filter(
+                            ativos_AG_v1,
+                            ID_ESPELHO >= 4000 && ID_ESPELHO < 6000
+                        ),
+                        "field_1",
+                        "field_2",
+                        "field_3",
+                        "field_4",
+                        "field_5",
+                        "field_6",
+                        "field_7",
+                        "field_8",
+                        "field_9",
+                        "field_10",
+                        "field_11",
+                        "field_12",
+                        "field_13",
+                        "field_14",
+                        "field_15",
+                        "field_16",
+                        "field_17",
+                        "field_18",
+                        "field_19",
+                        "field_20",
+                        "field_21",
+                        "field_22",
+                        "field_23",
+                        "ID_pasta_geracaoQA",
+                        "ativo_link_geracaoQA",
+                        "Title"
+                    )
+                ),
+                ClearCollect(
+                    colAtivos_G_provisorio_4,
+                    ShowColumns(
+                        Filter(
+                            ativos_AG_v1,
+                            ID_ESPELHO >= 6000 && ID_ESPELHO < 8000
+                        ),
+                        "field_1",
+                        "field_2",
+                        "field_3",
+                        "field_4",
+                        "field_5",
+                        "field_6",
+                        "field_7",
+                        "field_8",
+                        "field_9",
+                        "field_10",
+                        "field_11",
+                        "field_12",
+                        "field_13",
+                        "field_14",
+                        "field_15",
+                        "field_16",
+                        "field_17",
+                        "field_18",
+                        "field_19",
+                        "field_20",
+                        "field_21",
+                        "field_22",
+                        "field_23",
+                        "ID_pasta_geracaoQA",
+                        "ativo_link_geracaoQA",
+                        "Title"
+                    )
+                ),
+                ClearCollect(
+                    colAtivos_G_provisorio_5,
+                    ShowColumns(
+                        Filter(
+                            ativos_AG_v1,
+                            ID_ESPELHO >= 8000 && ID_ESPELHO < 10000
+                        ),
+                        "field_1",
+                        "field_2",
+                        "field_3",
+                        "field_4",
+                        "field_5",
+                        "field_6",
+                        "field_7",
+                        "field_8",
+                        "field_9",
+                        "field_10",
+                        "field_11",
+                        "field_12",
+                        "field_13",
+                        "field_14",
+                        "field_15",
+                        "field_16",
+                        "field_17",
+                        "field_18",
+                        "field_19",
+                        "field_20",
+                        "field_21",
+                        "field_22",
+                        "field_23",
+                        "ID_pasta_geracaoQA",
+                        "ativo_link_geracaoQA",
+                        "Title"
+                    )
+                ),
+                ClearCollect(
+                    colAtivos_G_provisorio_6,
+                    ShowColumns(
+                        Filter(
+                            ativos_AG_v1,
+                            ID_ESPELHO >= 10000 && ID_ESPELHO < 12000
+                        ),
+                        "field_1",
+                        "field_2",
+                        "field_3",
+                        "field_4",
+                        "field_5",
+                        "field_6",
+                        "field_7",
+                        "field_8",
+                        "field_9",
+                        "field_10",
+                        "field_11",
+                        "field_12",
+                        "field_13",
+                        "field_14",
+                        "field_15",
+                        "field_16",
+                        "field_17",
+                        "field_18",
+                        "field_19",
+                        "field_20",
+                        "field_21",
+                        "field_22",
+                        "field_23",
+                        "ID_pasta_geracaoQA",
+                        "ativo_link_geracaoQA",
+                        "Title"
+                    )
+                ),
+                ClearCollect(
+                    colAtivos_G_provisorio_7,
+                    ShowColumns(
+                        Filter(
+                            ativos_AG_v1,
+                            ID_ESPELHO >= 12000 && ID_ESPELHO < 14000
+                        ),
+                        "field_1",
+                        "field_2",
+                        "field_3",
+                        "field_4",
+                        "field_5",
+                        "field_6",
+                        "field_7",
+                        "field_8",
+                        "field_9",
+                        "field_10",
+                        "field_11",
+                        "field_12",
+                        "field_13",
+                        "field_14",
+                        "field_15",
+                        "field_16",
+                        "field_17",
+                        "field_18",
+                        "field_19",
+                        "field_20",
+                        "field_21",
+                        "field_22",
+                        "field_23",
+                        "ID_pasta_geracaoQA",
+                        "ativo_link_geracaoQA",
+                        "Title"
+                    )
+                ),
+                ClearCollect(
+                    colAtivos_G_provisorio_8,
+                    ShowColumns(
+                        Filter(
+                            ativos_AG_v1,
+                            ID_ESPELHO >= 14000 && ID_ESPELHO < 16000
+                        ),
+                        "field_1",
+                        "field_2",
+                        "field_3",
+                        "field_4",
+                        "field_5",
+                        "field_6",
+                        "field_7",
+                        "field_8",
+                        "field_9",
+                        "field_10",
+                        "field_11",
+                        "field_12",
+                        "field_13",
+                        "field_14",
+                        "field_15",
+                        "field_16",
+                        "field_17",
+                        "field_18",
+                        "field_19",
+                        "field_20",
+                        "field_21",
+                        "field_22",
+                        "field_23",
+                        "ID_pasta_geracaoQA",
+                        "ativo_link_geracaoQA",
+                        "Title"
+                    )
+                )
+            );
+            ClearCollect(
+                colAtivos_G_provisorio,
+                colAtivos_G_provisorio_1,
+                colAtivos_G_provisorio_2,
+                colAtivos_G_provisorio_3,
+                colAtivos_G_provisorio_4,
+                colAtivos_G_provisorio_5,
+                colAtivos_G_provisorio_6,
+                colAtivos_G_provisorio_7,
+                colAtivos_G_provisorio_8
+            );
+            ClearCollect(
+                colAtivos_G,
+                RenameColumns(
+                    colAtivos_G_provisorio,
+                    "field_1",
+                    "ID_ESPELHO",
+                    "field_2",
+                    "ID_pasta_sharepoint",
+                    "field_3",
+                    "ativo_SIOM",
+                    "field_4",
+                    "ativo_link_novo",
+                    "field_5",
+                    "ativo_tem_acidente",
+                    "field_6",
+                    "ativo_gerencia",
+                    "field_7",
+                    "ativo_local_nome",
+                    "field_8",
+                    "ativo_sistema",
+                    "field_9",
+                    "ativo_tipo",
+                    "field_10",
+                    "ativo_denominacao",
+                    "field_11",
+                    "ativo_local_instalacao",
+                    "field_12",
+                    "ativo_area_operacional",
+                    "field_13",
+                    "ativo_fabricante",
+                    "field_14",
+                    "ativo_modelo",
+                    "field_15",
+                    "ativo_numero_serie",
+                    "field_16",
+                    "ativo_nome",
+                    "field_17",
+                    "ativo_centro_trab_responsavel",
+                    "field_18",
+                    "ativo_ano_fabricacao",
+                    "field_19",
+                    "ativo_data_entrada_servico",
+                    "field_20",
+                    "ativo_tipo_sigla",
+                    "field_21",
+                    "ativo_status_SAP_1",
+                    "field_22",
+                    "ativo_status_SAP_2",
+                    "field_23",
+                    "ativo_tamanho"
+                )
+            );
+            Clear(colAtivos_G_provisorio);
+            Clear(colAtivos_G_provisorio_1);
+            Clear(colAtivos_G_provisorio_2);
+            Clear(colAtivos_G_provisorio_3);
+            Clear(colAtivos_G_provisorio_4);
+            Clear(colAtivos_G_provisorio_5);
+            Clear(colAtivos_G_provisorio_6);
+            Clear(colAtivos_G_provisorio_7);
+            Clear(colAtivos_G_provisorio_8);
+            ClearCollect(
+                colGerencias_G,
+                Sort(
+                    Distinct(
+                        colAtivos_G,
+                        ativo_gerencia
+                    ),
+                    Result,
+                    Ascending
+                )
+            );
+            ClearCollect(
+                colLocalizacoes_G,
+                Sort(
+                    Distinct(
+                        colAtivos_G,
+                        ativo_local_nome
+                    ),
+                    Result,
+                    Ascending
+                )
+            );
+            ClearCollect(
+                colTiposEqptos_G,
+                Sort(
+                    Distinct(
+                        colAtivos_G,
+                        ativo_tipo
+                    ),
+                    Result,
+                    Ascending
+                )
+            );
+            Set(
+                _varAtivo_G_WasEdited,
+                false
+            );
+            Set(
+                _varLoaded_ativos_G,
+                true
+            );
+            UpdateContext({varLoading_G: false});
+            
+        )
+
+    Rectangle11_5 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(210, 210, 210, 1)
+        Height: =262
+        Width: =Parent.Width
+        Y: =88
+        ZIndex: =1
+
+    "G_listaAtivosBrowseGallery As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =685
+        Items: |-
+            =Sort(
+                Filter(
+                    colAtivos_G,
+                    codigoSIOMTextSearchBox_1.Text in ativo_SIOM,
+                    If(
+                        IsBlank(instalacaoComboBox.Selected.Result),
+                        1 = 1,
+                        ativo_local_nome = instalacaoComboBox.Selected.Result
+                    ),
+                    If(
+                        IsBlank(tipoComboBox_1.Selected.Result),
+                        1 = 1,
+                        ativo_tipo = tipoComboBox_1.Selected.Result
+                    ),
+                    If(
+                        IsBlank(gerenciaComboBox_1.Selected.Result),
+                        1 = 1,
+                        ativo_gerencia = gerenciaComboBox_1.Selected.Result
+                    ),
+                    denLocalInstalacaoTextSearchBox.Text in ativo_nome,
+                    If(
+                        IsBlank(numeroSerieTextSearchBox_1.Text),
+                        1 = 1,
+                        numeroSerieTextSearchBox_1.Text in ativo_numero_serie
+                    ),
+                    If(
+                        IsBlank(fabricanteTextSearchBox_1.Text),
+                        1 = 1,
+                        fabricanteTextSearchBox_1.Text in ativo_fabricante
+                    ),
+                    If(
+                        IsBlank(modeloTextSearchBox_1.Text),
+                        1 = 1,
+                        modeloTextSearchBox_1.Text in ativo_modelo
+                    ),
+                    If(
+                        IsBlank(faseComboBox_1.Selected.Value),
+                        1 = 1,
+                        Text("_" & Text(faseComboBox_1.Selected.Value)) in ativo_nome
+                    )
+                ),
+                ativo_SIOM,
+                Ascending
+            )
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =239
+        Width: =Parent.Width
+        Y: =408
+        ZIndex: =2
+
+        traçoSeparaDorItens_1 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(135, 190, 82, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =1
+
+        exclamationImage_1 As image:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Height: =65
+            Image: ='exclamacao icone'
+            OnSelect: =
+            Tooltip: ="Este ativo possui documento de Saúde e Segurança. Acesse a pasta de documentos do mesmo para visualizá-lo"
+            Visible: =ThisItem.ativo_tem_acidente
+            Width: =60
+            X: =558
+            Y: =141
+            ZIndex: =2
+
+        linkButton_2 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 134, 208, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(244, 244, 244, 1)
+            Height: =60
+            Icon: =Icon.Link
+            OnSelect: =Launch(ThisItem.ativo_link_novo)
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="Abrir pasta do ativo no sharepoint"
+            Visible: =If(IsBlank(ThisItem.ativo_link_novo) || ThisItem.ativo_link_novo = "" || StartsWith(ThisItem.ativo_link_novo,"ainda carregando"),false,true)
+            Width: =55
+            X: =496
+            Y: =86
+            ZIndex: =6
+
+        NextArrow2_1 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(135, 190, 82, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(244, 244, 244, 1)
+            Height: =60
+            Icon: =Icon.ChevronRight
+            OnSelect: |-
+                =Navigate(Ativo_G_DetailScreen, ScreenTransition.None, {varAtivoG: ThisItem, varIsSearchScreen: true})
+            PaddingBottom: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="Exibir detalhes do item"
+            Width: =60
+            X: =567
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =7
+
+        modeloSubtitle_1 As label:
+            Color: =RGBA(29, 29, 29, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =29
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: |-
+                ="Modelo: "&ThisItem.ativo_modelo
+            VerticalAlign: =VerticalAlign.Top
+            Width: =280
+            Wrap: =false
+            X: =280
+            Y: =204
+            ZIndex: =8
+
+        dataEntradaServicoSubtitle As label:
+            Color: =RGBA(29, 29, 29, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =27
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: |-
+                ="Data Ent. Serviço: "&ThisItem.ativo_data_entrada_servico
+            VerticalAlign: =VerticalAlign.Top
+            Width: =310
+            Wrap: =false
+            X: =25
+            Y: =151
+            ZIndex: =9
+
+        gerenciaSubtitle_1 As label:
+            Color: =RGBA(29, 29, 29, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =29
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: |-
+                ="Gerência: "&ThisItem.ativo_gerencia
+            VerticalAlign: =VerticalAlign.Top
+            Width: =248
+            X: =25
+            Y: =127
+            ZIndex: =10
+
+        localizacaoSubtitle_1 As label:
+            Color: =RGBA(29, 29, 29, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =30
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: |-
+                ="Localização: "&ThisItem.ativo_local_nome
+            VerticalAlign: =VerticalAlign.Top
+            Width: =466
+            Wrap: =false
+            X: =25
+            Y: =97
+            ZIndex: =11
+
+        identificacaoSubtitle_1 As label:
+            Color: =RGBA(29, 29, 29, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =29
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: |
+                ="Den. Local Inst.: "&ThisItem.ativo_nome
+            VerticalAlign: =VerticalAlign.Top
+            Width: =501
+            Wrap: =false
+            X: =25
+            Y: =70
+            ZIndex: =12
+
+        tipoSubtitle_1 As label:
+            Color: =RGBA(29, 29, 29, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =29
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: |-
+                ="Tipo: "&ThisItem.ativo_tipo
+            VerticalAlign: =VerticalAlign.Top
+            Width: =466
+            X: =25
+            Y: =43
+            ZIndex: =13
+
+        codSIOMTitle_1 As label:
+            Color: =RGBA(29, 29, 29, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =16
+            Text: |-
+                ="Cód. SIOM:  "&ThisItem.ativo_SIOM
+            VerticalAlign: =VerticalAlign.Top
+            Width: =466
+            X: =25
+            Y: =7
+            ZIndex: =14
+
+        fabricanteSubtitle_1 As label:
+            Color: =RGBA(29, 29, 29, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =29
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: |-
+                ="Fabric.: "&ThisItem.ativo_fabricante
+            VerticalAlign: =VerticalAlign.Top
+            Width: =250
+            Wrap: =false
+            X: =25
+            Y: =204
+            ZIndex: =15
+
+        numeroSerieSubtitle_1 As label:
+            Color: =RGBA(29, 29, 29, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =29
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: |-
+                ="Número de Série: "&ThisItem.ativo_numero_serie
+            VerticalAlign: =VerticalAlign.Top
+            Width: =536
+            Wrap: =false
+            X: =25
+            Y: =178
+            ZIndex: =16
+
+    codigoSIOMTextSearchBox_1 As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Clear: =true
+        Color: =RGBA(29, 29, 29, 1)
+        Default: =""
+        DelayOutput: =true
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        FocusedBorderThickness: =4
+        Height: =50
+        HintText: ="Código SIOM"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        OnChange: =
+        PaddingLeft: =15
+        Reset: =
+        Size: =18
+        Width: =334
+        X: =14
+        Y: =99
+        ZIndex: =3
+
+    RectQuickActionBar2_11 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =4
+
+    LblAppName2_10 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        Height: =88
+        Size: =21
+        Text: ="Busca - Ativos Geração"
+        Width: =Parent.Width - Self.X
+        Wrap: =false
+        X: =IconBackarrow1_1.X + IconBackarrow1_1.Width
+        ZIndex: =5
+
+    IconBackarrow1_14 As icon.ChevronLeft:
+        AccessibleLabel: =Self.Tooltip
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =88
+        Icon: =Icon.ChevronLeft
+        OnSelect: |-
+            =Reset(codigoSIOMTextSearchBox_1);
+            Reset(gerenciaComboBox_1);
+            Reset(instalacaoComboBox);
+            Reset(numeroSerieTextSearchBox_1);
+            Reset(fabricanteTextSearchBox_1);
+            Reset(modeloTextSearchBox_1);
+            Reset(tipoComboBox_1);
+            Reset(denLocalInstalacaoTextSearchBox);
+            Reset(faseComboBox_1);
+            Navigate(HomeScreen)
+        PaddingBottom: =24
+        PaddingLeft: =24
+        PaddingRight: =24
+        PaddingTop: =24
+        PressedFill: =RGBA(255, 255, 255, 0.3)
+        TabIndex: =0
+        Tooltip: ="Voltar para a lista"
+        Width: =88
+        ZIndex: =6
+
+    denLocalInstalacaoTextSearchBox As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Clear: =true
+        Color: =RGBA(29, 29, 29, 1)
+        Default: =""
+        DelayOutput: =true
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        FocusedBorderThickness: =4
+        Height: =50
+        HintText: ="Den. Local Instalação"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        PaddingLeft: =15
+        Size: =18
+        Width: =334
+        X: =14
+        Y: =282
+        ZIndex: =7
+
+    gerenciaComboBox_1 As combobox:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        ChevronBackground: =RGBA(12, 126, 44, 1)
+        ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+        ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+        Color: =RGBA(29, 29, 29, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayFields: =["Result"]
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        Height: =50
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(141, 198, 63, 1)
+        InputTextPlaceholder: ="Gerência"
+        IsSearchable: =false
+        Items: =colGerencias_G
+        NoSelectionText: ="Gerência"
+        OnChange: |-
+            =If(!IsBlank(instalacaoComboBox.Selected.Result),Reset(instalacaoComboBox));
+            If(!IsBlank(tipoComboBox_1.Selected.Result),Reset(tipoComboBox_1));
+            ClearCollect(colLocalizacoes_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_local_nome),Result,Ascending));
+            ClearCollect(colTiposEqptos_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_tipo),Result,Ascending));
+        PaddingLeft: =15
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(135, 190, 82, 1)
+        SearchFields: =["Result"]
+        SearchItems: =[]
+        SelectionFill: =RGBA(12, 126, 44, 1)
+        SelectMultiple: =false
+        Size: =18
+        Width: =264
+        X: =14
+        Y: =160
+        ZIndex: =8
+
+    faseComboBox_1 As combobox:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        ChevronBackground: =RGBA(12, 126, 44, 1)
+        ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+        ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+        Color: =RGBA(29, 29, 29, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayFields: =["Value"]
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        Height: =49
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(141, 198, 63, 1)
+        InputTextPlaceholder: ="Fase"
+        IsSearchable: =false
+        Items: =colFases
+        NoSelectionText: ="Fase"
+        PaddingLeft: =15
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(135, 190, 82, 1)
+        SearchFields: =["Value"]
+        SearchItems: =[]
+        SelectionFill: =RGBA(12, 126, 44, 1)
+        SelectMultiple: =false
+        Size: =18
+        Width: =264
+        X: =364
+        Y: =283
+        ZIndex: =9
+
+    instalacaoComboBox As combobox:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        ChevronBackground: =RGBA(12, 126, 44, 1)
+        ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+        ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+        Color: =RGBA(29, 29, 29, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayFields: =["Result"]
+        DisplayMode: =If(!_varLoading,DisplayMode.Edit,DisplayMode.Disabled)
+        Height: =50
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(141, 198, 63, 1)
+        InputTextPlaceholder: ="Instalação"
+        IsSearchable: =false
+        Items: =colLocalizacoes_G
+        NoSelectionText: ="Instalação"
+        OnChange: |-
+            =If(!IsBlank(tipoComboBox_1.Selected.Result),Reset(tipoComboBox_1));
+            ClearCollect(colTiposEqptos_T,Sort(Distinct(G_listaAtivosBrowseGallery.AllItems,ativo_tipo),Result,Ascending));
+        PaddingLeft: =15
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(135, 190, 82, 1)
+        SearchFields: =["Result"]
+        SearchItems: =[]
+        SelectionFill: =RGBA(12, 126, 44, 1)
+        SelectMultiple: =false
+        Size: =18
+        Width: =334
+        X: =294
+        Y: =161
+        ZIndex: =10
+
+    Label3_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(29, 29, 29, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Semibold
+        Height: =38
+        Size: =18
+        Text: |-
+            ="Total de Registros: "& CountRows(G_listaAtivosBrowseGallery.AllItems)
+        Width: =560
+        X: =40
+        Y: =1097
+        ZIndex: =11
+
+    Rectangle1_7 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =4
+        Width: =640
+        Y: =1093
+        ZIndex: =12
+
+    Rectangle1_6 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =4
+        Width: =640
+        Y: =406
+        ZIndex: =13
+
+    numeroSerieTextSearchBox_1 As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Clear: =true
+        Color: =RGBA(29, 29, 29, 1)
+        Default: =""
+        DelayOutput: =true
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        FocusedBorderThickness: =4
+        Height: =50
+        HintText: ="Número de Série"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        PaddingLeft: =15
+        Size: =18
+        Width: =264
+        X: =364
+        Y: =100
+        ZIndex: =14
+
+    modeloTextSearchBox_1 As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Clear: =true
+        Color: =RGBA(29, 29, 29, 1)
+        Default: =""
+        DelayOutput: =true
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        FocusedBorderThickness: =4
+        Height: =50
+        HintText: ="Modelo"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        PaddingLeft: =15
+        Size: =18
+        Width: =300
+        X: =328
+        Y: =345
+        ZIndex: =15
+
+    fabricanteTextSearchBox_1 As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Clear: =true
+        Color: =RGBA(29, 29, 29, 1)
+        Default: =""
+        DelayOutput: =true
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        FocusedBorderThickness: =4
+        Height: =50
+        HintText: ="Fabricante"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        PaddingLeft: =15
+        Size: =18
+        Width: =300
+        X: =14
+        Y: =345
+        ZIndex: =16
+
+    tipoComboBox_1 As combobox:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        ChevronBackground: =RGBA(12, 126, 44, 1)
+        ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+        ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+        Color: =RGBA(29, 29, 29, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayFields: =["Result"]
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        Height: =50
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(141, 198, 63, 1)
+        InputTextPlaceholder: ="Tipo"
+        IsSearchable: =false
+        Items: =colTiposEqptos_G
+        NoSelectionText: ="Tipo"
+        OnChange: =
+        PaddingLeft: =15
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(135, 190, 82, 1)
+        SearchFields: =["Result"]
+        SearchItems: =[]
+        SelectionFill: =RGBA(12, 126, 44, 1)
+        SelectMultiple: =false
+        Size: =18
+        Width: =612
+        X: =14
+        Y: =222
+        ZIndex: =17
+
+    loadingGif2_7 As image:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Height: =91
+        Image: ='_21_loading-gif-transparent-background_All-Loading-Gif-Image-Transparent-Background-Best-Studio-'
+        Visible: =varLoading_G
+        Width: =151
+        X: =244
+        Y: =769
+        ZIndex: =18
+
+    loadingRectangle_6 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(169, 169, 169,.55)
+        Height: =1048
+        Visible: =varLoading_G
+        Width: =640
+        Y: =88
+        ZIndex: =19
+
+    popUpGroup_1 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =28
+
+        popUpBackGroundRectangle_6 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 0.1)
+            Height: =1136
+            Visible: =varPopUpVisible
+            Width: =640
+            ZIndex: =26
+
+        popUpRectangle_6 As rectangle:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =242
+            Visible: =varPopUpVisible
+            Width: =445
+            X: =88
+            Y: =425
+            ZIndex: =27
+
+        yesPopUpButton_5 As button:
+            Color: =RGBA(8, 88, 31, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Semibold
+            Height: =55
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+            OnSelect: |-
+                =UpdateContext({varPopUpVisible: false});
+                Set(
+                    _varLoading,
+                    true
+                );
+                Set(
+                    _varExporting,
+                    true
+                );
+                Clear(colExportExcel);
+                ForAll(
+                    T_listaAtivosBrowseGallery.AllItems,
+                    Collect(
+                        colExportExcel,
+                        {
+                            Ativo_SIOM: ThisRecord.ativo_SIOM,
+                            Localizacao: ThisRecord.ativo_local_nome,
+                            Gerencia: ThisRecord.ativo_gerencia,
+                            Centro_Trab_Responsavel: ThisRecord.ativo_centro_trab_responsavel,
+                            Local_de_Instalacao: ThisRecord.ativo_local_instalacao,
+                            Tipo: ThisRecord.ativo_tipo,
+                            Denominacao: ThisRecord.ativo_denominacao,
+                            Identificacao: ThisRecord.ativo_nome,
+                            Numero_Serie: ThisRecord.ativo_numero_serie,
+                            Modelo: ThisRecord.ativo_modelo,
+                            Fabricante: ThisRecord.ativo_fabricante,
+                            Data_Entrada_Servico: Text(
+                                ThisRecord.ativo_data_entrada_servico,
+                                "dd/mm/yyyy"
+                            ),
+                            Fabricacao_Ano: Text(ThisRecord.ativo_ano_fabricacao),
+                            Link: ThisRecord.ativo_link_novo
+                        }
+                    )
+                );
+                UpdateContext(
+                    {
+                        varFileLink: FlowExportCsvADORE.Run(
+                            JSON(
+                                colExportExcel,
+                                JSONFormat.IncludeBinaryData
+                            ),
+                            First(colExportExcel).Localizacao
+                        ).filelink
+                    }
+                );
+                Launch(varFileLink);
+                Set(
+                    _varExporting,
+                    false
+                );
+                Set(
+                    _varLoading,
+                    false
+                );
+                Notify(
+                    "Exportação para Excel finalizada! Verifique o bloqueio de pop-ups caso o arquivo não abra automaticamente ou verifique a pasta '/ADORE/Exportações' em seu OneDrive pessoal para acessar o arquivo",
+                    NotificationType.Success,
+                    25000
+                )
+            Size: =21
+            Text: ="Sim"
+            Visible: =varPopUpVisible
+            Width: =155
+            X: =147
+            Y: =584
+            ZIndex: =28
+
+        cancelPopUpButton_5 As button:
+            Color: =RGBA(39, 113, 194, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Semibold
+            Height: =55
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(102, 182, 227, 1)
+            OnSelect: |-
+                =UpdateContext({varPopUpVisible:false})
+            Size: =21
+            Text: ="Cancelar"
+            Visible: =varPopUpVisible
+            Width: =155
+            X: =327
+            Y: =584
+            ZIndex: =29
+
+        popupMessageLabel_6 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            Height: =111
+            Size: =21
+            Text: =varConfirmText
+            Visible: =varPopUpVisible
+            Width: =410
+            X: =104
+            Y: =437
+            ZIndex: =30
+
+    excelButtonGroup_1 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =30
+
+        excelImage_1 As image:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+            Height: =53
+            Image: ='excel-icon-48'
+            OnSelect: |-
+                =UpdateContext(
+                    {
+                        varConfirmText: "Confirma a exportação da lista dos ativos filtrados para um arquivo .CSV?",
+                        varPopUpVisible: true
+                    }
+                );
+            Tooltip: |-
+                ="Clique para exportar os dados filtrados. Verifique o bloqueio de pop-ups caso o arquivo não abra automaticamente. Pasta padrão de salvamento do arquivo: /ADORE/Exportações (OneDrive pessoal)."
+            Visible: =If(_varUserIsAdmin,If(IsBlank(instalacaoComboBox.Selected.Result),false,true),false)
+            Width: =40
+            X: =508
+            Y: =17
+            ZIndex: =21
+
+        excelButton_1 As button:
+            Color: =RGBA(0, 0, 0, 0)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 0)
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+            Fill: =RGBA(0, 0, 0, 0)
+            FontWeight: =FontWeight.Semibold
+            Height: =53
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(0, 0, 0, 0)
+            OnSelect: |-
+                =UpdateContext(
+                    {
+                        varConfirmText: "Confirma a exportação da lista dos ativos filtrados para um arquivo .CSV?",
+                        varPopUpVisible: true
+                    }
+                );
+            Size: =24
+            Text: =""
+            Tooltip: |-
+                ="Clique para exportar os dados filtrados. Verifique o bloqueio de pop-ups caso o arquivo não abra automaticamente. Pasta padrão de salvamento do arquivo: /ADORE/Exportações (OneDrive pessoal)."
+            Visible: =If(_varUserIsAdmin,If(IsBlank(instalacaoComboBox.Selected.Result),false,true),false)
+            Width: =53
+            X: =501
+            Y: =17
+            ZIndex: =22
+
+    clearFilterButtonGroup_1 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =30
+
+        clearFilterImage_1 As image:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Height: =45
+            Image: ='clear-filter-icon'
+            OnSelect: |-
+                =Set(_varLoading,true);
+                Reset(gerenciaComboBox_1);
+                Reset(tipoComboBox_1);
+                Reset(codigoSIOMTextSearchBox_1);
+                Reset(denLocalInstalacaoTextSearchBox);
+                Reset(numeroSerieTextSearchBox_1);
+                Reset(modeloTextSearchBox_1);
+                Reset(instalacaoComboBox);
+                Reset(faseComboBox_1);
+                Reset(numeroSerieTextSearchBox_1);
+                Reset(fabricanteTextSearchBox_1);
+                Set(_varLoading,false);
+            Tooltip: ="Clique para limpar todos os filtros de pesquisa"
+            Visible: |-
+                =(codigoSIOMTextSearchBox_1.Text <> "" || denLocalInstalacaoTextSearchBox.Text <> "" || !IsBlank(gerenciaComboBox_1.Selected.Result) || !IsBlank(instalacaoComboBox.Selected.Result) || !IsBlank(tipoComboBox_1.Selected.Result) || !IsBlank(faseComboBox_1.SelectedItems) 
+                || !IsBlank(numeroSerieTextSearchBox_1.Text)|| !IsBlank(modeloTextSearchBox_1.Text) || !IsBlank(fabricanteTextSearchBox_1.Text))
+            Width: =45
+            X: =571
+            Y: =23
+            ZIndex: =24
+
+        clearFilterButton_1 As button:
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(0, 0, 0, 0)
+            FontWeight: =FontWeight.Semibold
+            Height: =45
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =
+            OnSelect: |-
+                =Set(_varLoading,true);
+                Reset(gerenciaComboBox_1);
+                Reset(tipoComboBox_1);
+                Reset(codigoSIOMTextSearchBox_1);
+                Reset(denLocalInstalacaoTextSearchBox);
+                Reset(numeroSerieTextSearchBox_1);
+                Reset(modeloTextSearchBox_1);
+                Reset(instalacaoComboBox);
+                Reset(faseComboBox_1);
+                Reset(numeroSerieTextSearchBox_1);
+                Reset(fabricanteTextSearchBox_1);
+                Set(_varLoading,false);
+            PressedFill: =
+            Size: =24
+            Text: =""
+            Tooltip: ="Clique para limpar todos os filtros de pesquisa"
+            Visible: |-
+                =(codigoSIOMTextSearchBox_1.Text <> "" || denLocalInstalacaoTextSearchBox.Text <> "" || !IsBlank(gerenciaComboBox_1.Selected.Result) || !IsBlank(instalacaoComboBox.Selected.Result) || !IsBlank(tipoComboBox_1.Selected.Result) || !IsBlank(faseComboBox_1.SelectedItems) 
+                || !IsBlank(numeroSerieTextSearchBox_1.Text)|| !IsBlank(modeloTextSearchBox_1.Text) || !IsBlank(fabricanteTextSearchBox_1.Text))
+            Width: =45
+            X: =571
+            Y: =23
+            ZIndex: =25
+

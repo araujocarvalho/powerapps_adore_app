@@ -1,0 +1,330 @@
+"ModelosSearchScreen As screen.'phoneBrowseLayout_ver3.0'":
+    Fill: =RGBA(210, 210, 210, 1)
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+    OnVisible: |-
+        =Set(_varLoading,true);
+        Reset(modeloComboBox);
+        Reset(fabricanteComboBox);
+        Reset(tipoEqptoComboBox);
+        ClearCollect(colModelos,Sort(Distinct(colModelosEquipamentos,Modelo_Real),Result,Ascending));
+        ClearCollect(colFabricantes,Sort(Distinct(colModelosEquipamentos,Fabricante_Real),Result,Ascending));
+        ClearCollect(colTiposEqptos,Sort(Distinct(colModelosEquipamentos,Tipo_Descrição),Result,Ascending));
+        Set(_varLoading,false)
+
+    "listaModelosBrowseGallery As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =802
+        Items: |-
+            =Filter(
+                colModelosEquipamentos,
+                If(
+                    IsBlank(modeloComboBox.Selected.Result),
+                    1=1,
+                    Modelo_Real = modeloComboBox.Selected.Result
+                ),
+                If(
+                    IsBlank(fabricanteComboBox.Selected.Result),
+                    1=1,
+                    Fabricante_Real = fabricanteComboBox.Selected.Result
+                ),
+                If(
+                    IsBlank(tipoEqptoComboBox.Selected.Result),
+                    1=1,
+                    Tipo_Descrição = tipoEqptoComboBox.Selected.Result
+                )
+            )
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =136
+        Y: =291
+        ZIndex: =1
+
+        Title5 As label:
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =20
+            Text: =ThisItem.Tipo_Descrição
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            X: =32
+            Y: =16
+            ZIndex: =1
+
+        Subtitle5 As label:
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =18
+            Text: |-
+                ="Modelo: "&ThisItem.Modelo_Real
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            X: =32
+            Y: =91
+            ZIndex: =2
+
+        Body1 As label:
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =44
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =18
+            Text: |-
+                ="Fabricante: "&ThisItem.Fabricante_Real
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            X: =32
+            Y: =53
+            ZIndex: =3
+
+        Separator6 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(135, 190, 82, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+        linkButton_1 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(255, 191, 0, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(244, 244, 244, 1)
+            Height: =75
+            Icon: =Icon.DocumentWithContent
+            OnSelect: =Launch(ThisItem.Link_Sharepoint)
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="Abrir pasta de documentos no Sharepoint"
+            Visible: =If(IsBlank(ThisItem.Link_Sharepoint) || ThisItem.Link_Sharepoint = "" || StartsWith(ThisItem.Link_Sharepoint,"ainda carregando"),false,true)
+            Width: =77
+            X: =536
+            Y: =32
+            ZIndex: =6
+
+    Rectangle11_2 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(210, 210, 210, 1)
+        Height: =199
+        Width: =Parent.Width
+        Y: =88
+        ZIndex: =2
+
+    RectQuickActionBar2_6 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =3
+
+    LblAppName2_5 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        Height: =88
+        Size: =25
+        Text: ="Busca - Modelos Equipamentos"
+        Width: =Parent.Width - Self.X
+        Wrap: =false
+        X: =IconBackarrow1_1.X + IconBackarrow1_1.Width
+        ZIndex: =4
+
+    IconBackarrow1_8 As icon.ChevronLeft:
+        AccessibleLabel: =Self.Tooltip
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =88
+        Icon: =Icon.ChevronLeft
+        OnSelect: =Navigate(HomeScreen)
+        PaddingBottom: =24
+        PaddingLeft: =24
+        PaddingRight: =24
+        PaddingTop: =24
+        PressedFill: =RGBA(255, 255, 255, 0.3)
+        TabIndex: =0
+        Tooltip: ="Voltar para a página inicial"
+        Width: =88
+        ZIndex: =5
+
+    totalRegistrosLabel4 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(29, 29, 29, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Semibold
+        Height: =38
+        Size: =18
+        Text: |-
+            ="Total de Registros: "& CountRows(listaModelosBrowseGallery.AllItems)
+        Width: =560
+        X: =40
+        Y: =1097
+        ZIndex: =6
+
+    Rectangle1_3 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =4
+        Width: =640
+        Y: =1093
+        ZIndex: =7
+
+    Rectangle1_2 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =4
+        Width: =640
+        Y: =287
+        ZIndex: =8
+
+    modeloComboBox As combobox:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        ChevronBackground: =RGBA(12, 126, 44, 1)
+        ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+        ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+        Color: =RGBA(29, 29, 29, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayFields: =["Result"]
+        DisplayMode: =If(!_varLoading,DisplayMode.Edit,DisplayMode.Disabled)
+        Height: =50
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(141, 198, 63, 1)
+        InputTextPlaceholder: ="Família/Modelo"
+        Items: =colModelos
+        NoSelectionText: ="Família/Modelo"
+        OnChange: =
+        PaddingLeft: =15
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(135, 190, 82, 1)
+        SearchFields: =["Result"]
+        SearchItems: =Search(colModelos,modeloComboBox.SearchText,"Result")
+        SelectionFill: =RGBA(12, 126, 44, 1)
+        SelectMultiple: =false
+        Size: =18
+        Width: =612
+        X: =16
+        Y: =226
+        ZIndex: =9
+
+    fabricanteComboBox As combobox:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        ChevronBackground: =RGBA(12, 126, 44, 1)
+        ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+        ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+        Color: =RGBA(29, 29, 29, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayFields: =["Result"]
+        DisplayMode: =If(!_varLoading,DisplayMode.Edit,DisplayMode.Disabled)
+        Height: =50
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(141, 198, 63, 1)
+        InputTextPlaceholder: ="Fabricante"
+        Items: =colFabricantes
+        NoSelectionText: ="Fabricante"
+        OnChange: |-
+            =If(!IsBlank(modeloComboBox.Selected.Result),Reset(modeloComboBox));
+            ClearCollect(colModelos,Sort(Distinct(listaModelosBrowseGallery.AllItems,Modelo_Real),Result,Ascending));
+        PaddingLeft: =15
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(135, 190, 82, 1)
+        SearchFields: =["Result"]
+        SearchItems: =Search(colFabricantes,fabricanteComboBox.SearchText,"Result")
+        SelectionFill: =RGBA(12, 126, 44, 1)
+        SelectMultiple: =false
+        Size: =18
+        Width: =612
+        X: =16
+        Y: =161
+        ZIndex: =10
+
+    tipoEqptoComboBox As combobox:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        ChevronBackground: =RGBA(12, 126, 44, 1)
+        ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+        ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+        Color: =RGBA(29, 29, 29, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayFields: =["Result"]
+        DisplayMode: =If(!_varLoading,DisplayMode.Edit,DisplayMode.Disabled)
+        Height: =50
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(141, 198, 63, 1)
+        InputTextPlaceholder: ="Tipo de Equipamento"
+        Items: =colTiposEqptos
+        NoSelectionText: ="Tipo de Equipamento"
+        OnChange: |-
+            =If(!IsBlank(fabricanteComboBox.Selected.Result),Reset(fabricanteComboBox));
+            If(!IsBlank(modeloComboBox.Selected.Result),Reset(modeloComboBox));
+            ClearCollect(colFabricantes,Sort(Distinct(listaModelosBrowseGallery.AllItems,Fabricante),Result,Ascending));
+            ClearCollect(colModelos,Sort(Distinct(listaModelosBrowseGallery.AllItems,Modelo_Real),Result,Ascending));
+        PaddingLeft: =15
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(135, 190, 82, 1)
+        SearchFields: =["Result"]
+        SearchItems: =Search(colTiposEqptos,tipoEqptoComboBox.SearchText,"Result")
+        SelectionFill: =RGBA(12, 126, 44, 1)
+        SelectMultiple: =false
+        Size: =18
+        Width: =612
+        X: =16
+        Y: =98
+        ZIndex: =11
+
+    loadingGif2_4 As image:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Height: =91
+        Image: ='_21_loading-gif-transparent-background_All-Loading-Gif-Image-Transparent-Background-Best-Studio-'
+        Visible: =If(_varLoading,true,false)
+        Width: =151
+        X: =244
+        Y: =769
+        ZIndex: =12
+
+    loadingRectangle_3 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(169, 169, 169,.55)
+        Height: =1048
+        Visible: =_varLoading
+        Width: =640
+        Y: =88
+        ZIndex: =13
+

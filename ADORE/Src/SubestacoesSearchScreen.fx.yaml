@@ -1,0 +1,250 @@
+"SubestacoesSearchScreen As screen.'phoneBrowseLayout_ver3.0'":
+    Fill: =RGBA(210, 210, 210, 1)
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+    OnVisible: |-
+        =Reset(subestacaoTextSearchBox);
+        Reset(gerenciaSubComboBox)
+
+    Rectangle11_3 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(210, 210, 210, 1)
+        Height: =136
+        Width: =Parent.Width
+        Y: =88
+        ZIndex: =1
+
+    RectQuickActionBar2_7 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =2
+
+    LblAppName2_6 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        Height: =88
+        Size: =25
+        Text: ="Busca - Subestações"
+        Width: =Parent.Width - Self.X
+        Wrap: =false
+        X: =IconBackarrow1_1.X + IconBackarrow1_1.Width
+        ZIndex: =3
+
+    IconBackarrow1_9 As icon.ChevronLeft:
+        AccessibleLabel: =Self.Tooltip
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =88
+        Icon: =Icon.ChevronLeft
+        OnSelect: =Navigate(HomeScreen)
+        PaddingBottom: =24
+        PaddingLeft: =24
+        PaddingRight: =24
+        PaddingTop: =24
+        PressedFill: =RGBA(255, 255, 255, 0.3)
+        TabIndex: =0
+        Tooltip: ="Voltar para a página inicial"
+        Width: =88
+        ZIndex: =4
+
+    totalRegistrosLabel4_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(29, 29, 29, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Semibold
+        Height: =38
+        Size: =18
+        Text: |-
+            ="Total de Registros: "& CountRows(listaSubestacoesBrowseGallery.AllItems)
+        Width: =560
+        X: =40
+        Y: =1097
+        ZIndex: =5
+
+    Rectangle1_5 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =4
+        Width: =640
+        Y: =1093
+        ZIndex: =6
+
+    Rectangle1_4 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =4
+        Width: =640
+        Y: =224
+        ZIndex: =7
+
+    "listaSubestacoesBrowseGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =865
+        Items: |-
+            =Filter(
+                subestacoes_AT_v1,
+                subestacaoTextSearchBox.Text in local_nome,
+                If(
+                    IsBlank(gerenciaSubComboBox.Selected.Result),
+                    1 = 1,
+                    local_gerencia = gerenciaSubComboBox.Selected.Result
+                )
+            )
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =86
+        Y: =228
+        ZIndex: =8
+
+        subestacaoNomeLabel As label:
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FontWeight: =FontWeight.Semibold
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =20
+            Text: |-
+                ="Subestação: "&ThisItem.local_nome
+            VerticalAlign: =VerticalAlign.Top
+            Width: =572
+            X: =28
+            Y: =14
+            ZIndex: =2
+
+        gerenciaSubLabel As label:
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =18
+            Text: |-
+                ="Gerência: "&ThisItem.local_gerencia
+            VerticalAlign: =VerticalAlign.Top
+            Width: =subestacaoNomeLabel.Width
+            X: =subestacaoNomeLabel.X
+            Y: =48
+            ZIndex: =3
+
+        NextArrow4 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(255, 191, 0, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(244, 244, 244, 1)
+            Height: =60
+            Icon: =Icon.DocumentWithContent
+            OnSelect: =Launch(ThisItem.link_sharepoint)
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="Abrir pasta de documentos no Sharepoint"
+            Width: =60
+            X: =537
+            Y: =10
+            ZIndex: =4
+
+        Separator4 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(135, 190, 82, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+    subestacaoTextSearchBox As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Color: =RGBA(29, 29, 29, 1)
+        Default: =""
+        DelayOutput: =true
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        FocusedBorderThickness: =4
+        Height: =50
+        HintText: ="Subestação"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        OnChange: =
+        PaddingLeft: =15
+        Reset: =
+        Size: =18
+        Width: =612
+        X: =14
+        Y: =99
+        ZIndex: =9
+
+    gerenciaSubComboBox As combobox:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        ChevronBackground: =RGBA(12, 126, 44, 1)
+        ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+        ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+        Color: =RGBA(29, 29, 29, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayFields: =["Result"]
+        DisplayMode: =If(_varLoading,DisplayMode.Disabled,DisplayMode.Edit)
+        Height: =51
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(141, 198, 63, 1)
+        InputTextPlaceholder: ="Gerência"
+        IsSearchable: =false
+        Items: =colGerencias_T
+        NoSelectionText: ="Gerência"
+        OnChange: =
+        PaddingLeft: =15
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(135, 190, 82, 1)
+        SearchFields: =["Result"]
+        SearchItems: =[]
+        SelectionFill: =RGBA(12, 126, 44, 1)
+        SelectMultiple: =false
+        Size: =18
+        Width: =612
+        X: =14
+        Y: =161
+        ZIndex: =10
+
+    loadingGif2_5 As image:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Height: =91
+        Image: ='_21_loading-gif-transparent-background_All-Loading-Gif-Image-Transparent-Background-Best-Studio-'
+        Visible: =If(_varLoading,true,false)
+        Width: =151
+        X: =244
+        Y: =769
+        ZIndex: =11
+
+    loadingRectangle_4 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(169, 169, 169,.55)
+        Height: =1048
+        Visible: =_varLoading
+        Width: =640
+        Y: =88
+        ZIndex: =12
+

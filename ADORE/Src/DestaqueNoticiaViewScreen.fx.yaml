@@ -1,0 +1,347 @@
+"DestaqueNoticiaViewScreen As screen.'phoneDetailViewLayout_ver3.0'":
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+    OnVisible: |-
+        =UpdateContext({varPopUpVisible: false})
+
+    retanguloAppBar As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =1
+
+    IconBackarrow1_11 As icon.ChevronLeft:
+        AccessibleLabel: =Self.Tooltip
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =88
+        Icon: =Icon.ChevronLeft
+        OnSelect: |-
+            =Navigate(DestaquesNoticiasSearchScreen,None,{varFiltroDestaque_SIOM: "",varFiltroDestaque_Fabricante:"",varFiltroDestaque_Modelo:""})
+        PaddingBottom: =24
+        PaddingLeft: =24
+        PaddingRight: =24
+        PaddingTop: =24
+        PressedFill: =RGBA(255, 255, 255, 0.3)
+        TabIndex: =0
+        Tooltip: ="Voltar para a lista"
+        Width: =88
+        ZIndex: =2
+
+    LblAppName2_7 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        Height: =88
+        Size: =25
+        Text: =""
+        Width: =Parent.Width - Self.X
+        Wrap: =false
+        X: =80
+        ZIndex: =5
+
+    destaqueContainerVertical As groupContainer.verticalAutoLayoutContainer:
+        Height: =1048
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        LayoutOverflowY: =LayoutOverflow.Scroll
+        Width: =640
+        Y: =88
+        ZIndex: =7
+
+        fotoNoticia As image:
+            AlignInContainer: =AlignInContainer.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Height: =350
+            Image: =varDestaque.Foto
+            LayoutMinHeight: =320
+            LayoutMinWidth: =320
+            PaddingBottom: =30
+            PaddingTop: =30
+            Visible: =!IsBlank(varDestaque.Foto)
+            Width: =640
+            ZIndex: =1
+
+        assuntoLabel As label:
+            Align: =Align.Center
+            AutoHeight: =true
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(54, 176, 75, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Bold
+            Height: =176
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            PaddingTop: =20
+            Size: =25
+            Text: =varDestaque.Assunto
+            Width: =618
+            Y: =100
+            ZIndex: =2
+
+        autorDataLabel As label:
+            Align: =Align.Center
+            AutoHeight: =true
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(149, 149, 149, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Bold
+            Height: =70
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            Size: =15
+            Text: =Proper(varDestaque.Autor.DisplayName)&" - "&varDestaque.'Publicado em'
+            Width: =618
+            ZIndex: =3
+
+        orgaoLabel As label:
+            Align: =Align.Center
+            AutoHeight: =true
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(149, 149, 149, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Bold
+            Height: =70
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            Size: =15
+            Text: =varDestaque.Órgão
+            Visible: =!IsBlank(varDestaque.Órgão)
+            Width: =618
+            ZIndex: =4
+
+        conteudoHtmlText As htmlViewer:
+            AutoHeight: =true
+            Font: =Font.'Lato Light'
+            Height: =70
+            HtmlText: =varDestaque.Conteúdo
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            PaddingBottom: =40
+            PaddingLeft: =30
+            PaddingRight: =30
+            PaddingTop: =40
+            Size: =20
+            Width: =618
+            ZIndex: =5
+
+        numeroPACPLabel As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            Size: =18
+            Text: |-
+                ="Nº do PACP vinculado: "&varDestaque.'Nº PACP'
+            Visible: =!IsBlank(varDestaque.'Nº PACP')
+            Width: =618
+            ZIndex: =7
+
+        eqptoSIOMLabel As label:
+            Align: =Align.Center
+            AutoHeight: =true
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            Size: =18
+            Text: |-
+                ="Equipamento(s): "&varDestaque.'Equipamento (SIOM)'
+            Visible: =!IsBlank(varDestaque.'Equipamento (SIOM)')
+            Width: =618
+            ZIndex: =8
+
+        fabricanteLabel As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            Size: =18
+            Text: |-
+                ="Fabricante: "&varDestaque.'Fabricante Equipamento'
+            Visible: =!IsBlank(varDestaque.'Fabricante Equipamento')
+            Width: =640
+            ZIndex: =9
+
+        modeloLabel As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            Size: =18
+            Text: |-
+                ="Modelo: "&varDestaque.'Modelo Equipamento'
+            Visible: =!IsBlank(varDestaque.'Modelo Equipamento')
+            Width: =640
+            Y: =647
+            ZIndex: =10
+
+        linkNoticiaContainer As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =100
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =50
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingTop: =20
+            Visible: =!IsBlank(varDestaque.Link)
+            ZIndex: =11
+
+            linkNoticiaIcon As icon.Share:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                Color: =RGBA(39, 113, 194, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(244, 244, 244, 1)
+                Icon: =Icon.Share
+                OnSelect: =Launch(varDestaque.Link)
+                Width: =40
+                ZIndex: =1
+
+            linkNoticiaButton As button:
+                Align: =Align.Left
+                Color: =RGBA(39, 113, 194, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Semibold
+                Height: =70
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: =Launch(varDestaque.Link)
+                Size: =20
+                Text: ="Link"
+                Width: =60
+                ZIndex: =2
+
+        anexosContainerVertical As groupContainer.verticalAutoLayoutContainer:
+            Height: =225
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =300
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            LayoutOverflowY: =LayoutOverflow.Scroll
+            PaddingBottom: =40
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =5
+            Visible: =varDestaque.'Tem anexos'
+            ZIndex: =12
+
+            "anexosGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+                AlignInContainer: =AlignInContainer.SetByContainer
+                BorderColor: =RGBA(135, 190, 82, 1)
+                BorderThickness: =2
+                Height: =200
+                Items: =varDestaque.Anexos
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =20
+                LayoutMinWidth: =320
+                TemplatePadding: =0
+                TemplateSize: =65
+                Width: =600
+                ZIndex: =3
+
+                anexoItemGroup As group:
+                    Height: =5
+                    Width: =5
+                    X: =40
+                    Y: =40
+                    ZIndex: =4
+
+                    anexoSubtitle As label:
+                        Color: =RGBA(39, 113, 194, 1)
+                        DisabledColor: =RGBA(0, 0, 0, 1)
+                        Font: =Font.'Lato Light'
+                        Height: =44
+                        OnSelect: =Launch(Substitute(ThisItem.AbsoluteUri,"%","%25"))
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =18
+                        Text: =ThisItem.DisplayName
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =541
+                        Wrap: =false
+                        X: =59
+                        Y: =21
+                        ZIndex: =1
+
+                    anexoIconButton As icon.Attachment:
+                        BorderColor: =RGBA(135, 190, 82, 1)
+                        Color: =RGBA(39, 113, 194, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        DisabledColor: =RGBA(244, 244, 244, 1)
+                        Height: =44
+                        Icon: =Icon.PaperClip
+                        OnSelect: =Launch(Substitute(ThisItem.AbsoluteUri,"%","%25"))
+                        Width: =46
+                        X: =13
+                        Y: =21
+                        ZIndex: =2
+
+                    anexoInvisibleButton As button:
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        FontWeight: =FontWeight.Semibold
+                        Height: =57
+                        HoverColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =ColorFade(RGBA(166, 166, 166, 0.2), -20%)
+                        OnSelect: =Launch(Substitute(ThisItem.AbsoluteUri,"%","%25"))
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =5
+                        RadiusTopRight: =5
+                        Size: =24
+                        Text: =""
+                        Width: =587
+                        X: =13
+                        Y: =8
+                        ZIndex: =3
+
+    Icon2 As icon.Edit:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =54
+        Icon: =Icon.Edit
+        OnSelect: |-
+            =Navigate(
+                DestaqueNoticiaEditScreen,
+                None,
+                {
+                    varDestaqueEdit: varDestaque,
+                    varIsEdit: true
+                }
+            )
+        Visible: =User().Email = varDestaque.Autor.Email
+        Width: =52
+        X: =564
+        Y: =17
+        ZIndex: =8
+

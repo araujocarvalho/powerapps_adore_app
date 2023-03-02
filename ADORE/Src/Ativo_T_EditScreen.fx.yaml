@@ -1,0 +1,325 @@
+"Ativo_T_EditScreen As screen.'phoneDetailViewLayout_ver3.0'":
+    Fill: =
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+    OnVisible: |-
+        =UpdateContext({varPopUpVisible: false})
+
+    RectQuickActionBar2_3 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =1
+
+    IconBackarrow1_4 As icon.ChevronLeft:
+        AccessibleLabel: =Self.Tooltip
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =88
+        Icon: =Icon.ChevronLeft
+        OnSelect: =Navigate(Ativo_T_DetailScreen)
+        PaddingBottom: =24
+        PaddingLeft: =24
+        PaddingRight: =24
+        PaddingTop: =24
+        PressedFill: =RGBA(255, 255, 255, 0.3)
+        TabIndex: =0
+        Tooltip: ="Voltar para a lista"
+        Width: =88
+        ZIndex: =2
+
+    LblAppName2_3 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        Height: =88
+        Size: =25
+        Text: ="Editar ativo"
+        Width: =Parent.Width - Self.X
+        Wrap: =false
+        X: =80
+        ZIndex: =5
+
+    salvarIcon As icon.Edit:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =54
+        Icon: =Icon.Check
+        OnSelect: |-
+            =UpdateContext({varPopUpVisible: true})
+        Visible: =_varUserIsAdmin
+        Width: =52
+        X: =573
+        Y: =17
+        ZIndex: =11
+
+    ativoForm As form:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DataSource: =ativos_AT_v3
+        Height: =302
+        Item: =varAtivoEdit
+        OnSuccess: |-
+            =Set(_varAtivo_T_WasEdited,true);
+            Notify(
+                "Item salvo com sucesso!",
+                NotificationType.Success
+            );
+            Navigate(Ativo_T_DetailScreen,None,{varAtivoT: ativoForm.LastSubmit,varIsSearchScreen:true})
+        Width: =640
+        Y: =88
+        ZIndex: =12
+
+        ativo_tem_acidente_DataCard2 As typedDataCard.toggleEditCard:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="ativo_tem_acidente"
+            Default: =ThisItem.ativo_tem_acidente
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"ativo_tem_acidente")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue10.Value
+            Width: =640
+            X: =0
+            Y: =1
+            ZIndex: =1
+
+            DataCardKey10 As label:
+                AutoHeight: =true
+                Color: =RGBA(135, 190, 82, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                Height: =48
+                Size: =18
+                Text: ="Ativo possui documento de saúde e segurança"
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue10 As toggleSwitch:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Color: =RGBA(255, 255, 255, 1)
+                Default: =Parent.Default
+                DisplayMode: =Parent.DisplayMode
+                FalseFill: =RGBA(128, 130, 133, 1)
+                HandleFill: =RGBA(255, 255, 255, 1)
+                Height: =45
+                Size: =21
+                Tooltip: =Parent.DisplayName
+                TrueFill: =RGBA(12, 126, 44, 1)
+                Width: =85
+                X: =280
+                Y: =58
+                ZIndex: =2
+
+            ErrorMessage10 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 51, 51, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue10.Y + DataCardValue10.Height
+                ZIndex: =3
+
+            StarVisible10 As label:
+                Align: =Align.Center
+                Color: =RGBA(135, 190, 82, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                Height: =DataCardKey10.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey10.Y
+                ZIndex: =4
+
+        ativo_link_DataCard1 As typedDataCard.textualEditCard:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="field_3"
+            Default: =ThisItem.ativo_link_novo
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@ativos_AT_v3],DataSourceInfo.DisplayName,"field_3")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =141
+            MaxLength: =DataSourceInfo([@ativos_AT_v3], DataSourceInfo.MaxLength, "field_3")
+            Required: =false
+            Update: =DataCardValue4.Text
+            Width: =640
+            X: =0
+            Y: =0
+            ZIndex: =13
+
+            DataCardKey4 As label:
+                AutoHeight: =true
+                Color: =RGBA(135, 190, 82, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                Height: =48
+                Size: =18
+                Text: ="Link da pasta de documentos"
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =28
+                ZIndex: =1
+
+            DataCardValue4 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                BorderThickness: =2
+                Color: =RGBA(0, 0, 0, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                DisplayMode: =Parent.DisplayMode
+                Fill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =4
+                Height: =48
+                HoverBorderColor: =RGBA(135, 190, 82, 1)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(53, 74, 36, 1)
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =15
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =76
+                ZIndex: =2
+
+            ErrorMessage4 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 51, 51, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue4.Y + DataCardValue4.Height
+                ZIndex: =3
+
+            StarVisible4 As label:
+                Align: =Align.Center
+                Color: =RGBA(135, 190, 82, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                Height: =DataCardKey4.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey4.Y
+                ZIndex: =4
+
+    popUpGroup2 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =18
+
+        popUpBackGroundRectangle_1 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 0.1)
+            Height: =1136
+            Visible: =varPopUpVisible
+            Width: =640
+            ZIndex: =13
+
+        popUpRectangle_1 As rectangle:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =242
+            Visible: =varPopUpVisible
+            Width: =445
+            X: =88
+            Y: =425
+            ZIndex: =14
+
+        yesPopUpButton_1 As button:
+            Color: =RGBA(8, 88, 31, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Semibold
+            Height: =55
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+            OnSelect: =SubmitForm(ativoForm)
+            Size: =21
+            Text: ="Sim"
+            Visible: =varPopUpVisible
+            Width: =155
+            X: =147
+            Y: =584
+            ZIndex: =15
+
+        cancelPopUpButton_1 As button:
+            Color: =RGBA(39, 113, 194, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Semibold
+            Height: =55
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(102, 182, 227, 1)
+            OnSelect: |-
+                =UpdateContext({varPopUpVisible:false})
+            Size: =21
+            Text: ="Cancelar"
+            Visible: =varPopUpVisible
+            Width: =155
+            X: =327
+            Y: =584
+            ZIndex: =16
+
+        popupMessageLabel_1 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            Height: =111
+            Size: =21
+            Text: ="Confirma a edição do ativo?"
+            Visible: =varPopUpVisible
+            Width: =410
+            X: =104
+            Y: =437
+            ZIndex: =17
+
