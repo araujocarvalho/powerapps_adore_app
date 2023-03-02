@@ -16,22 +16,36 @@
             colGroups,
             {displayName: ""}
         );
-        UpdateContext({varColGroupsLoading:true});
+        UpdateContext({varColGroupsLoading: true});
         If(
             !varIsEdit,
             ForAll(
                 GruposdoOffice365.ListGroupMembers("6a175f73-e11b-48d2-b616-da4041fe8805").value,//LPDGT
-                Collect(
-                    colGroups,
-                    GruposdoOffice365.ListGroupMembers(id).value
-                );
-                If(StartsWith(displayName,"LPA"),ForAll(
-                    GruposdoOffice365.ListGroupMembers(id).value,
+                If(
+                    StartsWith(
+                        displayName,
+                        "LPA"
+                    ),
                     Collect(
                         colGroups,
                         GruposdoOffice365.ListGroupMembers(id).value
-                    )
-                ));
+                    );
+                    ForAll(
+                        GruposdoOffice365.ListGroupMembers(id).value,
+                        If(
+                            StartsWith(
+                                displayName,
+                                "LPA"
+                            ),
+                            Collect(
+                                colGroups,
+                                GruposdoOffice365.ListGroupMembers(id).value
+                            ),
+                            Collect(colGroups,ThisRecord)
+                        )
+                    ),
+                    Collect(colGroups,ThisRecord)
+                )
             );
             Collect(
                 colGroups,
@@ -55,7 +69,7 @@
                 }
             )
         );
-        UpdateContext({varColGroupsLoading:false});
+        UpdateContext({varColGroupsLoading: false});
         ClearCollect(
             colFabricantes,
             Sort(
