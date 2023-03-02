@@ -384,7 +384,7 @@
                 },
                 "region": {
                   "charLength": 208,
-                  "charOffset": 2321,
+                  "charOffset": 2270,
                   "snippet": {
                     "text": "If(\n                        fabricanteEqptoComboBox.Selected.Result = \"\";\n                        1 = 1;\n                        fabricanteEqptoComboBox.Selected.Result = Fabricante_Real\n                    )"
                   }
