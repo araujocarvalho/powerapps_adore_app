@@ -78,7 +78,7 @@ SplashScreen As screen:
 
     Timer As timer:
         AutoStart: =true
-        Duration: =1000
+        Duration: =700
         Fill: =RGBA(12, 126, 44, 1)
         Height: =70
         HoverColor: =RGBA(255, 255, 255, 1)
