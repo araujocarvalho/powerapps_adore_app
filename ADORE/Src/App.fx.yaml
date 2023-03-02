@@ -1,6 +1,6 @@
 App As appinfo:
     BackEnabled: =false
-    OnStart: |-
+    OnStart: |
         =Set(
             _varLoading,
             true
@@ -109,6 +109,39 @@ App As appinfo:
             colAtivos_T_provisorio_9,
             colAtivos_T_provisorio_10
         );
+        ClearCollect(
+            colGerencias_T,
+            Sort(
+                Distinct(
+                    colAtivos_T,
+                    ativo_gerencia
+                ),
+                Result,
+                Ascending
+            )
+        );
+        ClearCollect(
+            colLocalizacoes_T,
+            Sort(
+                Distinct(
+                    colAtivos_T,
+                    ativo_local_nome
+                ),
+                Result,
+                Ascending
+            )
+        );
+        ClearCollect(
+            colTiposEqptos_T,
+            Sort(
+                Distinct(
+                    colAtivos_T,
+                    ativo_tipo
+                ),
+                Result,
+                Ascending
+            )
+        );
         Set(
             _varLoading_T,
             false
@@ -184,6 +217,39 @@ App As appinfo:
             colAtivos_G_provisorio_6,
             colAtivos_G_provisorio_7,
             colAtivos_G_provisorio_8
+        );
+        ClearCollect(
+            colGerencias_G,
+            Sort(
+                Distinct(
+                    colAtivos_G,
+                    ativo_gerencia
+                ),
+                Result,
+                Ascending
+            )
+        );
+        ClearCollect(
+            colLocalizacoes_G,
+            Sort(
+                Distinct(
+                    colAtivos_G,
+                    ativo_local_nome
+                ),
+                Result,
+                Ascending
+            )
+        );
+        ClearCollect(
+            colTiposEqptos_G,
+            Sort(
+                Distinct(
+                    colAtivos_G,
+                    ativo_tipo
+                ),
+                Result,
+                Ascending
+            )
         );
         Set(
             _varLoading_G,
