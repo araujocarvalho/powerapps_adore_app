@@ -2,14 +2,50 @@
     Fill: =RGBA(210, 210, 210, 1)
     LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
     OnVisible: |-
-        =Set(_varLoading,true);
+        =Set(
+            _varLoading,
+            true
+        );
         Reset(modeloComboBox);
         Reset(fabricanteComboBox);
         Reset(tipoEqptoComboBox);
-        ClearCollect(colModelos,Sort(Distinct(colModelosEquipamentos,Modelo_Real),Result,Ascending));
-        ClearCollect(colFabricantes,Sort(Distinct(colModelosEquipamentos,Fabricante_Real),Result,Ascending));
-        ClearCollect(colTiposEqptos,Sort(Distinct(colModelosEquipamentos,Tipo_Descrição),Result,Ascending));
-        Set(_varLoading,false)
+        ClearCollect(
+            colModelos,
+            Sort(
+                Distinct(
+                    colModelosEquipamentos,
+                    Modelo_Real
+                ),
+                Result,
+                Ascending
+            )
+        );
+        ClearCollect(
+            colFabricantes,
+            Sort(
+                Distinct(
+                    colModelosEquipamentos,
+                    Fabricante_Real
+                ),
+                Result,
+                Ascending
+            )
+        );
+        ClearCollect(
+            colTiposEqptos,
+            Sort(
+                Distinct(
+                    colModelosEquipamentos,
+                    Tipo_Descrição
+                ),
+                Result,
+                Ascending
+            )
+        );
+        Set(
+            _varLoading,
+            false
+        )
 
     "listaModelosBrowseGallery As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
         BorderColor: =RGBA(135, 190, 82, 1)

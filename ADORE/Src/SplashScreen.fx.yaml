@@ -1,60 +1,8 @@
 SplashScreen As screen:
     Fill: =RGBA(152, 208, 70, 1)
     LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
-    OnVisible: |
-        =Set(
-            _varLoading,
-            true
-        );
-        Set(
-            _varJaMostrouDicaDestaque,
-            false
-        );
-        Set(
-            _varLoaded_ativos_T,
-            false
-        );
-        Set(
-            _varLoaded_ativos_G,
-            false
-        );
-        ClearCollect(
-            colFases,
-            "VM",
-            "AZ",
-            "BR",
-            "RM",
-            "TR"
-        );
-        Refresh(modelos_ativos_v3);
-        ClearCollect(
-            colModelosEquipamentos,
-            Filter(
-                modelos_ativos_v3,
-                ID_ESPELHO >= 1 && ID_ESPELHO < 2000
-            )
-        );
-        Collect(
-            colModelosEquipamentos,
-            Filter(
-                modelos_ativos_v3,
-                ID_ESPELHO >= 2000 && ID_ESPELHO < 3000
-            )
-        );
-        Set(
-            _varUserIsAdmin,
-            !IsBlank(
-                LookUp(
-                    users_admin_adore_app,
-                    Usuario.Email = User().Email,
-                    Usuario
-                )
-            )
-        );
-        Set(
-            _varLoading,
-            false
-        );
+    OnHidden: =
+    OnVisible: =
 
     logoImage As image:
         BorderColor: =RGBA(135, 190, 82, 1)

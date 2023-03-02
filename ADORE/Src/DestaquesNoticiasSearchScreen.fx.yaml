@@ -1,7 +1,7 @@
 "DestaquesNoticiasSearchScreen As screen.'phoneBrowseLayout_ver3.0'":
     Fill: =RGBA(210, 210, 210, 1)
     LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
-    OnVisible: |
+    OnVisible: |-
         =Reset(categoriaFiltroComboBox);
         Reset(tituloAssuntoTextSearchBox);
         Reset(siomEquipamentoTextSearchBox);

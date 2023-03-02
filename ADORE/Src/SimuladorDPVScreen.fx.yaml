@@ -492,12 +492,13 @@
                 HoverFill: =RGBA(53, 74, 36, 1)
                 Items: =["Programado","Urgência","Ocorrência/Emergência"]
                 OnChange: |-
-                    =If(origemEventoDropdown.Selected.Value <> "Programado",
-                    Reset(horaInicioPLEComboBox);
-                    Reset(horaFimPLEComboBox);
-                    Reset(minutoInicioPLEComboBox);
-                    Reset(minutoFimPLEComboBox);
-                    Reset(franquiaCheckbox);
+                    =If(
+                        origemEventoDropdown.Selected.Value <> "Programado",
+                        Reset(horaInicioPLEComboBox);
+                        Reset(horaFimPLEComboBox);
+                        Reset(minutoInicioPLEComboBox);
+                        Reset(minutoFimPLEComboBox);
+                        Reset(franquiaCheckbox)
                     )
                 PressedColor: =RGBA(255, 255, 255, 1)
                 PressedFill: =RGBA(135, 190, 82, 1)

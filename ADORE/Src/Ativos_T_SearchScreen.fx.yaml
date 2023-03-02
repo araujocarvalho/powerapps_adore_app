@@ -2,9 +2,8 @@
     Fill: =RGBA(210, 210, 210, 1)
     LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
     OnVisible: |-
-        =If(
-            !_varLoaded_ativos_T || _varAtivo_T_WasEdited,
-            UpdateContext({varLoading_T: true});
+        =If(_varAtivo_T_WasEdited,
+            Set(_varLoading_T, true);
             Refresh(ativos_AT_v3);
             Concurrent(
                 ClearCollect(
@@ -92,17 +91,6 @@
                 colAtivos_T_provisorio_9,
                 colAtivos_T_provisorio_10
             );
-            //Limpa as coleções provisórias
-            Clear(colAtivos_T_provisorio_1);
-            Clear(colAtivos_T_provisorio_2);
-            Clear(colAtivos_T_provisorio_3);
-            Clear(colAtivos_T_provisorio_4);
-            Clear(colAtivos_T_provisorio_5);
-            Clear(colAtivos_T_provisorio_6);
-            Clear(colAtivos_T_provisorio_7);
-            Clear(colAtivos_T_provisorio_8);
-            Clear(colAtivos_T_provisorio_9);
-            Clear(colAtivos_T_provisorio_10);
             ClearCollect(
                 colGerencias_T,
                 Sort(
@@ -140,12 +128,18 @@
                 _varAtivo_T_WasEdited,
                 false
             );
-            UpdateContext({varLoading_T: false});
-            Set(
-                _varLoaded_ativos_T,
-                true
-            );
-            
+            Set(_varLoading_T, false);
+            //Limpa as coleções provisórias
+            Clear(colAtivos_T_provisorio_1);
+            Clear(colAtivos_T_provisorio_2);
+            Clear(colAtivos_T_provisorio_3);
+            Clear(colAtivos_T_provisorio_4);
+            Clear(colAtivos_T_provisorio_5);
+            Clear(colAtivos_T_provisorio_6);
+            Clear(colAtivos_T_provisorio_7);
+            Clear(colAtivos_T_provisorio_8);
+            Clear(colAtivos_T_provisorio_9);
+            Clear(colAtivos_T_provisorio_10);    
         )
 
     Rectangle11 As rectangle:
@@ -826,7 +820,7 @@
         DisabledFill: =RGBA(244, 244, 244, 1)
         Height: =91
         Image: ='_21_loading-gif-transparent-background_All-Loading-Gif-Image-Transparent-Background-Best-Studio-'
-        Visible: =varLoading_T
+        Visible: =_varLoading_T
         Width: =151
         X: =244
         Y: =769
@@ -836,7 +830,7 @@
         BorderColor: =RGBA(135, 190, 82, 1)
         Fill: =RGBA(169, 169, 169,.55)
         Height: =1048
-        Visible: =varLoading_T
+        Visible: =_varLoading_T
         Width: =640
         Y: =88
         ZIndex: =19
@@ -1053,8 +1047,11 @@
             DisabledFill: =RGBA(244, 244, 244, 1)
             Height: =45
             Image: ='clear-filter-icon'
-            OnSelect: |-
-                =Set(_varLoading,true);
+            OnSelect: |
+                =Set(
+                    _varLoading,
+                    true
+                );
                 Reset(gerenciaComboBox);
                 Reset(tipoComboBox);
                 Reset(codigoSIOMTextSearchBox);
@@ -1065,7 +1062,10 @@
                 Reset(faseComboBox);
                 Reset(numeroSerieTextSearchBox);
                 Reset(fabricanteTextSearchBox);
-                Set(_varLoading,false);
+                Set(
+                    _varLoading,
+                    false
+                );
             Tooltip: ="Clique para limpar todos os filtros de pesquisa"
             Visible: |-
                 =(codigoSIOMTextSearchBox.Text <> "" || identificacaoTextSearchBox.Text <> "" || !IsBlank(gerenciaComboBox.Selected.Result) || !IsBlank(localizacaoComboBox.Selected.Result) || !IsBlank(tipoComboBox.Selected.Result) || !IsBlank(faseComboBox.SelectedItems) 
@@ -1084,8 +1084,11 @@
             Height: =45
             HoverColor: =RGBA(255, 255, 255, 1)
             HoverFill: =
-            OnSelect: |-
-                =Set(_varLoading,true);
+            OnSelect: |
+                =Set(
+                    _varLoading,
+                    true
+                );
                 Reset(gerenciaComboBox);
                 Reset(tipoComboBox);
                 Reset(codigoSIOMTextSearchBox);
@@ -1096,7 +1099,10 @@
                 Reset(faseComboBox);
                 Reset(numeroSerieTextSearchBox);
                 Reset(fabricanteTextSearchBox);
-                Set(_varLoading,false);
+                Set(
+                    _varLoading,
+                    false
+                );
             PressedFill: =
             Size: =24
             Text: =""

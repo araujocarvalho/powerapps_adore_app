@@ -55,7 +55,7 @@
         DisabledFill: =RGBA(244, 244, 244, 1)
         DisplayMode: |-
             =If(
-                _varLoading,
+                _varLoading_G || _varLoading_T,
                 DisplayMode.Disabled,
                 DisplayMode.Edit
             )
@@ -470,12 +470,7 @@
             BorderColor: =RGBA(135, 190, 82, 1)
             DisabledBorderColor: =RGBA(166, 166, 166, 1)
             DisabledFill: =RGBA(0, 0, 0, 0)
-            DisplayMode: |-
-                =If(
-                    _varLoading,
-                    DisplayMode.Disabled,
-                    DisplayMode.Edit
-                )
+            DisplayMode: =If( _varLoading_G || _varLoading_T,DisplayMode.Disabled,Edit)
             Height: =240
             Image: ='QR CODE - LINKEDIN'
             OnSelect: =Select(barCodeScanner)
@@ -487,9 +482,10 @@
 
         invisibleButton As button:
             Color: =RGBA(0, 0, 0, 1)
-            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
             DisabledColor: =RGBA(0, 0, 0, 0)
             DisabledFill: =RGBA(0, 0, 0, 0)
+            DisplayMode: =If( _varLoading_G || _varLoading_T,DisplayMode.Disabled,Edit)
             Fill: =RGBA(0, 0, 0, 0)
             FontWeight: =FontWeight.Semibold
             Height: =249

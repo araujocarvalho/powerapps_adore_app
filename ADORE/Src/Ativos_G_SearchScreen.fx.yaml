@@ -3,8 +3,8 @@
     LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
     OnVisible: |-
         =If(
-            !_varLoaded_ativos_G || _varAtivo_G_WasEdited,
-            UpdateContext({varLoading_G: true});
+            _varAtivo_G_WasEdited,
+            Set(_varLoading_G, true);
             Refresh(ativos_AG_v1);
             //Divide a busca dos ativos em subcoleções provisórias que rodam no servidor simultaneamente, otimizando o processamento
             Concurrent(
@@ -85,15 +85,6 @@
                 colAtivos_G_provisorio_7,
                 colAtivos_G_provisorio_8
             );
-            //Limpa coleções provisórias
-            Clear(colAtivos_G_provisorio_1);
-            Clear(colAtivos_G_provisorio_2);
-            Clear(colAtivos_G_provisorio_3);
-            Clear(colAtivos_G_provisorio_4);
-            Clear(colAtivos_G_provisorio_5);
-            Clear(colAtivos_G_provisorio_6);
-            Clear(colAtivos_G_provisorio_7);
-            Clear(colAtivos_G_provisorio_8);
             ClearCollect(
                 colGerencias_G,
                 Sort(
@@ -131,12 +122,16 @@
                 _varAtivo_G_WasEdited,
                 false
             );
-            Set(
-                _varLoaded_ativos_G,
-                true
-            );
-            UpdateContext({varLoading_G: false});
-            
+            Set(_varLoading_G, false);
+            //Limpa coleções provisórias
+            Clear(colAtivos_G_provisorio_1);
+            Clear(colAtivos_G_provisorio_2);
+            Clear(colAtivos_G_provisorio_3);
+            Clear(colAtivos_G_provisorio_4);
+            Clear(colAtivos_G_provisorio_5);
+            Clear(colAtivos_G_provisorio_6);
+            Clear(colAtivos_G_provisorio_7);
+            Clear(colAtivos_G_provisorio_8);
         )
 
     Rectangle11_5 As rectangle:
@@ -776,7 +771,7 @@
         DisabledFill: =RGBA(244, 244, 244, 1)
         Height: =91
         Image: ='_21_loading-gif-transparent-background_All-Loading-Gif-Image-Transparent-Background-Best-Studio-'
-        Visible: =varLoading_G
+        Visible: =_varLoading_G
         Width: =151
         X: =244
         Y: =769
@@ -786,7 +781,7 @@
         BorderColor: =RGBA(135, 190, 82, 1)
         Fill: =RGBA(169, 169, 169,.55)
         Height: =1048
-        Visible: =varLoading_G
+        Visible: =_varLoading_G
         Width: =640
         Y: =88
         ZIndex: =19
