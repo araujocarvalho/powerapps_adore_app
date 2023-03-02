@@ -59,7 +59,7 @@
 
     ativoForm As form:
         BorderColor: =RGBA(135, 190, 82, 1)
-        DataSource: =ativos_AT_v3
+        DataSource: =colAtivos_T
         Height: =302
         Item: =varAtivoEdit
         OnSuccess: |-

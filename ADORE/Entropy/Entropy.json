@@ -806,7 +806,7 @@
   },
   "FunctionParamsInvariantScripts": {},
   "FunctionParamsInvariantScriptsOnInstances": {},
-  "HeaderLastSavedDateTimeUTC": "03/02/2023 13:19:45",
+  "HeaderLastSavedDateTimeUTC": "03/02/2023 13:58:47",
   "IsLegacyComponentAllowGlobalScopeCase": false,
   "LocalConnectionIDReferences": {
     "30faf61f-b0dc-41f2-b83f-3e37349e72b5": "\"/providers/microsoft.powerapps/apis/shared_office365groups/connections/f97eb7fdee974b52aa7bc957a0486f4f\"",
@@ -874,17 +874,16 @@
     "colAtivos_G_provisorio_7": 48,
     "colAtivos_G_provisorio_8": 47,
     "colAtivos_T": 41,
-    "colAtivos_T_provisorio": 55,
-    "colAtivos_T_provisorio_1": 65,
-    "colAtivos_T_provisorio_10": 56,
-    "colAtivos_T_provisorio_2": 64,
-    "colAtivos_T_provisorio_3": 63,
-    "colAtivos_T_provisorio_4": 62,
-    "colAtivos_T_provisorio_5": 61,
-    "colAtivos_T_provisorio_6": 60,
-    "colAtivos_T_provisorio_7": 59,
-    "colAtivos_T_provisorio_8": 58,
-    "colAtivos_T_provisorio_9": 57,
+    "colAtivos_T_provisorio_1": 64,
+    "colAtivos_T_provisorio_10": 55,
+    "colAtivos_T_provisorio_2": 63,
+    "colAtivos_T_provisorio_3": 62,
+    "colAtivos_T_provisorio_4": 61,
+    "colAtivos_T_provisorio_5": 60,
+    "colAtivos_T_provisorio_6": 59,
+    "colAtivos_T_provisorio_7": 58,
+    "colAtivos_T_provisorio_8": 57,
+    "colAtivos_T_provisorio_9": 56,
     "colCarrossel": 39,
     "colExportExcel": 32,
     "colFabricantes": 36,
@@ -2762,7 +2761,7 @@
       "typedDataCard": 60
     },
     "DeserializationLoadTime": 3.5491668,
-    "ErrorCount": 17
+    "ErrorCount": 14
   },
   "WasLocalDatabaseReferencesEmpty": true
 }

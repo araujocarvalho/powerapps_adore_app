@@ -9,347 +9,77 @@
             Concurrent(
                 ClearCollect(
                     colAtivos_T_provisorio_1,
-                    ShowColumns(
-                        Filter(
-                            ativos_AT_v3,
-                            ID_ESPELHO >= 1 && ID_ESPELHO < 2000
-                        ),
-                        "field_1",
-                        "field_2",
-                        "field_3",
-                        "field_5",
-                        "field_6",
-                        "field_7",
-                        "field_8",
-                        "field_9",
-                        "field_10",
-                        "field_11",
-                        "field_12",
-                        "field_13",
-                        "field_14",
-                        "field_15",
-                        "field_16",
-                        "field_17",
-                        "field_18",
-                        "field_19",
-                        "field_20",
-                        "field_21",
-                        "field_22",
-                        "ativo_tem_acidente",
-                        "ID_pasta_DGT_ativos",
-                        "ativo_link_transmissaoQA",
-                        "ID_pasta_transmissaoQA"
+                    Filter(
+                        ativos_AT_v3,
+                        ID_ESPELHO >= 1 && ID_ESPELHO < 2000
                     )
                 ),
                 ClearCollect(
                     colAtivos_T_provisorio_2,
-                    ShowColumns(
-                        Filter(
-                            ativos_AT_v3,
-                            ID_ESPELHO >= 2000 && ID_ESPELHO < 4000
-                        ),
-                        "field_1",
-                        "field_2",
-                        "field_3",
-                        "field_5",
-                        "field_6",
-                        "field_7",
-                        "field_8",
-                        "field_9",
-                        "field_10",
-                        "field_11",
-                        "field_12",
-                        "field_13",
-                        "field_14",
-                        "field_15",
-                        "field_16",
-                        "field_17",
-                        "field_18",
-                        "field_19",
-                        "field_20",
-                        "field_21",
-                        "field_22",
-                        "ativo_tem_acidente",
-                        "ID_pasta_DGT_ativos",
-                        "ativo_link_transmissaoQA",
-                        "ID_pasta_transmissaoQA"
+                    Filter(
+                        ativos_AT_v3,
+                        ID_ESPELHO >= 2000 && ID_ESPELHO < 4000
                     )
                 ),
                 ClearCollect(
                     colAtivos_T_provisorio_3,
-                    ShowColumns(
-                        Filter(
-                            ativos_AT_v3,
-                            ID_ESPELHO >= 4000 && ID_ESPELHO < 6000
-                        ),
-                        "field_1",
-                        "field_2",
-                        "field_3",
-                        "field_5",
-                        "field_6",
-                        "field_7",
-                        "field_8",
-                        "field_9",
-                        "field_10",
-                        "field_11",
-                        "field_12",
-                        "field_13",
-                        "field_14",
-                        "field_15",
-                        "field_16",
-                        "field_17",
-                        "field_18",
-                        "field_19",
-                        "field_20",
-                        "field_21",
-                        "field_22",
-                        "ativo_tem_acidente",
-                        "ID_pasta_DGT_ativos",
-                        "ativo_link_transmissaoQA",
-                        "ID_pasta_transmissaoQA"
+                    Filter(
+                        ativos_AT_v3,
+                        ID_ESPELHO >= 4000 && ID_ESPELHO < 6000
                     )
                 ),
                 ClearCollect(
                     colAtivos_T_provisorio_4,
-                    ShowColumns(
-                        Filter(
-                            ativos_AT_v3,
-                            ID_ESPELHO >= 6000 && ID_ESPELHO < 8000
-                        ),
-                        "field_1",
-                        "field_2",
-                        "field_3",
-                        "field_5",
-                        "field_6",
-                        "field_7",
-                        "field_8",
-                        "field_9",
-                        "field_10",
-                        "field_11",
-                        "field_12",
-                        "field_13",
-                        "field_14",
-                        "field_15",
-                        "field_16",
-                        "field_17",
-                        "field_18",
-                        "field_19",
-                        "field_20",
-                        "field_21",
-                        "field_22",
-                        "ativo_tem_acidente",
-                        "ID_pasta_DGT_ativos",
-                        "ativo_link_transmissaoQA",
-                        "ID_pasta_transmissaoQA"
+                    Filter(
+                        ativos_AT_v3,
+                        ID_ESPELHO >= 6000 && ID_ESPELHO < 8000
                     )
                 ),
                 ClearCollect(
                     colAtivos_T_provisorio_5,
-                    ShowColumns(
-                        Filter(
-                            ativos_AT_v3,
-                            ID_ESPELHO >= 8000 && ID_ESPELHO < 10000
-                        ),
-                        "field_1",
-                        "field_2",
-                        "field_3",
-                        "field_5",
-                        "field_6",
-                        "field_7",
-                        "field_8",
-                        "field_9",
-                        "field_10",
-                        "field_11",
-                        "field_12",
-                        "field_13",
-                        "field_14",
-                        "field_15",
-                        "field_16",
-                        "field_17",
-                        "field_18",
-                        "field_19",
-                        "field_20",
-                        "field_21",
-                        "field_22",
-                        "ativo_tem_acidente",
-                        "ID_pasta_DGT_ativos",
-                        "ativo_link_transmissaoQA",
-                        "ID_pasta_transmissaoQA"
+                    Filter(
+                        ativos_AT_v3,
+                        ID_ESPELHO >= 8000 && ID_ESPELHO < 10000
                     )
                 ),
                 ClearCollect(
                     colAtivos_T_provisorio_6,
-                    ShowColumns(
-                        Filter(
-                            ativos_AT_v3,
-                            ID_ESPELHO >= 10000 && ID_ESPELHO < 12000
-                        ),
-                        "field_1",
-                        "field_2",
-                        "field_3",
-                        "field_5",
-                        "field_6",
-                        "field_7",
-                        "field_8",
-                        "field_9",
-                        "field_10",
-                        "field_11",
-                        "field_12",
-                        "field_13",
-                        "field_14",
-                        "field_15",
-                        "field_16",
-                        "field_17",
-                        "field_18",
-                        "field_19",
-                        "field_20",
-                        "field_21",
-                        "field_22",
-                        "ativo_tem_acidente",
-                        "ID_pasta_DGT_ativos",
-                        "ativo_link_transmissaoQA",
-                        "ID_pasta_transmissaoQA"
+                    Filter(
+                        ativos_AT_v3,
+                        ID_ESPELHO >= 10000 && ID_ESPELHO < 12000
                     )
                 ),
                 ClearCollect(
                     colAtivos_T_provisorio_7,
-                    ShowColumns(
-                        Filter(
-                            ativos_AT_v3,
-                            ID_ESPELHO >= 12000 && ID_ESPELHO < 14000
-                        ),
-                        "field_1",
-                        "field_2",
-                        "field_3",
-                        "field_5",
-                        "field_6",
-                        "field_7",
-                        "field_8",
-                        "field_9",
-                        "field_10",
-                        "field_11",
-                        "field_12",
-                        "field_13",
-                        "field_14",
-                        "field_15",
-                        "field_16",
-                        "field_17",
-                        "field_18",
-                        "field_19",
-                        "field_20",
-                        "field_21",
-                        "field_22",
-                        "ativo_tem_acidente",
-                        "ID_pasta_DGT_ativos",
-                        "ativo_link_transmissaoQA",
-                        "ID_pasta_transmissaoQA"
+                    Filter(
+                        ativos_AT_v3,
+                        ID_ESPELHO >= 12000 && ID_ESPELHO < 14000
                     )
                 ),
                 ClearCollect(
                     colAtivos_T_provisorio_8,
-                    ShowColumns(
-                        Filter(
-                            ativos_AT_v3,
-                            ID_ESPELHO >= 14000 && ID_ESPELHO < 16000
-                        ),
-                        "field_1",
-                        "field_2",
-                        "field_3",
-                        "field_5",
-                        "field_6",
-                        "field_7",
-                        "field_8",
-                        "field_9",
-                        "field_10",
-                        "field_11",
-                        "field_12",
-                        "field_13",
-                        "field_14",
-                        "field_15",
-                        "field_16",
-                        "field_17",
-                        "field_18",
-                        "field_19",
-                        "field_20",
-                        "field_21",
-                        "field_22",
-                        "ativo_tem_acidente",
-                        "ID_pasta_DGT_ativos",
-                        "ativo_link_transmissaoQA",
-                        "ID_pasta_transmissaoQA"
+                    Filter(
+                        ativos_AT_v3,
+                        ID_ESPELHO >= 14000 && ID_ESPELHO < 16000
                     )
                 ),
                 ClearCollect(
                     colAtivos_T_provisorio_9,
-                    ShowColumns(
-                        Filter(
-                            ativos_AT_v3,
-                            ID_ESPELHO >= 16000 && ID_ESPELHO < 18000
-                        ),
-                        "field_1",
-                        "field_2",
-                        "field_3",
-                        "field_5",
-                        "field_6",
-                        "field_7",
-                        "field_8",
-                        "field_9",
-                        "field_10",
-                        "field_11",
-                        "field_12",
-                        "field_13",
-                        "field_14",
-                        "field_15",
-                        "field_16",
-                        "field_17",
-                        "field_18",
-                        "field_19",
-                        "field_20",
-                        "field_21",
-                        "field_22",
-                        "ativo_tem_acidente",
-                        "ID_pasta_DGT_ativos",
-                        "ativo_link_transmissaoQA",
-                        "ID_pasta_transmissaoQA"
+                    Filter(
+                        ativos_AT_v3,
+                        ID_ESPELHO >= 16000 && ID_ESPELHO < 18000
                     )
                 ),
                 ClearCollect(
                     colAtivos_T_provisorio_10,
-                    ShowColumns(
-                        Filter(
-                            ativos_AT_v3,
-                            ID_ESPELHO >= 18000 && ID_ESPELHO < 20000
-                        ),
-                        "field_1",
-                        "field_2",
-                        "field_3",
-                        "field_5",
-                        "field_6",
-                        "field_7",
-                        "field_8",
-                        "field_9",
-                        "field_10",
-                        "field_11",
-                        "field_12",
-                        "field_13",
-                        "field_14",
-                        "field_15",
-                        "field_16",
-                        "field_17",
-                        "field_18",
-                        "field_19",
-                        "field_20",
-                        "field_21",
-                        "field_22",
-                        "ativo_tem_acidente",
-                        "ID_pasta_DGT_ativos",
-                        "ativo_link_transmissaoQA",
-                        "ID_pasta_transmissaoQA"
+                    Filter(
+                        ativos_AT_v3,
+                        ID_ESPELHO >= 18000 && ID_ESPELHO < 20000
                     )
                 )
             );
             ClearCollect(
-                colAtivos_T_provisorio,
+                colAtivos_T,
                 colAtivos_T_provisorio_1,
                 colAtivos_T_provisorio_2,
                 colAtivos_T_provisorio_3,
@@ -361,69 +91,17 @@
                 colAtivos_T_provisorio_9,
                 colAtivos_T_provisorio_10
             );
+            Clear(colAtivos_T_provisorio_1);
+            Clear(colAtivos_T_provisorio_2);
+            Clear(colAtivos_T_provisorio_3);
+            Clear(colAtivos_T_provisorio_4);
+            Clear(colAtivos_T_provisorio_5);
+            Clear(colAtivos_T_provisorio_6);
+            Clear(colAtivos_T_provisorio_7);
+            Clear(colAtivos_T_provisorio_8);
+            Clear(colAtivos_T_provisorio_9);
+            Clear(colAtivos_T_provisorio_10);
             ClearCollect(
-                colAtivos_T,
-                RenameColumns(
-                    colAtivos_T_provisorio,
-                    "field_1",
-                    "ID_ESPELHO",
-                    "field_2",
-                    "ativo_SIOM",
-                    "field_3",
-                    "ativo_link_novo",
-                    "field_5",
-                    "ativo_gerencia",
-                    "field_6",
-                    "ativo_local_nome",
-                    "field_7",
-                    "ativo_local_instalacao_FT",
-                    "field_8",
-                    "ativo_tipo",
-                    "field_9",
-                    "ativo_denominacao",
-                    "field_10",
-                    "ativo_local_instalacao",
-                    "field_11",
-                    "ativo_funcao_desempenhada",
-                    "field_12",
-                    "ativo_fabricante",
-                    "field_13",
-                    "ativo_modelo",
-                    "field_14",
-                    "ativo_numero_serie",
-                    "field_15",
-                    "ativo_nome",
-                    "field_16",
-                    "ativo_centro_trab_responsavel",
-                    "field_17",
-                    "ativo_ano_fabricacao",
-                    "field_18",
-                    "ativo_data_entrada_servico",
-                    "field_19",
-                    "ativo_tipo_sigla",
-                    "field_20",
-                    "ativo_status_SAP_1",
-                    "field_21",
-                    "ativo_status_SAP_2",
-                    "field_22",
-                    "ativo_tamanho",
-                    "ID_pasta_DGT_ativos",
-                    "ID_pasta_sharepoint"
-                )
-            );
-            
-        //Clear(colAtivos_T_provisorio);;
-        //Clear(colAtivos_T_provisorio_1);;
-        //Clear(colAtivos_T_provisorio_2);;
-        //Clear(colAtivos_T_provisorio_3);;
-        //Clear(colAtivos_T_provisorio_4);;
-        //Clear(colAtivos_T_provisorio_5);;
-        //Clear(colAtivos_T_provisorio_6);;
-        //Clear(colAtivos_T_provisorio_7);;
-        //Clear(colAtivos_T_provisorio_8);;
-        //Clear(colAtivos_T_provisorio_9);;
-        //Clear(colAtivos_T_provisorio_10);;
-        ClearCollect(
                 colGerencias_T,
                 Sort(
                     Distinct(

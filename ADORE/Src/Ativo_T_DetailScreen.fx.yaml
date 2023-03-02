@@ -61,7 +61,7 @@
         docFormViewer As formViewer:
             AcceptsFocus: =false
             BorderColor: =RGBA(135, 190, 82, 1)
-            DataSource: =ativos_AT_v3
+            DataSource: =colAtivos_T
             FillPortions: =0
             Height: =238
             Item: =varAtivoT
@@ -380,7 +380,7 @@
         DetailForm As formViewer:
             AcceptsFocus: =false
             BorderColor: =RGBA(135, 190, 82, 1)
-            DataSource: =[@ativos_AT_v3]
+            DataSource: =colAtivos_T
             Height: =723
             Item: =varAtivoT
             LayoutMinHeight: =250
