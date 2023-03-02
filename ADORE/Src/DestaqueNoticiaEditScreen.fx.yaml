@@ -16,45 +16,36 @@
             colGroups,
             {displayName: ""}
         );
+        UpdateContext({varColGroupsLoading:true});
         If(
             !varIsEdit,
-            Collect(
-                colGroups,
-                GruposdoOffice365.ListGroupMembers("07982123-b734-4e3e-b0e6-2bad93048e27").value//LPAT - Emp. AT
+            ForAll(
+                GruposdoOffice365.ListGroupMembers("6a175f73-e11b-48d2-b616-da4041fe8805").value,//LPDGT
+                Collect(
+                    colGroups,
+                    GruposdoOffice365.ListGroupMembers(id).value
+                );
+                If(StartsWith(displayName,"LPA"),ForAll(
+                    GruposdoOffice365.ListGroupMembers(id).value,
+                    Collect(
+                        colGroups,
+                        GruposdoOffice365.ListGroupMembers(id).value
+                    )
+                ));
             );
             Collect(
                 colGroups,
                 Filter(
-                    GruposdoOffice365.ListGroupMembers("6a175f73-e11b-48d2-b616-da4041fe8805").value,
-                    ("AT" in displayName) || ("AG" in displayName)
-                )//LPDGT - Emp. DGT
+                    GruposdoOffice365.ListGroupMembers("2dcb3457-f27a-4833-83ef-504252f510e5").value,//LPFROTA
+                    "LPAG/" in displayName
+                )
             );
             Collect(
                 colGroups,
                 Filter(
-                    GruposdoOffice365.ListGroupMembers("2dcb3457-f27a-4833-83ef-504252f510e5").value,
-                    "AT/CN" in displayName
-                )//LPFROTA
-            );
-            Collect(
-                colGroups,
-                GruposdoOffice365.ListGroupMembers("7b67f568-9367-4ec5-9c48-2c044dede1b4").value//LPAT/CN - Emp. AT/CN
-            );
-            Collect(
-                colGroups,
-                GruposdoOffice365.ListGroupMembers("cbba490f-3314-4462-a3bb-b5c7ad797fe2").value//LPAT/SE - Emp. AT/SE
-            );
-            Collect(
-                colGroups,
-                GruposdoOffice365.ListGroupMembers("53696eb5-74b8-40dd-b515-9883fa7b89bf").value//LPAT/TR - Emp. AT/TR
-            );
-            Collect(
-                colGroups,
-                GruposdoOffice365.ListGroupMembers("f3002375-9da7-4720-9c55-206749978898").value//LPAT/LE - Emp. AT/LE
-            );
-            Collect(
-                colGroups,
-                GruposdoOffice365.ListGroupMembers("b8184e63-ad68-4969-924c-c3c39dd2cbe3").value//LPAT/CP - Emp. AT/CP
+                    GruposdoOffice365.ListGroupMembers("2dcb3457-f27a-4833-83ef-504252f510e5").value,//LPFROTA
+                    "LPAT/" in displayName
+                )
             );
             UpdateContext(
                 {
@@ -64,6 +55,7 @@
                 }
             )
         );
+        UpdateContext({varColGroupsLoading:false});
         ClearCollect(
             colFabricantes,
             Sort(
@@ -1610,7 +1602,7 @@
                     Height: =52
                     HoverColor: =RGBA(255, 255, 255, 1)
                     HoverFill: =RGBA(53, 74, 36, 1)
-                    InputTextPlaceholder: ="Enviar e-mail para"
+                    InputTextPlaceholder: =If(varColGroupsLoading,"Enviar e-mail para (Carregando e-mails, aguarde... )","Enviar e-mail para")
                     Items: =Sort(colGroups,displayName,Ascending)
                     LayoutMinHeight: =70
                     LayoutMinWidth: =575
