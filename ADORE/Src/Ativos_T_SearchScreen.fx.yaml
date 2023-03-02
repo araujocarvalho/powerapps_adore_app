@@ -78,6 +78,7 @@
                     )
                 )
             );
+            //Junta as coleções em colAtivos_T
             ClearCollect(
                 colAtivos_T,
                 colAtivos_T_provisorio_1,
@@ -91,6 +92,7 @@
                 colAtivos_T_provisorio_9,
                 colAtivos_T_provisorio_10
             );
+            //Limpa as coleções provisórias
             Clear(colAtivos_T_provisorio_1);
             Clear(colAtivos_T_provisorio_2);
             Clear(colAtivos_T_provisorio_3);
