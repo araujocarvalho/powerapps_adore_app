@@ -2,7 +2,11 @@
     LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
     OnHidden: =
     OnVisible: |-
-        =UpdateContext({varRefreshGifVisible: true});
+        =Set(
+            _varOnMobile,
+            !IsBlank(Acceleration.X)
+        );
+        UpdateContext({varRefreshGifVisible: true});
         UpdateContext({varSideMenuVisible: false});
         UpdateContext({varOrgao: UsuáriosdoOffice365.UserProfile(User().Email).Department});
         UpdateContext({varAlertIconVisible: false});
