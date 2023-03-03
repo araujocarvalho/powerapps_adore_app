@@ -12,7 +12,9 @@
         UpdateContext({varAlertIconVisible: false});
         UpdateContext({varCarrosselIndex: 1});
         UpdateContext({varCarrosselTimerStart: true});
+        UpdateContext({varSubmenuTimerStart: false});
         UpdateContext({varSubmenuAtivosVisible: false});
+        UpdateContext({varSubmenuIndicadoresVisible: false});
         ClearCollect(
             colCarrossel,
             ShowColumns(
@@ -262,7 +264,15 @@
         HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
         Italic: =true
         OnSelect: |-
-            =UpdateContext({varSubmenuAtivosVisible: !varSubmenuAtivosVisible})
+            =Reset(subMenuTimer);
+            UpdateContext({varSubmenuTimerStart: false});
+            UpdateContext(
+                {
+                    varSubmenuAtivosVisible: !varSubmenuAtivosVisible,
+                    varSubmenuIndicadoresVisible: false,
+                    varSubmenuTimerStart: true
+                }
+            )
         PaddingLeft: =10
         PaddingRight: =1
         PaddingTop: =1
@@ -363,7 +373,15 @@
             HoverColor: =RGBA(255, 255, 255, 1)
             HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
             OnSelect: |-
-                =Launch("https://app.powerbi.com/reportEmbed?reportId=5a9ea2bf-ae5a-48fc-91d6-2fe0d1fd657b&autoAuth=true&ctid=97ce2340-9c1d-45b1-a835-7ea811b6fe9a&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWJyYXppbC1zb3V0aC1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D")
+                =Reset(subMenuTimer);
+                UpdateContext({varSubmenuTimerStart: false});
+                UpdateContext(
+                    {
+                        varSubmenuIndicadoresVisible: !varSubmenuIndicadoresVisible,
+                        varSubmenuAtivosVisible: false,
+                        varSubmenuTimerStart: true
+                    }
+                )
             PaddingRight: =85
             RadiusBottomLeft: =40
             RadiusBottomRight: =40
@@ -384,7 +402,15 @@
             DisabledColor: =RGBA(244, 244, 244, 1)
             Icon: =Icon.Trending
             OnSelect: |-
-                =Launch("https://app.powerbi.com/reportEmbed?reportId=5a9ea2bf-ae5a-48fc-91d6-2fe0d1fd657b&autoAuth=true&ctid=97ce2340-9c1d-45b1-a835-7ea811b6fe9a&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWJyYXppbC1zb3V0aC1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D")
+                =Reset(subMenuTimer);
+                UpdateContext({varSubmenuTimerStart: false});
+                UpdateContext(
+                    {
+                        varSubmenuIndicadoresVisible: !varSubmenuIndicadoresVisible,
+                        varSubmenuAtivosVisible: false,
+                        varSubmenuTimerStart: true
+                    }
+                )
             Tooltip: ="Clique para abrir o BI de indicadores estratégicos da AT"
             Width: =37
             X: =172
@@ -671,7 +697,7 @@
         Width: =555
         X: =85
         Y: =88
-        ZIndex: =28
+        ZIndex: =30
 
         blankLabel As label:
             Align: =Align.Center
@@ -1278,23 +1304,6 @@
             Y: =40
             ZIndex: =21
 
-    errorMessageTimer As timer:
-        Duration: =3000
-        Fill: =RGBA(12, 126, 44, 1)
-        Height: =70
-        HoverColor: =RGBA(255, 255, 255, 1)
-        HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
-        OnTimerEnd: |-
-            =UpdateContext({varAlertIconVisible: false, varStartTimer: false})
-        OnTimerStart: |-
-            =UpdateContext({varAlertIconVisible: true})
-        Start: =varStartTimer
-        Visible: =false
-        Width: =280
-        X: =-300
-        Y: =315
-        ZIndex: =35
-
     carrosselImageGroup As group:
         Height: =5
         Width: =5
@@ -1343,23 +1352,22 @@
             Y: =841
             ZIndex: =21
 
-    carrosselTimer As timer:
-        AutoPause: =false
-        AutoStart: =true
-        Duration: =8000
+    errorMessageTimer As timer:
+        Duration: =3000
         Fill: =RGBA(12, 126, 44, 1)
         Height: =70
         HoverColor: =RGBA(255, 255, 255, 1)
         HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
         OnTimerEnd: |-
-            =UpdateContext({varCarrosselIndex:If(varCarrosselIndex=CountRows(colCarrossel),1,varCarrosselIndex+1)})
-        Repeat: =true
-        Start: =varCarrosselTimerStart
+            =UpdateContext({varAlertIconVisible: false, varStartTimer: false})
+        OnTimerStart: |-
+            =UpdateContext({varAlertIconVisible: true})
+        Start: =varStartTimer
         Visible: =false
         Width: =280
         X: =-300
-        Y: =334
-        ZIndex: =36
+        Y: =315
+        ZIndex: =37
 
     subMenuAtivos As group:
         Height: =5
@@ -1368,7 +1376,7 @@
         Y: =60
         ZIndex: =37
 
-        subMenuBackButton As button:
+        subMenuAtivosBackButton As button:
             BorderColor: =RGBA(39, 113, 194, 1)
             DisabledBorderColor: =RGBA(166, 166, 166, 1)
             DisabledColor: =RGBA(166, 166, 166, 1)
@@ -1385,7 +1393,7 @@
             Width: =205
             X: =332
             Y: =242
-            ZIndex: =29
+            ZIndex: =31
 
         ativosGTContainer As groupContainer.verticalAutoLayoutContainer:
             Height: =96
@@ -1397,7 +1405,7 @@
             Width: =205
             X: =332
             Y: =242
-            ZIndex: =30
+            ZIndex: =32
 
             ativos_G_Button As button:
                 Align: =Align.Left
@@ -1471,6 +1479,44 @@
                 Width: =200
                 ZIndex: =2
 
+    carrosselTimer As timer:
+        AutoPause: =false
+        AutoStart: =true
+        Duration: =8000
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =70
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        OnTimerEnd: |-
+            =UpdateContext({varCarrosselIndex:If(varCarrosselIndex=CountRows(colCarrossel),1,varCarrosselIndex+1)})
+        Repeat: =true
+        Start: =varCarrosselTimerStart
+        Visible: =false
+        Width: =280
+        X: =-300
+        Y: =334
+        ZIndex: =38
+
+    subMenuTimer As timer:
+        Duration: =3000
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =70
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        OnTimerEnd: |-
+            =UpdateContext(
+                {
+                    varSubmenuAtivosVisible: false,
+                    varSubmenuIndicadoresVisible: false
+                }
+            )
+        Start: =varSubmenuTimerStart
+        Visible: =false
+        Width: =280
+        X: =-300
+        Y: =450
+        ZIndex: =39
+
     alertPopUpGroup As group:
         Height: =5
         Width: =5
@@ -1484,7 +1530,7 @@
             Height: =1136
             Visible: =varAlertIconVisible
             Width: =640
-            ZIndex: =31
+            ZIndex: =33
 
         alertPopUpRectangle As rectangle:
             BorderColor: =RGBA(166, 166, 166, 1)
@@ -1495,7 +1541,7 @@
             Width: =605
             X: =17
             Y: =485
-            ZIndex: =32
+            ZIndex: =34
 
         alertIcon As icon.Warning:
             BorderColor: =RGBA(135, 190, 82, 1)
@@ -1509,7 +1555,7 @@
             Width: =73
             X: =283
             Y: =626
-            ZIndex: =33
+            ZIndex: =35
 
         errorMessageLabel As label:
             Align: =Align.Center
@@ -1536,5 +1582,97 @@
             Width: =579
             X: =30
             Y: =504
-            ZIndex: =34
+            ZIndex: =36
+
+    subMenuIndicadores As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =39
+
+        subMenuIndicadoresBackButton As button:
+            BorderColor: =RGBA(39, 113, 194, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            DisplayMode: =DisplayMode.Disabled
+            Fill: =RGBA(237, 237, 237, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =96
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+            Size: =24
+            Text: =""
+            Visible: =varSubmenuIndicadoresVisible
+            Width: =205
+            X: =217
+            Y: =678
+            ZIndex: =28
+
+        indicadoresGTContainer As groupContainer.verticalAutoLayoutContainer:
+            Height: =96
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMode: =LayoutMode.Auto
+            Visible: =varSubmenuIndicadoresVisible
+            Width: =205
+            X: =217
+            Y: =678
+            ZIndex: =29
+
+            indicadores_AG_Button As button:
+                Align: =Align.Left
+                BorderColor: =RGBA(39, 113, 194, 1)
+                BorderThickness: =0
+                Color: =RGBA(0, 134, 208, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(237, 237, 237, 1)
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Lighter
+                Height: =45
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+                Italic: =true
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: |-
+                    =UpdateContext({varSubmenuIndicadoresVisible: false});
+                    Launch("https://app.powerbi.com/groups/me/apps/fa8972ac-0b63-4f1a-8b67-a019fc922194/reports/d0f976a3-8f18-48d8-a2bb-d67e55dbe83e/ReportSection068fdddbd876477b2497")
+                PaddingLeft: =20
+                Size: =20
+                Text: ="• AG"
+                Visible: =varSubmenuIndicadoresVisible
+                Width: =200
+                ZIndex: =1
+
+            indicadores_AT_Button As button:
+                Align: =Align.Left
+                BorderColor: =RGBA(39, 113, 194, 1)
+                BorderThickness: =0
+                Color: =RGBA(0, 134, 208, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(237, 237, 237, 1)
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Lighter
+                Height: =45
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+                Italic: =true
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: |-
+                    =UpdateContext({varSubmenuIndicadoresVisible: false});
+                    Launch("https://app.powerbi.com/reportEmbed?reportId=5a9ea2bf-ae5a-48fc-91d6-2fe0d1fd657b&autoAuth=true&ctid=97ce2340-9c1d-45b1-a835-7ea811b6fe9a&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWJyYXppbC1zb3V0aC1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D")
+                PaddingLeft: =20
+                Size: =20
+                Text: ="• AT"
+                Visible: =varSubmenuIndicadoresVisible
+                Width: =200
+                ZIndex: =2
 
