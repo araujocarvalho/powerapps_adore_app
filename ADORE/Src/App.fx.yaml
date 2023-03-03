@@ -6,6 +6,10 @@ App As appinfo:
             true
         );
         Set(
+            _varOnMobile,
+            !IsBlank(Acceleration.X)
+        );
+        Set(
             _varJaMostrouDicaDestaque,
             false
         );
