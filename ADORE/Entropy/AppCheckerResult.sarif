@@ -637,19 +637,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAvancadaAtivosContainer.lupaIcon2.AccessibleLabel"
+                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAtivosContainer.lupaIcon2.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAvancadaAtivosContainer.lupaIcon2.AccessibleLabel",
+                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAtivosContainer.lupaIcon2.AccessibleLabel",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "AccessibleLabel",
                 "module": "HomeScreen",
-                "type": "HomeScreen.sideMenu.buscaAvancadaAtivosContainer.lupaIcon2"
+                "type": "HomeScreen.sideMenu.buscaAtivosContainer.lupaIcon2"
               }
             }
           ],
@@ -667,19 +667,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAvancadaAtivosContainer.lupaIcon2.TabIndex"
+                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAtivosContainer.lupaIcon2.TabIndex"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAvancadaAtivosContainer.lupaIcon2.TabIndex",
+                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAtivosContainer.lupaIcon2.TabIndex",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "TabIndex",
                 "module": "HomeScreen",
-                "type": "HomeScreen.sideMenu.buscaAvancadaAtivosContainer.lupaIcon2"
+                "type": "HomeScreen.sideMenu.buscaAtivosContainer.lupaIcon2"
               }
             }
           ],
@@ -697,19 +697,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAvancadaModelosContainer.lupaIcon2_1.AccessibleLabel"
+                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaModelosContainer.lupaIcon2_1.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAvancadaModelosContainer.lupaIcon2_1.AccessibleLabel",
+                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaModelosContainer.lupaIcon2_1.AccessibleLabel",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "AccessibleLabel",
                 "module": "HomeScreen",
-                "type": "HomeScreen.sideMenu.buscaAvancadaModelosContainer.lupaIcon2_1"
+                "type": "HomeScreen.sideMenu.buscaModelosContainer.lupaIcon2_1"
               }
             }
           ],
@@ -727,19 +727,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAvancadaModelosContainer.lupaIcon2_1.TabIndex"
+                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaModelosContainer.lupaIcon2_1.TabIndex"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAvancadaModelosContainer.lupaIcon2_1.TabIndex",
+                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaModelosContainer.lupaIcon2_1.TabIndex",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "TabIndex",
                 "module": "HomeScreen",
-                "type": "HomeScreen.sideMenu.buscaAvancadaModelosContainer.lupaIcon2_1"
+                "type": "HomeScreen.sideMenu.buscaModelosContainer.lupaIcon2_1"
               }
             }
           ],
@@ -757,19 +757,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAvancadaSubestacoesContainer.lupaIcon2_2.AccessibleLabel"
+                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaSubestacoesContainer.lupaIcon2_2.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAvancadaSubestacoesContainer.lupaIcon2_2.AccessibleLabel",
+                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaSubestacoesContainer.lupaIcon2_2.AccessibleLabel",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "AccessibleLabel",
                 "module": "HomeScreen",
-                "type": "HomeScreen.sideMenu.buscaAvancadaSubestacoesContainer.lupaIcon2_2"
+                "type": "HomeScreen.sideMenu.buscaSubestacoesContainer.lupaIcon2_2"
               }
             }
           ],
@@ -787,19 +787,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAvancadaSubestacoesContainer.lupaIcon2_2.TabIndex"
+                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaSubestacoesContainer.lupaIcon2_2.TabIndex"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaAvancadaSubestacoesContainer.lupaIcon2_2.TabIndex",
+                  "fullyQualifiedName": "HomeScreen.sideMenu.buscaSubestacoesContainer.lupaIcon2_2.TabIndex",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "TabIndex",
                 "module": "HomeScreen",
-                "type": "HomeScreen.sideMenu.buscaAvancadaSubestacoesContainer.lupaIcon2_2"
+                "type": "HomeScreen.sideMenu.buscaSubestacoesContainer.lupaIcon2_2"
               }
             }
           ],

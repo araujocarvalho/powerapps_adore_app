@@ -15,6 +15,8 @@
         UpdateContext({varSubmenuTimerStart: false});
         UpdateContext({varSubmenuAtivosVisible: false});
         UpdateContext({varSubmenuIndicadoresVisible: false});
+        UpdateContext({varSubmenuLateralAtivosVisible: false});
+        UpdateContext({varSubmenuLateralIndicadoresVisible: false});
         ClearCollect(
             colCarrossel,
             ShowColumns(
@@ -154,7 +156,8 @@
             =UpdateContext(
                 {
                     varSideMenuVisible: !varSideMenuVisible,
-                    varSubmenuAtivosVisible: false
+                    varSubmenuAtivosVisible: false,
+                    varSubmenuIndicadoresVisible: false
                 }
             )
         Tooltip: =If(varSideMenuVisible=false,"Expandir menu lateral","Esconder menu lateral")
@@ -389,7 +392,7 @@
             RadiusTopRight: =40
             Size: =24
             Text: ="Indicadores"
-            Tooltip: ="Clique para abrir o BI de indicadores estratégicos da AT"
+            Tooltip: ="Selecione o BI de indicadores desejado"
             Width: =349
             X: =146
             Y: =623
@@ -411,7 +414,7 @@
                         varSubmenuTimerStart: true
                     }
                 )
-            Tooltip: ="Clique para abrir o BI de indicadores estratégicos da AT"
+            Tooltip: ="Selecione o BI de indicadores desejado"
             Width: =37
             X: =172
             Y: =625
@@ -779,10 +782,11 @@
             Y: =40
             ZIndex: =5
 
-        buscaAvancadaAtivosContainer As groupContainer.horizontalAutoLayoutContainer:
+        buscaAtivosContainer As groupContainer.horizontalAutoLayoutContainer:
             FillPortions: =0
-            Height: =70
-            LayoutMinHeight: =112
+            Height: =If(varSubmenuLateralAtivosVisible,170,70)
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =70
             LayoutMinWidth: =250
             LayoutMode: =LayoutMode.Auto
             ZIndex: =6
@@ -791,7 +795,8 @@
                 BorderColor: =RGBA(135, 190, 82, 1)
                 Color: =RGBA(0, 134, 208, 1)
                 DisabledBorderColor: =RGBA(166, 166, 166, 1)
-                DisabledColor: =RGBA(244, 244, 244, 1)
+                DisabledColor: =RGBA(0, 134, 208, 1)
+                DisplayMode: =DisplayMode.Disabled
                 Height: =70
                 Icon: =Icon.Search
                 OnSelect: |-
@@ -800,43 +805,143 @@
                 PaddingLeft: =50
                 PaddingRight: =10
                 PaddingTop: =10
-                Tooltip: ="Clique para fazer uma busca por ativo com filtros específicos"
                 Width: =100
                 X: =202
                 Y: =595
                 ZIndex: =1
 
-            buscaAvancadaAtivosButton As button:
-                Align: =Align.Left
-                BorderColor: =RGBA(0, 0, 0, 0)
-                BorderThickness: =0
-                DisabledBorderColor: =RGBA(166, 166, 166, 1)
-                DisabledColor: =RGBA(166, 166, 166, 1)
-                DisabledFill: =RGBA(244, 244, 244, 1)
-                Fill: =RGBA(0, 0, 0, 0)
-                FillPortions: =1
-                Font: =Font.'Lato Light'
-                FontWeight: =FontWeight.Lighter
-                Height: =70
-                HoverColor: =RGBA(255, 255, 255, 1)
-                HoverFill: =RGBA(0, 0, 0, 0)
+            buscaAtivosContainerVertical As groupContainer.verticalAutoLayoutContainer:
+                Height: =Parent.Height
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutJustifyContent: =LayoutJustifyContent.Center
                 LayoutMinHeight: =70
-                LayoutMinWidth: =280
-                OnSelect: |-
-                    =UpdateContext({varSubmenuAtivosVisible:!varSubmenuAtivosVisible})
-                PaddingBottom: =0
-                PaddingRight: =10
-                PaddingTop: =0
-                PressedFill: =RGBA(0,0,0,0)
-                RadiusBottomLeft: =0
-                RadiusBottomRight: =0
-                RadiusTopLeft: =0
-                RadiusTopRight: =0
-                Size: =22
-                Text: ="Busca - Ativos"
-                Tooltip: ="Clique para fazer uma busca por ativo com filtros específicos"
-                Width: =280
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                Width: =Parent.Width
                 ZIndex: =2
+
+                buscaAtivosButton As button:
+                    Align: =Align.Left
+                    AlignInContainer: =AlignInContainer.Center
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderThickness: =0
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FillPortions: =1
+                    Font: =Font.'Lato Light'
+                    FontWeight: =FontWeight.Lighter
+                    Height: =Parent.Height
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    LayoutMinHeight: =50
+                    LayoutMinWidth: =280
+                    OnSelect: |-
+                        =UpdateContext(
+                            {
+                                varSubmenuLateralAtivosVisible: !varSubmenuLateralAtivosVisible
+                            }
+                        );
+                    PaddingBottom: =0
+                    PaddingRight: =10
+                    PaddingTop: =0
+                    PressedFill: =RGBA(0,0,0,0)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =22
+                    Text: ="Busca - Ativos"
+                    Tooltip: ="Clique para fazer uma busca por ativos da Geração com filtros específicos"
+                    Width: =Parent.Width
+                    ZIndex: =1
+
+                buscaAtivosGeracaoButton As button:
+                    Align: =Align.Left
+                    AlignInContainer: =AlignInContainer.Start
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderThickness: =0
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FillPortions: =1
+                    Font: =Font.'Lato Light'
+                    FontWeight: =FontWeight.Lighter
+                    Height: =70
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    LayoutMinHeight: =50
+                    LayoutMinWidth: =280
+                    OnSelect: |-
+                        =UpdateContext(
+                            {
+                                varRefreshGifVisible: true,
+                                varSubmenuAtivosVisible: false
+                            }
+                        );
+                        Navigate(
+                            Ativos_G_SearchScreen,
+                            ScreenTransition.None
+                        )
+                    PaddingBottom: =0
+                    PaddingRight: =10
+                    PaddingTop: =0
+                    PressedFill: =RGBA(0,0,0,0)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =22
+                    Text: ="• Geração"
+                    Tooltip: ="Clique para fazer uma busca por ativos da Geração com filtros específicos"
+                    Visible: =varSubmenuLateralAtivosVisible
+                    Width: =Parent.Width
+                    ZIndex: =3
+
+                buscaAtivosTransmissaoButton As button:
+                    Align: =Align.Left
+                    AlignInContainer: =AlignInContainer.Start
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderThickness: =0
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FillPortions: =1
+                    Font: =Font.'Lato Light'
+                    FontWeight: =FontWeight.Lighter
+                    Height: =70
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    LayoutMinHeight: =50
+                    LayoutMinWidth: =280
+                    OnSelect: |-
+                        =UpdateContext(
+                            {
+                                varRefreshGifVisible: true,
+                                varSubmenuAtivosVisible: false
+                            }
+                        );
+                        Navigate(
+                            Ativos_T_SearchScreen,
+                            ScreenTransition.None
+                        )
+                    PaddingBottom: =0
+                    PaddingRight: =10
+                    PaddingTop: =0
+                    PressedFill: =RGBA(0,0,0,0)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =22
+                    Text: ="• Transmissão"
+                    Tooltip: ="Clique para fazer uma busca por ativos da Transmissão com filtros específicos"
+                    Visible: =varSubmenuLateralAtivosVisible
+                    Width: =Parent.Width
+                    ZIndex: =4
 
         separador As rectangle:
             BorderColor: =RGBA(135, 190, 82, 1)
@@ -847,7 +952,7 @@
             Y: =40
             ZIndex: =7
 
-        buscaAvancadaModelosContainer As groupContainer.horizontalAutoLayoutContainer:
+        buscaModelosContainer As groupContainer.horizontalAutoLayoutContainer:
             FillPortions: =0
             Height: =70
             LayoutMinHeight: =112
@@ -874,7 +979,7 @@
                 Y: =595
                 ZIndex: =1
 
-            buscaAvancadaModelosButton As button:
+            buscaModelosButton As button:
                 Align: =Align.Left
                 BorderColor: =RGBA(0, 0, 0, 0)
                 BorderThickness: =0
@@ -915,7 +1020,7 @@
             Y: =40
             ZIndex: =9
 
-        buscaAvancadaSubestacoesContainer As groupContainer.horizontalAutoLayoutContainer:
+        buscaSubestacoesContainer As groupContainer.horizontalAutoLayoutContainer:
             FillPortions: =0
             Height: =70
             LayoutMinHeight: =112
@@ -942,7 +1047,7 @@
                 Y: =595
                 ZIndex: =1
 
-            buscaAvancadaSubestacoesButton As button:
+            buscaSubestacoesButton As button:
                 Align: =Align.Left
                 BorderColor: =RGBA(0, 0, 0, 0)
                 BorderThickness: =0
@@ -1053,7 +1158,7 @@
 
         indicadoresContainer As groupContainer.horizontalAutoLayoutContainer:
             FillPortions: =0
-            Height: =70
+            Height: =If(varSubmenuLateralIndicadoresVisible,170,70)
             LayoutMinHeight: =112
             LayoutMinWidth: =250
             LayoutMode: =LayoutMode.Auto
@@ -1072,43 +1177,218 @@
                 PaddingLeft: =50
                 PaddingRight: =10
                 PaddingTop: =10
-                Tooltip: ="Clique para abrir o BI de indicadores estratégicos da AT"
                 Width: =100
                 X: =202
                 Y: =595
                 ZIndex: =1
 
-            indicadoresButton As button:
-                Align: =Align.Left
-                BorderColor: =RGBA(0, 0, 0, 0)
-                BorderThickness: =0
-                DisabledBorderColor: =RGBA(166, 166, 166, 1)
-                DisabledColor: =RGBA(166, 166, 166, 1)
-                DisabledFill: =RGBA(244, 244, 244, 1)
-                Fill: =RGBA(0, 0, 0, 0)
-                FillPortions: =1
-                Font: =Font.'Lato Light'
-                FontWeight: =FontWeight.Lighter
-                Height: =70
-                HoverColor: =RGBA(255, 255, 255, 1)
-                HoverFill: =RGBA(0, 0, 0, 0)
+            indicadoresContainerVertical As groupContainer.verticalAutoLayoutContainer:
+                Height: =Parent.Height
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutJustifyContent: =LayoutJustifyContent.Center
                 LayoutMinHeight: =70
-                LayoutMinWidth: =280
-                OnSelect: |-
-                    =Launch("https://app.powerbi.com/reportEmbed?reportId=5a9ea2bf-ae5a-48fc-91d6-2fe0d1fd657b&autoAuth=true&ctid=97ce2340-9c1d-45b1-a835-7ea811b6fe9a&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWJyYXppbC1zb3V0aC1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D")
-                PaddingBottom: =0
-                PaddingRight: =10
-                PaddingTop: =0
-                PressedFill: =RGBA(0,0,0,0)
-                RadiusBottomLeft: =0
-                RadiusBottomRight: =0
-                RadiusTopLeft: =0
-                RadiusTopRight: =0
-                Size: =22
-                Text: ="Indicadores"
-                Tooltip: ="Clique para abrir o BI de indicadores estratégicos da AT"
-                Width: =280
-                ZIndex: =2
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                Width: =Parent.Width
+                ZIndex: =22
+
+                buscaAtivosLabel_1 As label:
+                    BorderColor: =RGBA(135, 190, 82, 1)
+                    Color: =RGBA(255, 255, 255, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Font: =Font.'Lato Light'
+                    Height: =50
+                    LayoutMinHeight: =70
+                    LayoutMinWidth: =560
+                    Size: =22
+                    Text: ="Busca - Ativos"
+                    Width: =Parent.Width
+                    ZIndex: =1
+
+                indicadoresMenuLateralButton As button:
+                    Align: =Align.Left
+                    AlignInContainer: =AlignInContainer.Center
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderThickness: =0
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FillPortions: =1
+                    Font: =Font.'Lato Light'
+                    FontWeight: =FontWeight.Lighter
+                    Height: =Parent.Height
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    LayoutMinHeight: =70
+                    LayoutMinWidth: =280
+                    OnSelect: |-
+                        =UpdateContext(
+                            {
+                                varSubmenuLateralIndicadoresVisible: !varSubmenuLateralIndicadoresVisible
+                            }
+                        );
+                    PaddingBottom: =0
+                    PaddingRight: =10
+                    PaddingTop: =0
+                    PressedFill: =RGBA(0,0,0,0)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =22
+                    Text: ="Indicadores"
+                    Tooltip: ="Clique para expandir/esconder submenu de Indicadores"
+                    Width: =Parent.Width
+                    ZIndex: =1
+
+                buscaAtivosGeracaoButton_1 As button:
+                    Align: =Align.Left
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderThickness: =0
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FillPortions: =1
+                    Font: =Font.'Lato Light'
+                    FontWeight: =FontWeight.Lighter
+                    Height: =70
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    LayoutMinHeight: =50
+                    LayoutMinWidth: =280
+                    OnSelect: |-
+                        =UpdateContext(
+                            {
+                                varRefreshGifVisible: true,
+                                varSubmenuAtivosVisible: false
+                            }
+                        );
+                        Navigate(
+                            Ativos_G_SearchScreen,
+                            ScreenTransition.None
+                        )
+                    PaddingBottom: =0
+                    PaddingRight: =10
+                    PaddingTop: =0
+                    PressedFill: =RGBA(0,0,0,0)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =22
+                    Text: ="• Geração"
+                    Tooltip: ="Clique para fazer uma busca por ativos da Geração com filtros específicos"
+                    Width: =Parent.Width
+                    ZIndex: =2
+
+                buscaAtivosTransmissaoButton_1 As button:
+                    Align: =Align.Left
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderThickness: =0
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FillPortions: =1
+                    Font: =Font.'Lato Light'
+                    FontWeight: =FontWeight.Lighter
+                    Height: =70
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    LayoutMinHeight: =50
+                    LayoutMinWidth: =280
+                    OnSelect: |-
+                        =UpdateContext(
+                            {
+                                varRefreshGifVisible: true,
+                                varSubmenuAtivosVisible: false
+                            }
+                        );
+                        Navigate(
+                            Ativos_T_SearchScreen,
+                            ScreenTransition.None
+                        )
+                    PaddingBottom: =0
+                    PaddingRight: =10
+                    PaddingTop: =0
+                    PressedFill: =RGBA(0,0,0,0)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =22
+                    Text: ="• Transmissão"
+                    Tooltip: ="Clique para fazer uma busca por ativos da Transmissão com filtros específicos"
+                    Width: =Parent.Width
+                    ZIndex: =3
+
+                indicadoresAGButton As button:
+                    Align: =Align.Left
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderThickness: =0
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FillPortions: =1
+                    Font: =Font.'Lato Light'
+                    FontWeight: =FontWeight.Lighter
+                    Height: =70
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    LayoutMinHeight: =50
+                    LayoutMinWidth: =280
+                    OnSelect: |-
+                        =Launch("https://app.powerbi.com/groups/me/apps/fa8972ac-0b63-4f1a-8b67-a019fc922194/reports/d0f976a3-8f18-48d8-a2bb-d67e55dbe83e/ReportSection068fdddbd876477b2497")
+                    PaddingBottom: =0
+                    PaddingRight: =10
+                    PaddingTop: =0
+                    PressedFill: =RGBA(0,0,0,0)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =22
+                    Text: ="• AG"
+                    Tooltip: ="Clique para abrir o BI de indicadores estratégicos da AG"
+                    Visible: =varSubmenuLateralIndicadoresVisible
+                    Width: =Parent.Width
+                    ZIndex: =3
+
+                indicadoresATButton As button:
+                    Align: =Align.Left
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderThickness: =0
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FillPortions: =1
+                    Font: =Font.'Lato Light'
+                    FontWeight: =FontWeight.Lighter
+                    Height: =70
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    LayoutMinHeight: =50
+                    LayoutMinWidth: =280
+                    OnSelect: |-
+                        =Launch("https://app.powerbi.com/reportEmbed?reportId=5a9ea2bf-ae5a-48fc-91d6-2fe0d1fd657b&autoAuth=true&ctid=97ce2340-9c1d-45b1-a835-7ea811b6fe9a&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWJyYXppbC1zb3V0aC1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D")
+                    PaddingBottom: =0
+                    PaddingRight: =10
+                    PaddingTop: =0
+                    PressedFill: =RGBA(0,0,0,0)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =22
+                    Text: ="• AT"
+                    Tooltip: ="Clique para abrir o BI de indicadores estratégicos da AT"
+                    Visible: =varSubmenuLateralIndicadoresVisible
+                    Width: =Parent.Width
+                    ZIndex: =4
 
         separador3 As rectangle:
             BorderColor: =RGBA(135, 190, 82, 1)
@@ -1645,6 +1925,7 @@
                 PaddingLeft: =20
                 Size: =20
                 Text: ="• AG"
+                Tooltip: ="Clique para abrir o BI de indicadores estratégicos da AG"
                 Visible: =varSubmenuIndicadoresVisible
                 Width: =200
                 ZIndex: =1
@@ -1672,6 +1953,7 @@
                 PaddingLeft: =20
                 Size: =20
                 Text: ="• AT"
+                Tooltip: ="Clique para abrir o BI de indicadores estratégicos da AT"
                 Visible: =varSubmenuIndicadoresVisible
                 Width: =200
                 ZIndex: =2
