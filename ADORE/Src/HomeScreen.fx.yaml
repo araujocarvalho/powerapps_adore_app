@@ -1192,19 +1192,6 @@
                 Width: =Parent.Width
                 ZIndex: =22
 
-                buscaAtivosLabel_1 As label:
-                    BorderColor: =RGBA(135, 190, 82, 1)
-                    Color: =RGBA(255, 255, 255, 1)
-                    DisabledColor: =RGBA(166, 166, 166, 1)
-                    Font: =Font.'Lato Light'
-                    Height: =50
-                    LayoutMinHeight: =70
-                    LayoutMinWidth: =560
-                    Size: =22
-                    Text: ="Busca - Ativos"
-                    Width: =Parent.Width
-                    ZIndex: =1
-
                 indicadoresMenuLateralButton As button:
                     Align: =Align.Left
                     AlignInContainer: =AlignInContainer.Center
@@ -1241,88 +1228,6 @@
                     Tooltip: ="Clique para expandir/esconder submenu de Indicadores"
                     Width: =Parent.Width
                     ZIndex: =1
-
-                buscaAtivosGeracaoButton_1 As button:
-                    Align: =Align.Left
-                    BorderColor: =RGBA(0, 0, 0, 0)
-                    BorderThickness: =0
-                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
-                    DisabledColor: =RGBA(166, 166, 166, 1)
-                    DisabledFill: =RGBA(244, 244, 244, 1)
-                    Fill: =RGBA(0, 0, 0, 0)
-                    FillPortions: =1
-                    Font: =Font.'Lato Light'
-                    FontWeight: =FontWeight.Lighter
-                    Height: =70
-                    HoverColor: =RGBA(255, 255, 255, 1)
-                    HoverFill: =RGBA(0, 0, 0, 0)
-                    LayoutMinHeight: =50
-                    LayoutMinWidth: =280
-                    OnSelect: |-
-                        =UpdateContext(
-                            {
-                                varRefreshGifVisible: true,
-                                varSubmenuAtivosVisible: false
-                            }
-                        );
-                        Navigate(
-                            Ativos_G_SearchScreen,
-                            ScreenTransition.None
-                        )
-                    PaddingBottom: =0
-                    PaddingRight: =10
-                    PaddingTop: =0
-                    PressedFill: =RGBA(0,0,0,0)
-                    RadiusBottomLeft: =0
-                    RadiusBottomRight: =0
-                    RadiusTopLeft: =0
-                    RadiusTopRight: =0
-                    Size: =22
-                    Text: ="• Geração"
-                    Tooltip: ="Clique para fazer uma busca por ativos da Geração com filtros específicos"
-                    Width: =Parent.Width
-                    ZIndex: =2
-
-                buscaAtivosTransmissaoButton_1 As button:
-                    Align: =Align.Left
-                    BorderColor: =RGBA(0, 0, 0, 0)
-                    BorderThickness: =0
-                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
-                    DisabledColor: =RGBA(166, 166, 166, 1)
-                    DisabledFill: =RGBA(244, 244, 244, 1)
-                    Fill: =RGBA(0, 0, 0, 0)
-                    FillPortions: =1
-                    Font: =Font.'Lato Light'
-                    FontWeight: =FontWeight.Lighter
-                    Height: =70
-                    HoverColor: =RGBA(255, 255, 255, 1)
-                    HoverFill: =RGBA(0, 0, 0, 0)
-                    LayoutMinHeight: =50
-                    LayoutMinWidth: =280
-                    OnSelect: |-
-                        =UpdateContext(
-                            {
-                                varRefreshGifVisible: true,
-                                varSubmenuAtivosVisible: false
-                            }
-                        );
-                        Navigate(
-                            Ativos_T_SearchScreen,
-                            ScreenTransition.None
-                        )
-                    PaddingBottom: =0
-                    PaddingRight: =10
-                    PaddingTop: =0
-                    PressedFill: =RGBA(0,0,0,0)
-                    RadiusBottomLeft: =0
-                    RadiusBottomRight: =0
-                    RadiusTopLeft: =0
-                    RadiusTopRight: =0
-                    Size: =22
-                    Text: ="• Transmissão"
-                    Tooltip: ="Clique para fazer uma busca por ativos da Transmissão com filtros específicos"
-                    Width: =Parent.Width
-                    ZIndex: =3
 
                 indicadoresAGButton As button:
                     Align: =Align.Left
