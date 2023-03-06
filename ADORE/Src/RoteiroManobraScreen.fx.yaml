@@ -1,0 +1,320 @@
+"RoteiroManobraScreen As screen.'phoneDetailViewLayout_ver3.0'":
+    Fill: =RGBA(152, 208, 70, 1)
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+
+    appIconImage_1 As image:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Height: =250
+        Image: =adore_code_image
+        ImagePosition: =ImagePosition.Center
+        Width: =310
+        X: =165
+        Y: =128
+        ZIndex: =4
+
+    RectQuickActionBar2_13 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =5
+
+    IconBackarrow1_16 As icon.ChevronLeft:
+        AccessibleLabel: =Self.Tooltip
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =88
+        Icon: =Icon.ChevronLeft
+        OnSelect: =Navigate(HomeScreen, None)
+        PaddingBottom: =24
+        PaddingLeft: =24
+        PaddingRight: =24
+        PaddingTop: =24
+        PressedFill: =RGBA(255, 255, 255, 0.3)
+        TabIndex: =0
+        Tooltip: ="Voltar para a lista"
+        Width: =88
+        ZIndex: =6
+
+    pageNameLabel_1 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        Height: =88
+        Size: =25
+        Text: ="Sobre"
+        Width: =Parent.Width - Self.X
+        Wrap: =false
+        X: =80
+        ZIndex: =7
+
+    appSubtitleLabel_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Italic: =true
+        Size: =17
+        Text: ="ACESSO A DOCUMENTOS EM REDE"
+        Width: =560
+        X: =40
+        Y: =419
+        ZIndex: =8
+
+    appTitleLabel_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Size: =25
+        Text: ="ADORE"
+        Width: =560
+        X: =40
+        Y: =375
+        ZIndex: =9
+
+    desdeLabel_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Size: =17
+        Text: ="Desde 2021"
+        Width: =560
+        X: =40
+        Y: =895
+        ZIndex: =10
+
+    empresaLabel_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Size: =18
+        Text: ="Cemig Geração e Transmissão S.A."
+        Width: =560
+        X: =40
+        Y: =925
+        ZIndex: =11
+
+    acessoDispositivoLabel_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(8, 88, 31, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Size: =18
+        Text: =If(_varOnMobile,"Versão para Dispositivo Móvel","Versão para Navegador")
+        Width: =560
+        X: =40
+        Y: =993
+        ZIndex: =12
+
+    versaoBancoAtivosLabel_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =30
+        Size: =18
+        Text: |-
+            ="Versão do Banco de Ativos T: v3"
+        Width: =560
+        X: =40
+        Y: =577
+        ZIndex: =13
+
+    dadosSimuladorPVLabel_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =30
+        Size: =18
+        Text: |-
+            ="Dados do Simulador de PV: 08/08/2022"
+        Width: =640
+        Y: =766
+        ZIndex: =14
+
+    cicloPVLabel_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =30
+        Size: =15
+        Text: ="(Ciclo 2022-2023)"
+        Width: =640
+        Y: =796
+        ZIndex: =15
+
+    versaoBancoModeloLabel_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =30
+        Size: =18
+        Text: |-
+            ="Versão do Banco de Modelos T: v3"
+        Width: =560
+        X: =40
+        Y: =624
+        ZIndex: =16
+
+    dadosAtivosGSAPLabel_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =30
+        Size: =18
+        Text: |-
+            ="Extração de Ativos G SAP: 10/02/2023"
+        Width: =640
+        Y: =713
+        ZIndex: =17
+
+    dadosAtivosTSAPLabel_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =30
+        Size: =18
+        Text: |-
+            ="Extração de Ativos T SAP: 03/01/2023"
+        Width: =640
+        Y: =671
+        ZIndex: =18
+
+    versaoAppLabel_1 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =30
+        Size: =18
+        Text: |-
+            ="Versão: 1.271"
+        Width: =560
+        X: =40
+        Y: =530
+        ZIndex: =19
+
+    ajudaGroup_1 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =19
+
+        ajudaLabel_1 As label:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            Height: =70
+            OnSelect: =Navigate(AjudaScreen,None)
+            PaddingLeft: =10
+            Size: =18
+            Text: ="Ajuda"
+            Tooltip: ="Dúvidas, elogios, sugestões de melhoria ou correções de bugs? Clique aqui."
+            Width: =81
+            X: =301
+            Y: =1062
+            ZIndex: =1
+
+        ajudaIcon_1 As icon.Help:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(39, 113, 194, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(244, 244, 244, 1)
+            Height: =46
+            Icon: =Icon.Help
+            OnSelect: =Navigate(AjudaScreen,None)
+            Tooltip: ="Dúvidas, elogios, sugestões de melhoria ou correções de bugs? Clique aqui."
+            Width: =42
+            X: =259
+            Y: =1074
+            ZIndex: =2
+
+        ajudaButton_1 As button:
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(0, 0, 0, 0)
+            FontWeight: =FontWeight.Semibold
+            Height: =46
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(219, 219, 219, 0.1)
+            OnSelect: =Navigate(AjudaScreen,None)
+            PressedColor: =RGBA(219, 219, 219, 0.1)
+            PressedFill: =RGBA(219, 219, 219, 0.1)
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Size: =24
+            Text: =""
+            Tooltip: ="Dúvidas, elogios, sugestões de melhoria ou correções de bugs? Clique aqui."
+            Width: =153
+            X: =244
+            Y: =1074
+            ZIndex: =3
+
+    versaoButton_1 As button:
+        BorderColor: =RGBA(39, 113, 194, 1)
+        Color: =RGBA(39, 113, 194, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        DisplayMode: =If(_varUserIsAdmin,DisplayMode.Edit,DisplayMode.Disabled)
+        Fill: =RGBA(0, 0, 0, 0)
+        FontWeight: =FontWeight.Semibold
+        Height: =35
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(219, 219, 219, 0.1)
+        OnSelect: |-
+            =Launch("https://make.powerapps.com/environments/Default-97ce2340-9c1d-45b1-a835-7ea811b6fe9a/apps/b8f8449b-8281-42d8-beb0-bad14a3a275a/versions?utm_source=office&utm_medium=app_launcher&utm_campaign=office_referrals")
+        PressedColor: =RGBA(219, 219, 219, 0.1)
+        PressedFill: =RGBA(219, 219, 219, 0.1)
+        RadiusBottomLeft: =20
+        RadiusBottomRight: =20
+        RadiusTopLeft: =20
+        RadiusTopRight: =20
+        Size: =24
+        Text: =""
+        Width: =210
+        X: =215
+        Y: =527
+        ZIndex: =20
+

@@ -129,11 +129,11 @@
     "ModelosSearchScreen",
     "SubestacoesSearchScreen",
     "SimuladorDPVScreen",
-    "QrCodeScreen",
     "CISSearchScreen",
     "CISEditScreen",
     "DestaquesNoticiasSearchScreen",
     "DestaqueNoticiaViewScreen",
-    "DestaqueNoticiaEditScreen"
+    "DestaqueNoticiaEditScreen",
+    "RoteiroManobraScreen"
   ]
 }

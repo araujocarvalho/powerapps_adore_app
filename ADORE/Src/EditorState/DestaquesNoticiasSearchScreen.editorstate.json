@@ -179,7 +179,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Assunto",
-      "ParentIndex": 3,
+      "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -508,7 +508,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Autor",
-      "ParentIndex": 5,
+      "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -820,7 +820,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Categoria",
-      "ParentIndex": 6,
+      "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -1724,7 +1724,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "DataPublicacao",
-      "ParentIndex": 4,
+      "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -3266,7 +3266,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "eqptoSiom",
-      "ParentIndex": 0,
+      "ParentIndex": 5,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -3618,7 +3618,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "fabricante",
-      "ParentIndex": 1,
+      "ParentIndex": 6,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -5988,7 +5988,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "modelo",
-      "ParentIndex": 2,
+      "ParentIndex": 7,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -6908,7 +6908,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Órgão",
-      "ParentIndex": 7,
+      "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
