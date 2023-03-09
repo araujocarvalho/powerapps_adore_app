@@ -2,7 +2,30 @@
   <doc title="FlowGerarRoteiroManobra_ADORE" />
   <grammars>
     <jsonTypes targetNamespace="https://msmanaged-na.azure-apim.net/apim/logicflows" xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
-      <object name="ManualTriggerInput" />
+      <string name="ManualTriggerInput_Atualizarpropriedadesdoarquivo_var_PT_def" />
+      <string name="ManualTriggerInput_Atualizarpropriedadesdoarquivo_var_PLE_def" />
+      <string name="ManualTriggerInput_Atualizarpropriedadesdoarquivo_var_NOME_def" />
+      <string name="ManualTriggerInput_Atualizarpropriedadesdoarquivo_var_VAO_def" />
+      <string name="ManualTriggerInput_Atualizarpropriedadesdoarquivo_var_LINHA_def" />
+      <string name="ManualTriggerInput_Atualizarpropriedadesdoarquivo_var_TENSAO_def" />
+      <string name="ManualTriggerInput_Atualizarpropriedadesdoarquivo_var_BANCO_def" />
+      <string name="ManualTriggerInput_Atualizarpropriedadesdoarquivo_var_DISJ_MEIO_def" />
+      <string name="ManualTriggerInput_Enviarumemail-Erro_Para_def" />
+      <string name="ManualTriggerInput_Inicializarvari_uxE1_vel_Valor_def" />
+      <string name="ManualTriggerInput_Inicializarvari_uxE1_vel-varSubestacao_Valor_def" />
+      <object name="ManualTriggerInput">
+        <property name="Atualizarpropriedadesdoarquivo_var_PT" type="string" />
+        <property name="Atualizarpropriedadesdoarquivo_var_PLE" type="string" />
+        <property name="Atualizarpropriedadesdoarquivo_var_NOME" type="string" />
+        <property name="Atualizarpropriedadesdoarquivo_var_VAO" type="string" />
+        <property name="Atualizarpropriedadesdoarquivo_var_LINHA" type="string" />
+        <property name="Atualizarpropriedadesdoarquivo_var_TENSAO" type="string" />
+        <property name="Atualizarpropriedadesdoarquivo_var_BANCO" type="string" />
+        <property name="Atualizarpropriedadesdoarquivo_var_DISJ_MEIO" type="string" />
+        <property name="Enviarumemail-Erro_Para" type="string" />
+        <property name="Inicializarvariável_Valor" type="string" />
+        <property name="Inicializarvariável-varSubestacao_Valor" type="string" />
+      </object>
     </jsonTypes>
   </grammars>
   <resources siena:authenticationProviderHref="#PowerAppAuth" base="https://msmanaged-na.azure-apim.net/apim/logicflows">
@@ -14,7 +37,19 @@
           <param style="query" name="api-version" type="xs:string" required="true" fixed="2015-02-01-preview">
             <doc title="The api version" />
           </param>
-          <representation mediaType="application/json" />
+          <representation mediaType="application/json">
+            <param style="plain" name="Atualizarpropriedadesdoarquivo_var_PT" path="/Atualizarpropriedadesdoarquivo_var_PT" type="xs:string" required="true" />
+            <param style="plain" name="Atualizarpropriedadesdoarquivo_var_PLE" path="/Atualizarpropriedadesdoarquivo_var_PLE" type="xs:string" required="true" />
+            <param style="plain" name="Atualizarpropriedadesdoarquivo_var_NOME" path="/Atualizarpropriedadesdoarquivo_var_NOME" type="xs:string" required="true" />
+            <param style="plain" name="Atualizarpropriedadesdoarquivo_var_VAO" path="/Atualizarpropriedadesdoarquivo_var_VAO" type="xs:string" required="true" />
+            <param style="plain" name="Atualizarpropriedadesdoarquivo_var_LINHA" path="/Atualizarpropriedadesdoarquivo_var_LINHA" type="xs:string" required="true" />
+            <param style="plain" name="Atualizarpropriedadesdoarquivo_var_TENSAO" path="/Atualizarpropriedadesdoarquivo_var_TENSAO" type="xs:string" required="true" />
+            <param style="plain" name="Atualizarpropriedadesdoarquivo_var_BANCO" path="/Atualizarpropriedadesdoarquivo_var_BANCO" type="xs:string" required="true" />
+            <param style="plain" name="Atualizarpropriedadesdoarquivo_var_DISJ_MEIO" path="/Atualizarpropriedadesdoarquivo_var_DISJ_MEIO" type="xs:string" required="true" />
+            <param style="plain" name="Enviarumemail-Erro_Para" path="/Enviarumemail-Erro_Para" type="xs:string" required="true" />
+            <param style="plain" name="Inicializarvariável_Valor" path="/Inicializarvariável_Valor" type="xs:string" required="true" />
+            <param style="plain" name="Inicializarvariável-varSubestacao_Valor" path="/Inicializarvariável-varSubestacao_Valor" type="xs:string" required="true" />
+          </representation>
         </request>
       </method>
     </resource>
