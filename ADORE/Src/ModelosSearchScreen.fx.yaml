@@ -17,7 +17,7 @@
                     Modelo_Real
                 ),
                 Result,
-                Ascending
+                SortOrder.Ascending
             )
         );
         ClearCollect(
@@ -28,7 +28,7 @@
                     Fabricante_Real
                 ),
                 Result,
-                Ascending
+                SortOrder.Ascending
             )
         );
         ClearCollect(
@@ -39,7 +39,7 @@
                     Tipo_Descrição
                 ),
                 Result,
-                Ascending
+                SortOrder.Ascending
             )
         );
         Set(
@@ -292,7 +292,7 @@
         NoSelectionText: ="Fabricante"
         OnChange: |-
             =If(!IsBlank(modeloComboBox.Selected.Result),Reset(modeloComboBox));
-            ClearCollect(colModelos,Sort(Distinct(listaModelosBrowseGallery.AllItems,Modelo_Real),Result,Ascending));
+            ClearCollect(colModelos,Sort(Distinct(listaModelosBrowseGallery.AllItems,Modelo_Real),Result,SortOrder.Ascending));
         PaddingLeft: =15
         PressedColor: =RGBA(255, 255, 255, 1)
         PressedFill: =RGBA(135, 190, 82, 1)
@@ -328,8 +328,8 @@
         OnChange: |-
             =If(!IsBlank(fabricanteComboBox.Selected.Result),Reset(fabricanteComboBox));
             If(!IsBlank(modeloComboBox.Selected.Result),Reset(modeloComboBox));
-            ClearCollect(colFabricantes,Sort(Distinct(listaModelosBrowseGallery.AllItems,Fabricante),Result,Ascending));
-            ClearCollect(colModelos,Sort(Distinct(listaModelosBrowseGallery.AllItems,Modelo_Real),Result,Ascending));
+            ClearCollect(colFabricantes,Sort(Distinct(listaModelosBrowseGallery.AllItems,Fabricante),Result,SortOrder.Ascending));
+            ClearCollect(colModelos,Sort(Distinct(listaModelosBrowseGallery.AllItems,Modelo_Real),Result,SortOrder.Ascending));
         PaddingLeft: =15
         PressedColor: =RGBA(255, 255, 255, 1)
         PressedFill: =RGBA(135, 190, 82, 1)

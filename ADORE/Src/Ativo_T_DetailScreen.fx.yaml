@@ -306,7 +306,7 @@
                     Height: =50
                     Icon: =Icon.Lightbulb
                     OnSelect: |-
-                        =Navigate(DestaquesNoticiasSearchScreen,None,{varFiltroDestaque_SIOM: varAtivoT.ativo_SIOM,varFiltroDestaque_Fabricante:"",varFiltroDestaque_Modelo:""})
+                        =Navigate(DestaquesNoticiasSearchScreen,BorderStyle.None,{varFiltroDestaque_SIOM: varAtivoT.ativo_SIOM,varFiltroDestaque_Fabricante:"",varFiltroDestaque_Modelo:""})
                     Tooltip: ="Este ativo possui destaques associados. Clique na lâmpada para visualizá-los"
                     ZIndex: =1
 
@@ -357,7 +357,7 @@
                     Height: =50
                     Icon: =Icon.Lightbulb
                     OnSelect: |-
-                        =Navigate(DestaquesNoticiasSearchScreen,None,{varFiltroDestaque_SIOM: "",varFiltroDestaque_Fabricante:varAtivoT.ativo_fabricante,varFiltroDestaque_Modelo:varAtivoT.ativo_modelo})
+                        =Navigate(DestaquesNoticiasSearchScreen,BorderStyle.None,{varFiltroDestaque_SIOM: "",varFiltroDestaque_Fabricante:varAtivoT.ativo_fabricante,varFiltroDestaque_Modelo:varAtivoT.ativo_modelo})
                     Tooltip: ="O modelo deste ativo possui destaques associados. Clique na lâmpada para visualizá-los"
                     ZIndex: =1
 
@@ -995,7 +995,7 @@
         Height: =54
         Icon: =Icon.Edit
         OnSelect: |-
-            =Navigate(Ativo_T_EditScreen,None,{varAtivoEdit:varAtivoT})
+            =Navigate(Ativo_T_EditScreen,BorderStyle.None,{varAtivoEdit:varAtivoT})
         Tooltip: ="Clique para editar ativo"
         Visible: =_varUserIsAdmin
         Width: =52
@@ -1013,7 +1013,7 @@
         OnSelect: |-
             =Navigate(
                 SimuladorDPVScreen,
-                None,
+                BorderStyle.None,
                 {
                     varAtivoT: varAtivoT
                 }
@@ -1068,7 +1068,7 @@
                             Sort(
                                 colModelosEquipamentos,
                                 ID_ESPELHO,
-                                Descending
+                                SortOrder.Descending
                             )
                         ).ID_ESPELHO + 1,
                         varAtivoT.ativo_tipo_sigla,
@@ -1178,7 +1178,7 @@
                                 ativo_gerencia
                             ),
                             Result,
-                            Ascending
+                            SortOrder.Ascending
                         )
                     );
                     ClearCollect(
@@ -1189,7 +1189,7 @@
                                 ativo_local_nome
                             ),
                             Result,
-                            Ascending
+                            SortOrder.Ascending
                         )
                     );
                     ClearCollect(
@@ -1200,7 +1200,7 @@
                                 ativo_tipo
                             ),
                             Result,
-                            Ascending
+                            SortOrder.Ascending
                         )
                     );
                     ClearCollect(

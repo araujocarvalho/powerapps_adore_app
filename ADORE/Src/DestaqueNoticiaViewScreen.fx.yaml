@@ -19,7 +19,7 @@
         Height: =88
         Icon: =Icon.ChevronLeft
         OnSelect: |-
-            =Navigate(DestaquesNoticiasSearchScreen,None,{varFiltroDestaque_SIOM: "",varFiltroDestaque_Fabricante:"",varFiltroDestaque_Modelo:""})
+            =Navigate(DestaquesNoticiasSearchScreen,BorderStyle.None,{varFiltroDestaque_SIOM: "",varFiltroDestaque_Fabricante:"",varFiltroDestaque_Modelo:""})
         PaddingBottom: =24
         PaddingLeft: =24
         PaddingRight: =24
@@ -333,7 +333,7 @@
         OnSelect: |-
             =Navigate(
                 DestaqueNoticiaEditScreen,
-                None,
+                BorderStyle.None,
                 {
                     varDestaqueEdit: varDestaque,
                     varIsEdit: true

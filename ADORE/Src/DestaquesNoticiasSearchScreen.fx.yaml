@@ -203,7 +203,7 @@
         OnSelect: |-
             =Navigate(
                 DestaqueNoticiaEditScreen,
-                None,
+                BorderStyle.None,
                 {varIsEdit: false}
             );
             NewForm(destaqueForm)
@@ -261,7 +261,7 @@
                     )
                 ),
                 'Publicado em',
-                Descending
+                SortOrder.Descending
             )
         Layout: =Layout.Vertical
         OnSelect: =
@@ -482,7 +482,7 @@
             Height: =60
             Icon: =Icon.ChevronRight
             OnSelect: |-
-                =Navigate(DestaqueNoticiaViewScreen,None,{varDestaque:ThisItem})
+                =Navigate(DestaqueNoticiaViewScreen,BorderStyle.None,{varDestaque:ThisItem})
             PaddingBottom: =10
             PaddingLeft: =10
             PaddingRight: =10

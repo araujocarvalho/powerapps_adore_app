@@ -99,7 +99,7 @@
                         ativo_gerencia
                     ),
                     Result,
-                    Ascending
+                    SortOrder.Ascending
                 )
             );
             ClearCollect(
@@ -110,7 +110,7 @@
                         ativo_local_nome
                     ),
                     Result,
-                    Ascending
+                    SortOrder.Ascending
                 )
             );
             ClearCollect(
@@ -121,7 +121,7 @@
                         ativo_tipo
                     ),
                     Result,
-                    Ascending
+                    SortOrder.Ascending
                 )
             );
             Set(
@@ -198,7 +198,7 @@
                     )
                 ),
                 ativo_SIOM,
-                Ascending
+                SortOrder.Ascending
             )
         Layout: =Layout.Vertical
         TemplatePadding: =0
@@ -248,7 +248,7 @@
                 Height: =42
                 Icon: =Icon.Lightbulb
                 OnSelect: |-
-                    =Navigate(DestaquesNoticiasSearchScreen,None,{varFiltroDestaque_SIOM: ThisItem.ativo_SIOM,varFiltroDestaque_Fabricante:"",varFiltroDestaque_Modelo:""})
+                    =Navigate(DestaquesNoticiasSearchScreen,BorderStyle.None,{varFiltroDestaque_SIOM: ThisItem.ativo_SIOM,varFiltroDestaque_Fabricante:"",varFiltroDestaque_Modelo:""})
                 Tooltip: ="Este ativo possui um ou mais Destaques associados. Clique para visualizá-lo(s)"
                 Visible: |-
                     =!IsBlank(
@@ -272,7 +272,7 @@
                 Height: =42
                 Icon: =Icon.Lightbulb
                 OnSelect: |-
-                    =Navigate(DestaquesNoticiasSearchScreen,None,{varFiltroDestaque_SIOM: "",varFiltroDestaque_Fabricante: ThisItem.ativo_fabricante,varFiltroDestaque_Modelo: ThisItem.ativo_modelo})
+                    =Navigate(DestaquesNoticiasSearchScreen,BorderStyle.None,{varFiltroDestaque_SIOM: "",varFiltroDestaque_Fabricante: ThisItem.ativo_fabricante,varFiltroDestaque_Modelo: ThisItem.ativo_modelo})
                 Tooltip: ="Este modelo de ativo possui um ou mais Destaques associados. Clique para visualizá-lo(s)"
                 Visible: |-
                     =!IsBlank(ThisItem.ativo_fabricante) && !IsBlank(ThisItem.ativo_modelo) && !IsBlank(
@@ -594,8 +594,8 @@
         OnChange: |-
             =If(!IsBlank(localizacaoComboBox.Selected.Result),Reset(localizacaoComboBox));
             If(!IsBlank(tipoComboBox.Selected.Result),Reset(tipoComboBox));
-            ClearCollect(colLocalizacoes_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_local_nome),Result,Ascending));
-            ClearCollect(colTiposEqptos_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_tipo),Result,Ascending));
+            ClearCollect(colLocalizacoes_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_local_nome),Result,SortOrder.Ascending));
+            ClearCollect(colTiposEqptos_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_tipo),Result,SortOrder.Ascending));
         PaddingLeft: =15
         PressedColor: =RGBA(255, 255, 255, 1)
         PressedFill: =RGBA(135, 190, 82, 1)
@@ -663,7 +663,7 @@
         NoSelectionText: ="Subestação/Usina"
         OnChange: |-
             =If(!IsBlank(tipoComboBox.Selected.Result),Reset(tipoComboBox));
-            ClearCollect(colTiposEqptos_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_tipo),Result,Ascending));
+            ClearCollect(colTiposEqptos_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_tipo),Result,SortOrder.Ascending));
         PaddingLeft: =15
         PressedColor: =RGBA(255, 255, 255, 1)
         PressedFill: =RGBA(135, 190, 82, 1)

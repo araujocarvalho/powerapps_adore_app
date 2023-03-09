@@ -1,0 +1,205 @@
+"SequenciaManobraScreen As screen.'phoneDetailViewLayout_ver3.0'":
+    LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+
+    RectQuickActionBar2_13 As rectangle:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =5
+
+    IconBackarrow1_16 As icon.ChevronLeft:
+        AccessibleLabel: =Self.Tooltip
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =88
+        Icon: =Icon.ChevronLeft
+        OnSelect: =Navigate(HomeScreen, BorderStyle.None)
+        PaddingBottom: =24
+        PaddingLeft: =24
+        PaddingRight: =24
+        PaddingTop: =24
+        PressedFill: =RGBA(255, 255, 255, 0.3)
+        TabIndex: =0
+        Tooltip: ="Voltar para a lista"
+        Width: =88
+        ZIndex: =6
+
+    pageNameLabel_1 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        Height: =88
+        Size: =25
+        Text: ="Gerar Sequência de Manobras"
+        Width: =Parent.Width - Self.X
+        Wrap: =false
+        X: =80
+        ZIndex: =7
+
+    PTTextInput As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Color: =RGBA(0, 0, 0, 1)
+        Default: =""
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =68
+        HintText: ="PT"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        Size: =20
+        Width: =295
+        X: =15
+        Y: =111
+        ZIndex: =8
+
+    PLETextInput As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Color: =RGBA(0, 0, 0, 1)
+        Default: =""
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =68
+        HintText: ="PLE"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        Size: =20
+        Width: =295
+        X: =326
+        Y: =111
+        ZIndex: =9
+
+    vaoTextInput As text:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        BorderThickness: =2
+        Color: =RGBA(0, 0, 0, 1)
+        Default: =""
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =64
+        HintText: ="Vão"
+        HoverBorderColor: =RGBA(135, 190, 82, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        Size: =20
+        Width: =606
+        X: =15
+        Y: =376
+        ZIndex: =10
+
+    subestacaoComboBox As combobox:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        ChevronBackground: =RGBA(12, 126, 44, 1)
+        ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+        ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =70
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        InputTextPlaceholder: ="Subestação"
+        Items: =ComboBoxSample
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(135, 190, 82, 1)
+        SearchItems: =Search(ComboBoxSample,subestacaoComboBox.SearchText,"Value1")
+        SelectionFill: =RGBA(12, 126, 44, 1)
+        Size: =21
+        Width: =606
+        X: =15
+        Y: =202
+        ZIndex: =11
+
+    manobraComboBox As combobox:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        ChevronBackground: =RGBA(12, 126, 44, 1)
+        ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+        ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =70
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        InputTextPlaceholder: ="Manobra"
+        Items: =ComboBoxSample
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(135, 190, 82, 1)
+        SearchItems: =Search(ComboBoxSample,manobraComboBox.SearchText,"Value1")
+        SelectionFill: =RGBA(12, 126, 44, 1)
+        Size: =21
+        Width: =606
+        X: =15
+        Y: =289
+        ZIndex: =12
+
+    gerarManobraGroup As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =15
+
+        gerarManobraButton As button:
+            Align: =Align.Right
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(102, 182, 227, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Lighter
+            Height: =146
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+            PaddingRight: =20
+            RadiusBottomLeft: =25
+            RadiusBottomRight: =25
+            RadiusTopLeft: =25
+            RadiusTopRight: =25
+            Size: =24
+            Text: ="Gerar Manobras"
+            Tooltip: =" Clique para gerar e enviar a sequência de manobras para o seu e-mail."
+            Width: =339
+            X: =167
+            Y: =861
+            ZIndex: =13
+
+        gerarManobraIcon As icon.Paste:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(255, 191, 0, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(244, 244, 244, 1)
+            Height: =70
+            Icon: =Icon.Paste
+            Tooltip: =" Clique para gerar e enviar a sequência de manobras para o seu e-mail."
+            Width: =60
+            X: =186
+            Y: =899
+            ZIndex: =14
+

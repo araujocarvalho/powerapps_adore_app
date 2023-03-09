@@ -68,7 +68,7 @@
                 "Item salvo com sucesso!",
                 NotificationType.Success
             );
-            Navigate(Ativo_T_DetailScreen,None,{varAtivoT: ativoForm.LastSubmit,varIsSearchScreen:true})
+            Navigate(Ativo_T_DetailScreen,BorderStyle.None,{varAtivoT: ativoForm.LastSubmit,varIsSearchScreen:true})
         Width: =640
         Y: =88
         ZIndex: =12

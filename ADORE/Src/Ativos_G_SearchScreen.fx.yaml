@@ -93,7 +93,7 @@
                         ativo_gerencia
                     ),
                     Result,
-                    Ascending
+                    SortOrder.Ascending
                 )
             );
             ClearCollect(
@@ -104,7 +104,7 @@
                         ativo_local_nome
                     ),
                     Result,
-                    Ascending
+                    SortOrder.Ascending
                 )
             );
             ClearCollect(
@@ -115,7 +115,7 @@
                         ativo_tipo
                     ),
                     Result,
-                    Ascending
+                    SortOrder.Ascending
                 )
             );
             Set(
@@ -190,7 +190,7 @@
                     )
                 ),
                 ativo_SIOM,
-                Ascending
+                SortOrder.Ascending
             )
         Layout: =Layout.Vertical
         TemplatePadding: =0
@@ -545,8 +545,8 @@
         OnChange: |-
             =If(!IsBlank(instalacaoComboBox.Selected.Result),Reset(instalacaoComboBox));
             If(!IsBlank(tipoComboBox_1.Selected.Result),Reset(tipoComboBox_1));
-            ClearCollect(colLocalizacoes_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_local_nome),Result,Ascending));
-            ClearCollect(colTiposEqptos_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_tipo),Result,Ascending));
+            ClearCollect(colLocalizacoes_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_local_nome),Result,SortOrder.Ascending));
+            ClearCollect(colTiposEqptos_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_tipo),Result,SortOrder.Ascending));
         PaddingLeft: =15
         PressedColor: =RGBA(255, 255, 255, 1)
         PressedFill: =RGBA(135, 190, 82, 1)
@@ -614,7 +614,7 @@
         NoSelectionText: ="Instalação"
         OnChange: |-
             =If(!IsBlank(tipoComboBox_1.Selected.Result),Reset(tipoComboBox_1));
-            ClearCollect(colTiposEqptos_T,Sort(Distinct(G_listaAtivosBrowseGallery.AllItems,ativo_tipo),Result,Ascending));
+            ClearCollect(colTiposEqptos_T,Sort(Distinct(G_listaAtivosBrowseGallery.AllItems,ativo_tipo),Result,SortOrder.Ascending));
         PaddingLeft: =15
         PressedColor: =RGBA(255, 255, 255, 1)
         PressedFill: =RGBA(135, 190, 82, 1)

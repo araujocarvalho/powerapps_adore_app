@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "70f527ac-a31f-49c1-b745-97584dd5f0b3",
+    "Name": "FlowGerarRoteiroManobra_ADORE",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "f14526cd-58bc-ed11-83ff-000d3a1b9050"
+  }
+]

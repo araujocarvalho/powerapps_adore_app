@@ -117,7 +117,7 @@ App As appinfo:
                     ativo_gerencia
                 ),
                 Result,
-                Ascending
+                SortOrder.Ascending
             )
         );
         ClearCollect(
@@ -128,7 +128,7 @@ App As appinfo:
                     ativo_local_nome
                 ),
                 Result,
-                Ascending
+                SortOrder.Ascending
             )
         );
         ClearCollect(
@@ -139,7 +139,7 @@ App As appinfo:
                     ativo_tipo
                 ),
                 Result,
-                Ascending
+                SortOrder.Ascending
             )
         );
         Set(
@@ -226,7 +226,7 @@ App As appinfo:
                     ativo_gerencia
                 ),
                 Result,
-                Ascending
+                SortOrder.Ascending
             )
         );
         ClearCollect(
@@ -237,7 +237,7 @@ App As appinfo:
                     ativo_local_nome
                 ),
                 Result,
-                Ascending
+                SortOrder.Ascending
             )
         );
         ClearCollect(
@@ -248,7 +248,7 @@ App As appinfo:
                     ativo_tipo
                 ),
                 Result,
-                Ascending
+                SortOrder.Ascending
             )
         );
         Set(

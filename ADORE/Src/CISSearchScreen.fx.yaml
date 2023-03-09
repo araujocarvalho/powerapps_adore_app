@@ -116,7 +116,7 @@
         OnSelect: |-
             =Navigate(
                 CISEditScreen,
-                None,
+                BorderStyle.None,
                 {varIsEdit: false}
             );
             NewForm(CISForm)
@@ -141,11 +141,11 @@
                     If(incidenteTextSearchBox.Text="",1=1,incidenteTextSearchBox.Text in Incidente)
                 ),
                 Data_Incidente,
-                Descending
+                SortOrder.Descending
             )
         Layout: =Layout.Vertical
         OnSelect: |-
-            =Navigate(CISEditScreen,None,{varCIS: ThisItem, varIsEdit: true})
+            =Navigate(CISEditScreen,BorderStyle.None,{varCIS: ThisItem, varIsEdit: true})
         TemplatePadding: =0
         TemplateSize: =197
         Y: =165

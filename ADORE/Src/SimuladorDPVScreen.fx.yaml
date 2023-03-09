@@ -515,7 +515,7 @@
                 CheckboxSize: =60
                 CheckmarkFill: =RGBA(152, 208, 70, 1)
                 Color: =RGBA(152, 208, 70, 1)
-                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",Edit,Disabled)
+                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",DisplayMode.Edit,DisplayMode.Disabled)
                 Height: =64
                 HoverColor: =RGBA(0, 0, 0, 1)
                 OnUncheck: =Reset(excedenteFranquiaTextInput)
@@ -548,7 +548,7 @@
                 DisabledBorderColor: =RGBA(166, 166, 166, 1)
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
-                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",Edit,Disabled)
+                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",DisplayMode.Edit,DisplayMode.Disabled)
                 Height: =55
                 HoverDateFill: =RGBA(53, 74, 36, 1)
                 IconBackground: =RGBA(12, 126, 44, 1)
@@ -586,7 +586,7 @@
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
                 DisplayFields: =["Value"]
-                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",Edit,Disabled)
+                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",DisplayMode.Edit,DisplayMode.Disabled)
                 Height: =55
                 HoverColor: =RGBA(255, 255, 255, 1)
                 HoverFill: =RGBA(53, 74, 36, 1)
@@ -618,7 +618,7 @@
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
                 DisplayFields: =["Value"]
-                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",Edit,Disabled)
+                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",DisplayMode.Edit,DisplayMode.Disabled)
                 Height: =55
                 HoverColor: =RGBA(255, 255, 255, 1)
                 HoverFill: =RGBA(53, 74, 36, 1)
@@ -660,7 +660,7 @@
                 DisabledBorderColor: =RGBA(166, 166, 166, 1)
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
-                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",Edit,Disabled)
+                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",DisplayMode.Edit,DisplayMode.Disabled)
                 Height: =55
                 HoverDateFill: =RGBA(53, 74, 36, 1)
                 IconBackground: =RGBA(12, 126, 44, 1)
@@ -697,7 +697,7 @@
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
                 DisplayFields: =["Value"]
-                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",Edit,Disabled)
+                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",DisplayMode.Edit,DisplayMode.Disabled)
                 Height: =55
                 HoverColor: =RGBA(255, 255, 255, 1)
                 HoverFill: =RGBA(53, 74, 36, 1)
@@ -729,7 +729,7 @@
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
                 DisplayFields: =["Value"]
-                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",Edit,Disabled)
+                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",DisplayMode.Edit,DisplayMode.Disabled)
                 Height: =55
                 HoverColor: =RGBA(255, 255, 255, 1)
                 HoverFill: =RGBA(53, 74, 36, 1)
@@ -758,7 +758,7 @@
                 DisabledBorderColor: =RGBA(166, 166, 166, 1)
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
-                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",Edit,Disabled)
+                DisplayMode: =If(origemEventoDropdown.Selected.Value = "Programado",DisplayMode.Edit,DisplayMode.Disabled)
                 FocusedBorderThickness: =4
                 Height: =64
                 HintText: ="Excedente Franquia (min)"
@@ -845,7 +845,7 @@
                         (DateDiff(
                             DateTimeValue(dataHoraInicioReal_texto),
                             DateTimeValue(dataHoraFimReal_texto),
-                            Minutes
+                            TimeUnit.Minutes
                         ))
                     )
                 Visible: =false
@@ -867,7 +867,7 @@
                         (DateDiff(
                             DateTimeValue(dataHoraInicioPLE_texto),
                             DateTimeValue(dataHoraFimPLE_texto),
-                            Minutes
+                            TimeUnit.Minutes
                         ))
                     )
                 Visible: =false
@@ -921,12 +921,12 @@
                             ((DateDiff(
                                 DateTimeValue(dataHoraFimPLE_texto),
                                 DateTimeValue(dataHoraFimReal_texto),
-                                Minutes
+                                TimeUnit.Minutes
                             ))) > 0,
                             (DateDiff(
                                 DateTimeValue(dataHoraFimPLE_texto),
                                 DateTimeValue(dataHoraFimReal_texto),
-                                Minutes
+                                TimeUnit.Minutes
                             )),
                             0
                         ),
