@@ -2,7 +2,7 @@
     Fill: =RGBA(210, 210, 210, 1)
     LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
     OnVisible: |-
-        =If(_varAtivo_T_WasEdited,
+        =If(_varAtivo_T_WasEdited || (_varUserIsGeracao && !_varAlreadyLoaded_T),
             Set(_varLoading_T, true);
             Refresh(ativos_AT_v3);
             Concurrent(
@@ -129,6 +129,7 @@
                 false
             );
             Set(_varLoading_T, false);
+            Set(_varAlreadyLoaded_T, true);
             //Limpa as coleções provisórias
             Clear(colAtivos_T_provisorio_1);
             Clear(colAtivos_T_provisorio_2);

@@ -3,7 +3,7 @@
     LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
     OnVisible: |-
         =If(
-            _varAtivo_G_WasEdited,
+            _varAtivo_G_WasEdited || (!_varUserIsGeracao && !_varAlreadyLoaded_G),//Verifica se deve recarregar dados
             Set(_varLoading_G, true);
             Refresh(ativos_AG_v1);
             //Divide a busca dos ativos em subcoleções provisórias que rodam no servidor simultaneamente, otimizando o processamento
@@ -123,6 +123,7 @@
                 false
             );
             Set(_varLoading_G, false);
+            Set(_varAlreadyLoaded_G, true);
             //Limpa coleções provisórias
             Clear(colAtivos_G_provisorio_1);
             Clear(colAtivos_G_provisorio_2);
