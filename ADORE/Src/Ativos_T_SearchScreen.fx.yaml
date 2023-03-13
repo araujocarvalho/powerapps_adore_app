@@ -2,8 +2,12 @@
     Fill: =RGBA(210, 210, 210, 1)
     LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
     OnVisible: |-
-        =If(_varAtivo_T_WasEdited || (_varUserIsGeracao && !_varAlreadyLoaded_T),
-            Set(_varLoading_T, true);
+        =If(
+            _varAtivo_T_WasEdited || (_varUserIsGeracao && !_varAlreadyLoaded_T),
+            Set(
+                _varLoading_T,
+                true
+            );
             Refresh(ativos_AT_v3);
             Concurrent(
                 ClearCollect(
@@ -78,7 +82,7 @@
                 )
             );
             //Junta as coleções em colAtivos_T
-            ClearCollect(
+        ClearCollect(
                 colAtivos_T,
                 colAtivos_T_provisorio_1,
                 colAtivos_T_provisorio_2,
@@ -124,14 +128,75 @@
                     SortOrder.Ascending
                 )
             );
+            If(
+                !_varAlreadyLoaded_Modelos_AT,
+                Refresh(modelos_ativos_v3);
+                ClearCollect(
+                    colModelosEquipamentos,
+                    Filter(
+                        modelos_ativos_v3,
+                        ID_ESPELHO >= 1 && ID_ESPELHO < 2000
+                    )
+                );
+                Collect(
+                    colModelosEquipamentos,
+                    Filter(
+                        modelos_ativos_v3,
+                        ID_ESPELHO >= 2000 && ID_ESPELHO < 3000
+                    )
+                );
+                ClearCollect(
+                    colModelos,
+                    Sort(
+                        Distinct(
+                            colModelosEquipamentos,
+                            Modelo_Real
+                        ),
+                        Result,
+                        SortOrder.Ascending
+                    )
+                );
+                ClearCollect(
+                    colFabricantes,
+                    Sort(
+                        Distinct(
+                            colModelosEquipamentos,
+                            Fabricante_Real
+                        ),
+                        Result,
+                        SortOrder.Ascending
+                    )
+                );
+                ClearCollect(
+                    colTiposEqptos,
+                    Sort(
+                        Distinct(
+                            colModelosEquipamentos,
+                            Tipo_Descrição
+                        ),
+                        Result,
+                        SortOrder.Ascending
+                    )
+                );
+                Set(
+                    _varAlreadyLoaded_Modelos_AT,
+                    true
+                );
+            );
             Set(
                 _varAtivo_T_WasEdited,
                 false
             );
-            Set(_varLoading_T, false);
-            Set(_varAlreadyLoaded_T, true);
+            Set(
+                _varLoading_T,
+                false
+            );
+            Set(
+                _varAlreadyLoaded_T,
+                true
+            );
             //Limpa as coleções provisórias
-            Clear(colAtivos_T_provisorio_1);
+        Clear(colAtivos_T_provisorio_1);
             Clear(colAtivos_T_provisorio_2);
             Clear(colAtivos_T_provisorio_3);
             Clear(colAtivos_T_provisorio_4);
@@ -140,7 +205,8 @@
             Clear(colAtivos_T_provisorio_7);
             Clear(colAtivos_T_provisorio_8);
             Clear(colAtivos_T_provisorio_9);
-            Clear(colAtivos_T_provisorio_10);    
+            Clear(colAtivos_T_provisorio_10);
+            
         )
 
     Rectangle11 As rectangle:

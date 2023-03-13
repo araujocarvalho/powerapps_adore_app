@@ -16997,7 +16997,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "notificarParaComboBox",
-      "ParentIndex": 0,
+      "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -17923,7 +17923,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "notificarParaStarVisible",
-      "ParentIndex": 1,
+      "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
