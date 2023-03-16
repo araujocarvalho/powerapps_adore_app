@@ -7,13 +7,14 @@
         Reset(subestacaoComboBox);
         Reset(manobraComboBox);
         Reset(vaoTextInput);
+        UpdateContext({varDicaTimerStart: true})
 
     RectQuickActionBar2_13 As rectangle:
         BorderColor: =RGBA(135, 190, 82, 1)
         Fill: =RGBA(12, 126, 44, 1)
         Height: =88
         Width: =Parent.Width
-        ZIndex: =5
+        ZIndex: =1
 
     IconBackarrow1_16 As icon.ChevronLeft:
         AccessibleLabel: =Self.Tooltip
@@ -32,7 +33,7 @@
         TabIndex: =0
         Tooltip: ="Voltar para a lista"
         Width: =88
-        ZIndex: =6
+        ZIndex: =2
 
     pageNameLabel_1 As label:
         Color: =RGBA(255, 255, 255, 1)
@@ -44,7 +45,7 @@
         Width: =Parent.Width - Self.X
         Wrap: =false
         X: =80
-        ZIndex: =7
+        ZIndex: =3
 
     PTTextInput As text:
         BorderColor: =RGBA(135, 190, 82, 1)
@@ -68,7 +69,7 @@
         Width: =295
         X: =15
         Y: =111
-        ZIndex: =8
+        ZIndex: =4
 
     PLETextInput As text:
         BorderColor: =RGBA(135, 190, 82, 1)
@@ -92,7 +93,7 @@
         Width: =295
         X: =326
         Y: =111
-        ZIndex: =9
+        ZIndex: =5
 
     vaoTextInput As text:
         BorderColor: =RGBA(135, 190, 82, 1)
@@ -114,7 +115,7 @@
         Width: =606
         X: =15
         Y: =376
-        ZIndex: =10
+        ZIndex: =6
 
     subestacaoComboBox As combobox:
         BorderColor: =RGBA(135, 190, 82, 1)
@@ -144,7 +145,7 @@
         Width: =606
         X: =15
         Y: =202
-        ZIndex: =11
+        ZIndex: =7
 
     manobraComboBox As combobox:
         BorderColor: =RGBA(135, 190, 82, 1)
@@ -176,7 +177,22 @@
         Width: =606
         X: =15
         Y: =289
-        ZIndex: =12
+        ZIndex: =8
+
+    novoTemplateIcon As icon.Add:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =50
+        Icon: =Icon.AddDocument
+        OnSelect: |-
+            =Launch("https://teams.microsoft.com/l/chat/0/0?users=henrique.carvalho@cemig.com.br")
+        Tooltip: ="Clique aqui para entrar em contato com o desenvolvedor para te auxiliar a criar um novo template de sequência manobra para sua subestação"
+        Width: =50
+        X: =571
+        Y: =19
+        ZIndex: =11
 
     gerarManobraGroup As group:
         Height: =5
@@ -199,7 +215,7 @@
             Fill: =RGBA(102, 182, 227, 1)
             Font: =Font.'Lato Light'
             FontWeight: =FontWeight.Lighter
-            Height: =146
+            Height: =89
             HoverColor: =RGBA(255, 255, 255, 1)
             HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
             OnSelect: |-
@@ -210,12 +226,12 @@
             RadiusTopLeft: =25
             RadiusTopRight: =25
             Size: =24
-            Text: ="Gerar Manobras"
+            Text: ="Gerar"
             Tooltip: =" Clique para gerar e enviar a sequência de manobras para o seu e-mail."
-            Width: =339
-            X: =167
-            Y: =861
-            ZIndex: =13
+            Width: =193
+            X: =223
+            Y: =467
+            ZIndex: =9
 
         gerarManobraIcon As icon.Paste:
             BorderColor: =RGBA(135, 190, 82, 1)
@@ -228,27 +244,33 @@
                     DisplayMode.Disabled,
                     DisplayMode.Edit
                 )
-            Height: =70
+            Height: =45
             Icon: =Icon.Paste
             OnSelect: |-
                 =UpdateContext({varPopUpVisible:true})
             Tooltip: =" Clique para gerar e enviar a sequência de manobras para o seu e-mail."
-            Width: =60
-            X: =186
-            Y: =899
-            ZIndex: =14
+            Width: =48
+            X: =235
+            Y: =489
+            ZIndex: =10
 
-    Icon4 As icon.Add:
-        BorderColor: =RGBA(135, 190, 82, 1)
-        Color: =RGBA(255, 255, 255, 1)
-        DisabledBorderColor: =RGBA(166, 166, 166, 1)
-        DisabledColor: =RGBA(244, 244, 244, 1)
-        Height: =50
-        Icon: =Icon.AddDocument
-        Width: =50
-        X: =571
-        Y: =19
-        ZIndex: =20
+    dicaTimer_1 As timer:
+        AutoStart: =true
+        Duration: =7000
+        Fill: =RGBA(12, 126, 44, 1)
+        Height: =70
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        OnTimerEnd: |-
+            =UpdateContext({varDicaTimerStart: false});
+            Reset(dicaTimer_1)
+        Repeat: =true
+        Start: =varDicaTimerStart
+        Visible: =false
+        Width: =280
+        X: =-300
+        Y: =225
+        ZIndex: =17
 
     popUpGroup2_5 As group:
         Height: =5
@@ -263,7 +285,7 @@
             Height: =1136
             Visible: =varPopUpVisible
             Width: =640
-            ZIndex: =15
+            ZIndex: =12
 
         popUpRectangle_8 As rectangle:
             BorderColor: =RGBA(166, 166, 166, 1)
@@ -274,7 +296,7 @@
             Width: =445
             X: =88
             Y: =425
-            ZIndex: =16
+            ZIndex: =13
 
         yesPopUpButton_7 As button:
             Color: =RGBA(8, 88, 31, 1)
@@ -312,7 +334,7 @@
             Width: =155
             X: =147
             Y: =584
-            ZIndex: =17
+            ZIndex: =14
 
         cancelPopUpButton_7 As button:
             Color: =RGBA(39, 113, 194, 1)
@@ -333,7 +355,7 @@
             Width: =155
             X: =327
             Y: =584
-            ZIndex: =18
+            ZIndex: =15
 
         popupMessageLabel_8 As label:
             Align: =Align.Center
@@ -348,5 +370,68 @@
             Width: =410
             X: =104
             Y: =437
+            ZIndex: =16
+
+    dicaPopUpGroup_1 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =23
+
+        dicaRectangle_1 As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(237, 206, 31, 0.76)
+            Height: =210
+            Visible: =varDicaTimerStart
+            Width: =385
+            X: =228
+            Y: =129
+            ZIndex: =18
+
+        dicaTriangle_1 As triangle:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(237, 206, 31, 0.76)
+            Height: =70
+            Visible: =varDicaTimerStart
+            Width: =30
+            X: =584
+            Y: =59
             ZIndex: =19
+
+        dicaLabel_1 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.Lato
+            FontWeight: =FontWeight.Lighter
+            Height: =174
+            Size: =17
+            Text: ="Deseja criar um novo template para automatizar a emissão de uma sequência de manobras? Entre em contato com o desenvolvedor para auxiliá-lo, clicando aqui!"
+            Visible: =varDicaTimerStart
+            Width: =324
+            X: =259
+            Y: =147
+            ZIndex: =21
+
+        closePopUpIcon As icon.Cancel:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            Color: =RGBA(149, 149, 149, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(244, 244, 244, 1)
+            FocusedBorderThickness: =1
+            Height: =48
+            Icon: =Icon.Cancel
+            OnSelect: |-
+                =UpdateContext({varDicaTimerStart: false});
+                Reset(dicaTimer_1)
+            PaddingBottom: =5
+            PaddingLeft: =5
+            Tooltip: ="Clique para fechar o pop-up"
+            Visible: =varDicaTimerStart
+            Width: =35
+            X: =571
+            Y: =143
+            ZIndex: =22
 
