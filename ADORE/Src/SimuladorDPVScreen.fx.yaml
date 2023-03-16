@@ -30,7 +30,7 @@
         );
         ClearCollect(
             colModulosFT,
-            Distinct(
+            ForAll(Distinct(
                 Sort(
                     Filter(
                         Tabela_FT_Por_Local,
@@ -39,7 +39,7 @@
                     Módulo
                 ),
                 Módulo
-            )
+            ), {Result: ThisRecord.Value})
         );
         Set(
             _varLoading,

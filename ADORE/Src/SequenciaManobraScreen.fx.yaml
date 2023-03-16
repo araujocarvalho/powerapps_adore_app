@@ -1,5 +1,12 @@
 "SequenciaManobraScreen As screen.'phoneDetailViewLayout_ver3.0'":
     LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
+    OnVisible: |-
+        =ClearCollect(colManobrasSubestacoes, Sort(Distinct(TemplatesRoteirosManobra,manobra_subestacao),Value,SortOrder.Ascending));
+        Reset(PTTextInput);
+        Reset(PLETextInput);
+        Reset(subestacaoComboBox);
+        Reset(manobraComboBox);
+        Reset(vaoTextInput);
 
     RectQuickActionBar2_13 As rectangle:
         BorderColor: =RGBA(135, 190, 82, 1)
@@ -33,7 +40,7 @@
         Font: =Font.'Lato Light'
         Height: =88
         Size: =25
-        Text: ="Gerar Sequência de Manobras"
+        Text: ="Emitir Sequência de Manobras"
         Width: =Parent.Width - Self.X
         Wrap: =false
         X: =80
@@ -42,6 +49,7 @@
     PTTextInput As text:
         BorderColor: =RGBA(135, 190, 82, 1)
         BorderThickness: =2
+        Clear: =true
         Color: =RGBA(0, 0, 0, 1)
         Default: =""
         DisabledBorderColor: =RGBA(166, 166, 166, 1)
@@ -55,6 +63,7 @@
         HoverBorderColor: =RGBA(135, 190, 82, 1)
         HoverColor: =RGBA(255, 255, 255, 1)
         HoverFill: =RGBA(53, 74, 36, 1)
+        MaxLength: =10
         Size: =20
         Width: =295
         X: =15
@@ -64,6 +73,7 @@
     PLETextInput As text:
         BorderColor: =RGBA(135, 190, 82, 1)
         BorderThickness: =2
+        Clear: =true
         Color: =RGBA(0, 0, 0, 1)
         Default: =""
         DisabledBorderColor: =RGBA(166, 166, 166, 1)
@@ -77,6 +87,7 @@
         HoverBorderColor: =RGBA(135, 190, 82, 1)
         HoverColor: =RGBA(255, 255, 255, 1)
         HoverFill: =RGBA(53, 74, 36, 1)
+        MaxLength: =10
         Size: =20
         Width: =295
         X: =326
@@ -115,16 +126,19 @@
         DisabledBorderColor: =RGBA(166, 166, 166, 1)
         DisabledColor: =RGBA(166, 166, 166, 1)
         DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayFields: =["Value"]
         Font: =Font.'Lato Light'
         FontWeight: =FontWeight.Lighter
         Height: =70
         HoverColor: =RGBA(255, 255, 255, 1)
         HoverFill: =RGBA(53, 74, 36, 1)
         InputTextPlaceholder: ="Subestação"
-        Items: =ComboBoxSample
+        Items: =colManobrasSubestacoes
+        OnChange: =ClearCollect(colManobras,Sort(Distinct(Filter(TemplatesRoteirosManobra,manobra_subestacao=subestacaoComboBox.Selected.Value),manobra_nome),Value,SortOrder.Ascending))
         PressedColor: =RGBA(255, 255, 255, 1)
         PressedFill: =RGBA(135, 190, 82, 1)
-        SearchItems: =Search(ComboBoxSample,subestacaoComboBox.SearchText,"Value1")
+        SearchFields: =["Value"]
+        SearchItems: =Search(colManobrasSubestacoes,subestacaoComboBox.SearchText,"Value")
         SelectionFill: =RGBA(12, 126, 44, 1)
         Size: =21
         Width: =606
@@ -142,16 +156,21 @@
         DisabledBorderColor: =RGBA(166, 166, 166, 1)
         DisabledColor: =RGBA(166, 166, 166, 1)
         DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayFields: =["Value"]
+        DisplayMode: =If(IsBlank(subestacaoComboBox.Selected.Value),DisplayMode.Disabled,DisplayMode.Edit)
         Font: =Font.'Lato Light'
         FontWeight: =FontWeight.Lighter
         Height: =70
         HoverColor: =RGBA(255, 255, 255, 1)
         HoverFill: =RGBA(53, 74, 36, 1)
         InputTextPlaceholder: ="Manobra"
-        Items: =ComboBoxSample
+        IsSearchable: =false
+        Items: =colManobras
+        NoSelectionText: ="Selecione a manobra"
         PressedColor: =RGBA(255, 255, 255, 1)
         PressedFill: =RGBA(135, 190, 82, 1)
-        SearchItems: =Search(ComboBoxSample,manobraComboBox.SearchText,"Value1")
+        SearchFields: =["Value"]
+        SearchItems: =[]
         SelectionFill: =RGBA(12, 126, 44, 1)
         Size: =21
         Width: =606
@@ -171,12 +190,20 @@
             DisabledBorderColor: =RGBA(166, 166, 166, 1)
             DisabledColor: =RGBA(166, 166, 166, 1)
             DisabledFill: =RGBA(244, 244, 244, 1)
+            DisplayMode: |-
+                =If(
+                    IsBlank(PTTextInput.Text) || IsBlank(PLETextInput.Text) || IsBlank(subestacaoComboBox.Selected) || IsBlank(manobraComboBox.Selected) || IsBlank(vaoTextInput.Text),
+                    DisplayMode.Disabled,
+                    DisplayMode.Edit
+                )
             Fill: =RGBA(102, 182, 227, 1)
             Font: =Font.'Lato Light'
             FontWeight: =FontWeight.Lighter
             Height: =146
             HoverColor: =RGBA(255, 255, 255, 1)
             HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+            OnSelect: |-
+                =UpdateContext({varPopUpVisible:true})
             PaddingRight: =20
             RadiusBottomLeft: =25
             RadiusBottomRight: =25
@@ -193,13 +220,133 @@
         gerarManobraIcon As icon.Paste:
             BorderColor: =RGBA(135, 190, 82, 1)
             Color: =RGBA(255, 191, 0, 1)
-            DisabledBorderColor: =RGBA(166, 166, 166, 1)
-            DisabledColor: =RGBA(244, 244, 244, 1)
+            DisabledBorderColor: =RGBA(116, 116, 116, 1)
+            DisabledColor: =RGBA(202, 202, 202, 1)
+            DisplayMode: |-
+                =If(
+                    IsBlank(PTTextInput.Text) || IsBlank(PLETextInput.Text) || IsBlank(subestacaoComboBox.Selected) || IsBlank(manobraComboBox.Selected) || IsBlank(vaoTextInput.Text),
+                    DisplayMode.Disabled,
+                    DisplayMode.Edit
+                )
             Height: =70
             Icon: =Icon.Paste
+            OnSelect: |-
+                =UpdateContext({varPopUpVisible:true})
             Tooltip: =" Clique para gerar e enviar a sequência de manobras para o seu e-mail."
             Width: =60
             X: =186
             Y: =899
             ZIndex: =14
+
+    Icon4 As icon.Add:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =50
+        Icon: =Icon.AddDocument
+        Width: =50
+        X: =571
+        Y: =19
+        ZIndex: =20
+
+    popUpGroup2_5 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =20
+
+        popUpBackGroundRectangle_8 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 0.1)
+            Height: =1136
+            Visible: =varPopUpVisible
+            Width: =640
+            ZIndex: =15
+
+        popUpRectangle_8 As rectangle:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =242
+            Visible: =varPopUpVisible
+            Width: =445
+            X: =88
+            Y: =425
+            ZIndex: =16
+
+        yesPopUpButton_7 As button:
+            Color: =RGBA(8, 88, 31, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Semibold
+            Height: =55
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+            OnSelect: |
+                =UpdateContext({varPopUpVisible: false});
+                FlowGerarRoteiroManobra_ADORE.Run(
+                    PTTextInput.Text,
+                    PLETextInput.Text,
+                    Proper(User().FullName),
+                    vaoTextInput.Text,
+                    "LINHA",//Alterar estes campos buscando de tabela a ser criada
+                    "TENSÃO",
+                    "BANCO",
+                    "DISJ_MEIO",
+                    User().Email,
+                    manobraComboBox.Selected.Value,
+                    subestacaoComboBox.Selected.Value
+                );
+                Notify(
+                    "Sequência de Manobras emitida com sucesso! Para visualizá-la, cheque sua caixa de mensagens do Outlook.",
+                    NotificationType.Success
+                );
+            Size: =21
+            Text: ="Sim"
+            Visible: =varPopUpVisible
+            Width: =155
+            X: =147
+            Y: =584
+            ZIndex: =17
+
+        cancelPopUpButton_7 As button:
+            Color: =RGBA(39, 113, 194, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Semibold
+            Height: =55
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(102, 182, 227, 1)
+            OnSelect: |-
+                =UpdateContext({varPopUpVisible:false})
+            Size: =21
+            Text: ="Cancelar"
+            Visible: =varPopUpVisible
+            Width: =155
+            X: =327
+            Y: =584
+            ZIndex: =18
+
+        popupMessageLabel_8 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            Height: =111
+            Size: =21
+            Text: ="Confirma a emissão da sequência de manobras?"
+            Visible: =varPopUpVisible
+            Width: =410
+            X: =104
+            Y: =437
+            ZIndex: =19
 

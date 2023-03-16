@@ -72,10 +72,10 @@
         ClearCollect(
             colFabricantes,
             Sort(
-                Distinct(
+                ForAll(Distinct(
                     colModelosEquipamentos,
                     Fabricante_Real
-                ),
+                ), {Result: ThisRecord.Value}),
                 Result,
                 SortOrder.Ascending
             )
@@ -85,7 +85,7 @@
             ClearCollect(
                 colModelos,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         Filter(
                             modelos_ativos_v3,
                             If(
@@ -95,7 +95,7 @@
                             )
                         ),
                         Modelo_Real
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )
@@ -103,10 +103,10 @@
             ClearCollect(
                 colModelos,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         colModelosEquipamentos,
                         Modelo_Real
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )
@@ -941,7 +941,7 @@
                         ClearCollect(
                             colModelos,
                             Sort(
-                                Distinct(
+                                ForAll(Distinct(
                                     Filter(
                                         modelos_ativos_v3,
                                         If(
@@ -951,7 +951,7 @@
                                         )
                                     ),
                                     Modelo_Real
-                                ),
+                                ), {Result: ThisRecord.Value}),
                                 Result,
                                 SortOrder.Ascending
                             )

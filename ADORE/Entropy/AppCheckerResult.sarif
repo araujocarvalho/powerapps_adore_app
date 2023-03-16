@@ -14,86 +14,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.OnVisible"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.OnVisible",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 212,
-                  "charOffset": 2367,
-                  "snippet": {
-                    "text": "If(\r\n                        fabricanteEqptoComboBox.Selected.Result = \"\";\r\n                        1 = 1;\r\n                        fabricanteEqptoComboBox.Selected.Result = Fabricante_Real\r\n                    )"
-                  }
-                }
-              },
-              "properties": {
-                "member": "OnVisible",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "Filter"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.fabricanteEqptoComboBox.OnChange"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.fabricanteEqptoComboBox.OnChange",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 248,
-                  "charOffset": 229,
-                  "snippet": {
-                    "text": "If(\r\n                    fabricanteEqptoComboBox.Selected.Result = \"\" || IsBlank(fabricanteEqptoComboBox.Selected.Result);\r\n                    1 = 1;\r\n                    fabricanteEqptoComboBox.Selected.Result = Fabricante_Real\r\n                )"
-                  }
-                }
-              },
-              "properties": {
-                "member": "OnChange",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.fabricanteEqptoComboBox"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "Filter"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "HomeScreen.carrosselImage.OnSelect"
                 }
               ],
@@ -314,6 +234,86 @@
                 "member": "Items",
                 "module": "DestaquesNoticiasSearchScreen",
                 "type": "DestaquesNoticiasSearchScreen.destaquesNoticiasGallery"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "Filter"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-SuggestRemoteExecutionHint",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.OnVisible"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.OnVisible",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 212,
+                  "charOffset": 2410,
+                  "snippet": {
+                    "text": "If(\r\n                        fabricanteEqptoComboBox.Selected.Result = \"\";\r\n                        1 = 1;\r\n                        fabricanteEqptoComboBox.Selected.Result = Fabricante_Real\r\n                    )"
+                  }
+                }
+              },
+              "properties": {
+                "member": "OnVisible",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "Filter"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-SuggestRemoteExecutionHint",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.fabricanteEqptoComboBox.OnChange"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.fabricanteEqptoComboBox.OnChange",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 248,
+                  "charOffset": 236,
+                  "snippet": {
+                    "text": "If(\r\n                    fabricanteEqptoComboBox.Selected.Result = \"\" || IsBlank(fabricanteEqptoComboBox.Selected.Result);\r\n                    1 = 1;\r\n                    fabricanteEqptoComboBox.Selected.Result = Fabricante_Real\r\n                )"
+                  }
+                }
+              },
+              "properties": {
+                "member": "OnChange",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.fabricanteEqptoComboBox"
               }
             }
           ],
@@ -571,636 +571,6 @@
           },
           "ruleId": "app-SuggestRemoteExecutionHint-OpNotSupportedByColumn",
           "ruleIndex": 2
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.salvarIcon_2.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.salvarIcon_2.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.salvarIcon_2"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.salvarIcon_2.TabIndex"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.salvarIcon_2.TabIndex",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "TabIndex",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.salvarIcon_2"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 4
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Title_DataCard1.titleTextInput.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Title_DataCard1.titleTextInput.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Title_DataCard1.titleTextInput"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Autor_DataCard2.autorDataCardValue.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Autor_DataCard2.autorDataCardValue.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Autor_DataCard2.autorDataCardValue"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Órgão_DataCard1.órgãoDataCardValue.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Órgão_DataCard1.órgãoDataCardValue.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Órgão_DataCard1.órgãoDataCardValue"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Assunto_DataCard2.assuntoDataCardValue.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Assunto_DataCard2.assuntoDataCardValue.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Assunto_DataCard2.assuntoDataCardValue"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Conteúdo_DataCard1.conteudoRichTextEditor.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Conteúdo_DataCard1.conteudoRichTextEditor.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Conteúdo_DataCard1.conteudoRichTextEditor"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Categoria_DataCard2.categoriaDataCardValue.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Categoria_DataCard2.categoriaDataCardValue.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Categoria_DataCard2.categoriaDataCardValue"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Nº PACP_DataCard'.DataCardValue2.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Nº PACP_DataCard'.DataCardValue2.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Nº PACP_DataCard'.DataCardValue2"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Equipamento (SIOM)_DataCard1'.DataCardValue1.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Equipamento (SIOM)_DataCard1'.DataCardValue1.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Equipamento (SIOM)_DataCard1'.DataCardValue1"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.fabricanteEqptoComboBox.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.fabricanteEqptoComboBox.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.fabricanteEqptoComboBox"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.DataCardValue13_1.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.DataCardValue13_1.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.DataCardValue13_1"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Modelo_DataCard1.modeloEqptoComboBox.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Modelo_DataCard1.modeloEqptoComboBox.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Modelo_DataCard1.modeloEqptoComboBox"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Foto_DataCard2.AddPicture2.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Foto_DataCard2.AddPicture2.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Foto_DataCard2.AddPicture2"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Link_DataCard2.DataCardValue13.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Link_DataCard2.DataCardValue13.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Link_DataCard2.DataCardValue13"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Anexos_DataCard1.DataCardValue15.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Anexos_DataCard1.DataCardValue15.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Anexos_DataCard1.DataCardValue15"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.DateValue1.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.DateValue1.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.DateValue1"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.HourValue1.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.HourValue1.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.HourValue1"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.MinuteValue1.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.MinuteValue1.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.MinuteValue1"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.notificarDestaqueContainer.notificarToggle.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.notificarDestaqueContainer.notificarToggle.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.notificarDestaqueContainer.notificarToggle"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.notificarDestaqueContainer.notificarParaHorizontalContainer.notificarParaComboBox.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.notificarDestaqueContainer.notificarParaHorizontalContainer.notificarParaComboBox.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "DestaqueNoticiaEditScreen",
-                "type": "DestaqueNoticiaEditScreen.destaqueContainer.notificarDestaqueContainer.notificarParaHorizontalContainer.notificarParaComboBox"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
         },
         {
           "locations": [
@@ -3271,6 +2641,636 @@
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
           "ruleIndex": 4
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.salvarIcon_2.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.salvarIcon_2.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.salvarIcon_2"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.salvarIcon_2.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.salvarIcon_2.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.salvarIcon_2"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 4
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Title_DataCard1.titleTextInput.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Title_DataCard1.titleTextInput.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Title_DataCard1.titleTextInput"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Autor_DataCard2.autorDataCardValue.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Autor_DataCard2.autorDataCardValue.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Autor_DataCard2.autorDataCardValue"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Órgão_DataCard1.órgãoDataCardValue.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Órgão_DataCard1.órgãoDataCardValue.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Órgão_DataCard1.órgãoDataCardValue"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Assunto_DataCard2.assuntoDataCardValue.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Assunto_DataCard2.assuntoDataCardValue.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Assunto_DataCard2.assuntoDataCardValue"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Conteúdo_DataCard1.conteudoRichTextEditor.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Conteúdo_DataCard1.conteudoRichTextEditor.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Conteúdo_DataCard1.conteudoRichTextEditor"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Categoria_DataCard2.categoriaDataCardValue.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Categoria_DataCard2.categoriaDataCardValue.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Categoria_DataCard2.categoriaDataCardValue"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Nº PACP_DataCard'.DataCardValue2.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Nº PACP_DataCard'.DataCardValue2.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Nº PACP_DataCard'.DataCardValue2"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Equipamento (SIOM)_DataCard1'.DataCardValue1.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Equipamento (SIOM)_DataCard1'.DataCardValue1.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Equipamento (SIOM)_DataCard1'.DataCardValue1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.fabricanteEqptoComboBox.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.fabricanteEqptoComboBox.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.fabricanteEqptoComboBox"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.DataCardValue13_1.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.DataCardValue13_1.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Fabricante_DataCard1.DataCardValue13_1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Modelo_DataCard1.modeloEqptoComboBox.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Modelo_DataCard1.modeloEqptoComboBox.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Modelo_DataCard1.modeloEqptoComboBox"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Foto_DataCard2.AddPicture2.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Foto_DataCard2.AddPicture2.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Foto_DataCard2.AddPicture2"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Link_DataCard2.DataCardValue13.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Link_DataCard2.DataCardValue13.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Link_DataCard2.DataCardValue13"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Anexos_DataCard1.DataCardValue15.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Anexos_DataCard1.DataCardValue15.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.Anexos_DataCard1.DataCardValue15"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.DateValue1.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.DateValue1.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.DateValue1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.HourValue1.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.HourValue1.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.HourValue1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.MinuteValue1.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.MinuteValue1.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.destaqueForm.'Publicado em_DataCard1'.MinuteValue1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.notificarDestaqueContainer.notificarToggle.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.notificarDestaqueContainer.notificarToggle.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.notificarDestaqueContainer.notificarToggle"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.notificarDestaqueContainer.notificarParaHorizontalContainer.notificarParaComboBox.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DestaqueNoticiaEditScreen.destaqueContainer.notificarDestaqueContainer.notificarParaHorizontalContainer.notificarParaComboBox.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DestaqueNoticiaEditScreen",
+                "type": "DestaqueNoticiaEditScreen.destaqueContainer.notificarDestaqueContainer.notificarParaHorizontalContainer.notificarParaComboBox"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -6817,66 +6817,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesModeloContainer.lampadaDestaqueModeloIcon.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesModeloContainer.lampadaDestaqueModeloIcon.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "Ativo_T_DetailScreen",
-                "type": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesModeloContainer.lampadaDestaqueModeloIcon"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesModeloContainer.lampadaDestaqueModeloIcon.TabIndex"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesModeloContainer.lampadaDestaqueModeloIcon.TabIndex",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "TabIndex",
-                "module": "Ativo_T_DetailScreen",
-                "type": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesModeloContainer.lampadaDestaqueModeloIcon"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 4
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesAtivoContainer.lampadaDestaqueAtivoIcon.AccessibleLabel"
                 }
               ],
@@ -6920,6 +6860,66 @@
                 "member": "TabIndex",
                 "module": "Ativo_T_DetailScreen",
                 "type": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesAtivoContainer.lampadaDestaqueAtivoIcon"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 4
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesModeloContainer.lampadaDestaqueModeloIcon.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesModeloContainer.lampadaDestaqueModeloIcon.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "Ativo_T_DetailScreen",
+                "type": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesModeloContainer.lampadaDestaqueModeloIcon"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesModeloContainer.lampadaDestaqueModeloIcon.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesModeloContainer.lampadaDestaqueModeloIcon.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "Ativo_T_DetailScreen",
+                "type": "Ativo_T_DetailScreen.detalheAtivoVerticalContainer.destaquesHorizontalContainer.destaquesModeloContainer.lampadaDestaqueModeloIcon"
               }
             }
           ],
@@ -7081,6 +7081,126 @@
           },
           "ruleId": "acc-AccessibleLabelNeeded",
           "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "HomeScreen.sideMenu.sequenciaManobrasContainer.sequenciaManobrasIcon.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "HomeScreen.sideMenu.sequenciaManobrasContainer.sequenciaManobrasIcon.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "HomeScreen",
+                "type": "HomeScreen.sideMenu.sequenciaManobrasContainer.sequenciaManobrasIcon"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "HomeScreen.sideMenu.sequenciaManobrasContainer.sequenciaManobrasIcon.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "HomeScreen.sideMenu.sequenciaManobrasContainer.sequenciaManobrasIcon.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "HomeScreen",
+                "type": "HomeScreen.sideMenu.sequenciaManobrasContainer.sequenciaManobrasIcon"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 4
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "SequenciaManobraScreen.gerarManobraIcon.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "SequenciaManobraScreen.gerarManobraIcon.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "SequenciaManobraScreen",
+                "type": "SequenciaManobraScreen.gerarManobraIcon"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "SequenciaManobraScreen.gerarManobraIcon.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "SequenciaManobraScreen.gerarManobraIcon.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "SequenciaManobraScreen",
+                "type": "SequenciaManobraScreen.gerarManobraIcon"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -7636,7 +7756,7 @@
               }
             }
           ],
-          "version": "1.329"
+          "version": "1.330"
         }
       }
     }

@@ -130,10 +130,10 @@ SplashScreen As screen:
             ClearCollect(
                 colGerencias_T,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         colAtivos_T,
                         ativo_gerencia
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )
@@ -141,10 +141,10 @@ SplashScreen As screen:
             ClearCollect(
                 colLocalizacoes_T,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         colAtivos_T,
                         ativo_local_nome
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )
@@ -152,10 +152,10 @@ SplashScreen As screen:
             ClearCollect(
                 colTiposEqptos_T,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         colAtivos_T,
                         ativo_tipo
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )
@@ -192,10 +192,10 @@ SplashScreen As screen:
             ClearCollect(
                 colModelos,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         colModelosEquipamentos,
                         Modelo_Real
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )
@@ -203,10 +203,10 @@ SplashScreen As screen:
             ClearCollect(
                 colFabricantes,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         colModelosEquipamentos,
                         Fabricante_Real
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )
@@ -214,10 +214,10 @@ SplashScreen As screen:
             ClearCollect(
                 colTiposEqptos,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         colModelosEquipamentos,
                         Tipo_Descrição
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )
@@ -310,10 +310,10 @@ SplashScreen As screen:
             ClearCollect(
                 colGerencias_G,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         colAtivos_G,
                         ativo_gerencia
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )
@@ -321,10 +321,10 @@ SplashScreen As screen:
             ClearCollect(
                 colLocalizacoes_G,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         colAtivos_G,
                         ativo_local_nome
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )
@@ -332,10 +332,10 @@ SplashScreen As screen:
             ClearCollect(
                 colTiposEqptos_G,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         colAtivos_G,
                         ativo_tipo
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )

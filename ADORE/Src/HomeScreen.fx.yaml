@@ -1088,13 +1088,81 @@
             Y: =40
             ZIndex: =11
 
+        sequenciaManobrasContainer As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =112
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Visible: =_varUserIsAdmin
+            ZIndex: =12
+
+            sequenciaManobrasIcon As icon.Search:
+                BorderColor: =RGBA(135, 190, 82, 1)
+                Color: =RGBA(0, 134, 208, 1)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(244, 244, 244, 1)
+                Height: =70
+                Icon: =Icon.Paste
+                OnSelect: =Navigate(SequenciaManobraScreen)
+                PaddingBottom: =10
+                PaddingLeft: =50
+                PaddingRight: =10
+                PaddingTop: =10
+                Tooltip: ="Clique para abrir a tela de emissão de sequência de manobras"
+                Width: =100
+                X: =202
+                Y: =595
+                ZIndex: =1
+
+            sequenciaManobrasButton As button:
+                Align: =Align.Left
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderThickness: =0
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FillPortions: =1
+                Font: =Font.'Lato Light'
+                FontWeight: =FontWeight.Lighter
+                Height: =70
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                LayoutMinHeight: =70
+                LayoutMinWidth: =280
+                OnSelect: =Navigate(SequenciaManobraScreen)
+                PaddingBottom: =0
+                PaddingRight: =10
+                PaddingTop: =0
+                PressedFill: =RGBA(0,0,0,0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =22
+                Text: ="Sequência de Manobras"
+                Tooltip: ="Clique para abrir a tela de emissão de sequência de manobras"
+                Width: =280
+                ZIndex: =2
+
+        separador2_1 As rectangle:
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Fill: =RGBA(12, 126, 44, 1)
+            Height: =1
+            Visible: =_varUserIsAdmin
+            Width: =555
+            X: =40
+            Y: =40
+            ZIndex: =13
+
         simuladorPVContainer As groupContainer.horizontalAutoLayoutContainer:
             FillPortions: =0
             Height: =70
             LayoutMinHeight: =112
             LayoutMinWidth: =250
             LayoutMode: =LayoutMode.Auto
-            ZIndex: =12
+            ZIndex: =14
 
             simuladorPVIcon As icon.Search:
                 BorderColor: =RGBA(135, 190, 82, 1)
@@ -1154,7 +1222,7 @@
             Width: =555
             X: =40
             Y: =40
-            ZIndex: =13
+            ZIndex: =15
 
         indicadoresContainer As groupContainer.horizontalAutoLayoutContainer:
             FillPortions: =0
@@ -1162,7 +1230,7 @@
             LayoutMinHeight: =112
             LayoutMinWidth: =250
             LayoutMode: =LayoutMode.Auto
-            ZIndex: =14
+            ZIndex: =16
 
             indicadoresIcon As icon.Search:
                 BorderColor: =RGBA(135, 190, 82, 1)
@@ -1302,7 +1370,7 @@
             Width: =555
             X: =40
             Y: =40
-            ZIndex: =15
+            ZIndex: =17
 
         cadastrarCISContainer As groupContainer.horizontalAutoLayoutContainer:
             FillPortions: =0
@@ -1311,7 +1379,7 @@
             LayoutMinWidth: =250
             LayoutMode: =LayoutMode.Auto
             Visible: =_varUserIsAdmin
-            ZIndex: =16
+            ZIndex: =18
 
             cadastrarCISIcon As icon.Search:
                 BorderColor: =RGBA(135, 190, 82, 1)
@@ -1370,7 +1438,7 @@
             Width: =555
             X: =40
             Y: =40
-            ZIndex: =17
+            ZIndex: =19
 
         destaquesNoticiasContainer As groupContainer.horizontalAutoLayoutContainer:
             FillPortions: =0
@@ -1378,7 +1446,7 @@
             LayoutMinHeight: =112
             LayoutMinWidth: =250
             LayoutMode: =LayoutMode.Auto
-            ZIndex: =18
+            ZIndex: =20
 
             destaquesNoticiasIcon As icon.Search:
                 BorderColor: =RGBA(135, 190, 82, 1)
@@ -1438,7 +1506,7 @@
             Width: =555
             X: =40
             Y: =40
-            ZIndex: =19
+            ZIndex: =21
 
         sobreContainer As groupContainer.horizontalAutoLayoutContainer:
             FillPortions: =0
@@ -1446,7 +1514,7 @@
             LayoutMinHeight: =112
             LayoutMinWidth: =250
             LayoutMode: =LayoutMode.Auto
-            ZIndex: =20
+            ZIndex: =22
 
             sobreButton As button:
                 Align: =Align.Left
@@ -1487,7 +1555,7 @@
             Width: =555
             X: =40
             Y: =40
-            ZIndex: =21
+            ZIndex: =23
 
     carrosselImageGroup As group:
         Height: =5

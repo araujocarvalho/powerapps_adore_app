@@ -789,10 +789,10 @@
                         varAtivoG.ativo_fabricante,
                         varAtivoG.ativo_modelo,
                         Concat(
-                            Split(
+                            ForAll(Split(
                                 varAtivoG.ativo_modelo,
                                 ""
-                            ),
+                            ), {Result: ThisRecord.Value}),
                             If(
                                 IsMatch(
                                     Result,
@@ -886,10 +886,10 @@
                     ClearCollect(
                         colGerencias_T,
                         Sort(
-                            Distinct(
+                            ForAll(Distinct(
                                 colAtivos_T,
                                 ativo_gerencia
-                            ),
+                            ), {Result: ThisRecord.Value}),
                             Result,
                             SortOrder.Ascending
                         )
@@ -897,10 +897,10 @@
                     ClearCollect(
                         colLocalizacoes_T,
                         Sort(
-                            Distinct(
+                            ForAll(Distinct(
                                 colAtivos_T,
                                 ativo_local_nome
-                            ),
+                            ), {Result: ThisRecord.Value}),
                             Result,
                             SortOrder.Ascending
                         )
@@ -908,10 +908,10 @@
                     ClearCollect(
                         colTiposEqptos_T,
                         Sort(
-                            Distinct(
+                            ForAll(Distinct(
                                 colAtivos_T,
                                 ativo_tipo
-                            ),
+                            ), {Result: ThisRecord.Value}),
                             Result,
                             SortOrder.Ascending
                         )

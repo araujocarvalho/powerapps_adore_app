@@ -98,10 +98,10 @@
             ClearCollect(
                 colGerencias_T,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         colAtivos_T,
                         ativo_gerencia
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )
@@ -109,10 +109,10 @@
             ClearCollect(
                 colLocalizacoes_T,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         colAtivos_T,
                         ativo_local_nome
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )
@@ -120,10 +120,10 @@
             ClearCollect(
                 colTiposEqptos_T,
                 Sort(
-                    Distinct(
+                    ForAll(Distinct(
                         colAtivos_T,
                         ativo_tipo
-                    ),
+                    ), {Result: ThisRecord.Value}),
                     Result,
                     SortOrder.Ascending
                 )
@@ -148,10 +148,10 @@
                 ClearCollect(
                     colModelos,
                     Sort(
-                        Distinct(
+                        ForAll(Distinct(
                             colModelosEquipamentos,
                             Modelo_Real
-                        ),
+                        ), {Result: ThisRecord.Value}),
                         Result,
                         SortOrder.Ascending
                     )
@@ -159,10 +159,10 @@
                 ClearCollect(
                     colFabricantes,
                     Sort(
-                        Distinct(
+                        ForAll(Distinct(
                             colModelosEquipamentos,
                             Fabricante_Real
-                        ),
+                        ), {Result: ThisRecord.Value}),
                         Result,
                         SortOrder.Ascending
                     )
@@ -170,10 +170,10 @@
                 ClearCollect(
                     colTiposEqptos,
                     Sort(
-                        Distinct(
+                        ForAll(Distinct(
                             colModelosEquipamentos,
                             Tipo_Descrição
-                        ),
+                        ), {Result: ThisRecord.Value}),
                         Result,
                         SortOrder.Ascending
                     )
@@ -661,8 +661,8 @@
         OnChange: |-
             =If(!IsBlank(localizacaoComboBox.Selected.Result),Reset(localizacaoComboBox));
             If(!IsBlank(tipoComboBox.Selected.Result),Reset(tipoComboBox));
-            ClearCollect(colLocalizacoes_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_local_nome),Result,SortOrder.Ascending));
-            ClearCollect(colTiposEqptos_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_tipo),Result,SortOrder.Ascending));
+            ClearCollect(colLocalizacoes_T,Sort(ForAll(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_local_nome), {Result: ThisRecord.Value}),Result,SortOrder.Ascending));
+            ClearCollect(colTiposEqptos_T,Sort(ForAll(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_tipo), {Result: ThisRecord.Value}),Result,SortOrder.Ascending));
         PaddingLeft: =15
         PressedColor: =RGBA(255, 255, 255, 1)
         PressedFill: =RGBA(135, 190, 82, 1)
@@ -730,7 +730,7 @@
         NoSelectionText: ="Subestação/Usina"
         OnChange: |-
             =If(!IsBlank(tipoComboBox.Selected.Result),Reset(tipoComboBox));
-            ClearCollect(colTiposEqptos_T,Sort(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_tipo),Result,SortOrder.Ascending));
+            ClearCollect(colTiposEqptos_T,Sort(ForAll(Distinct(T_listaAtivosBrowseGallery.AllItems,ativo_tipo), {Result: ThisRecord.Value}),Result,SortOrder.Ascending));
         PaddingLeft: =15
         PressedColor: =RGBA(255, 255, 255, 1)
         PressedFill: =RGBA(135, 190, 82, 1)
