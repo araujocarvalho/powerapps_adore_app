@@ -35,6 +35,9 @@
       "vao_controle_reativo": "vao_controle_reativo",
       "vao_disj_do_meio": "vao_disj_do_meio",
       "vao_linha": "vao_linha",
+      "vao_manobra_filtro": "vao_manobra_filtro",
+      "vao_manobra_filtro#Id": "vao_manobra_filtro Id",
+      "vao_manobra_filtro@odata.type": "vao_manobra_filtro (vao_manobra_filtro@odata.type)",
       "vao_subestacao": "vao_subestacao",
       "vao_subestacao#Id": "vao_subestacao Id",
       "vao_tensao": "vao_tensao"

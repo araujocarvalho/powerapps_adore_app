@@ -191,7 +191,10 @@
         InputTextPlaceholder: ="Subestação"
         Items: =Choices([@TemplatesRoteirosManobra].manobra_subestacao)
         OnChange: |-
-            =ClearCollect(
+            =Reset(manobraComboBox);
+            Reset(vaoComboBox);
+            UpdateContext({varVao: Blank()});
+            ClearCollect(
                 colManobras,
                 Sort(
                     Distinct(
@@ -200,20 +203,6 @@
                             manobra_subestacao.Value = subestacaoComboBox.Selected.Value
                         ),
                         manobra_nome
-                    ),
-                    Value,
-                    SortOrder.Ascending
-                )
-            );
-            ClearCollect(
-                colVaos,
-                Sort(
-                    Distinct(
-                        Filter(
-                            VaosSubestacoesTransmissao,
-                            vao_subestacao.Value = subestacaoComboBox.Selected.Value
-                        ),
-                        vao_nome
                     ),
                     Value,
                     SortOrder.Ascending
@@ -256,6 +245,24 @@
         IsSearchable: =false
         Items: =colManobras
         NoSelectionText: =If(Self.DisplayMode = DisplayMode.Edit && IsEmpty(colManobras),"Subestação sem templates cadastrados","Manobra")
+        OnChange: |-
+            =Reset(vaoComboBox);
+            UpdateContext({varVao: Blank()});
+            ClearCollect(
+                colVaos,
+                Sort(
+                    Distinct(
+                        Filter(
+                            VaosSubestacoesTransmissao,
+                            vao_subestacao.Value = subestacaoComboBox.Selected.Value,
+                            First(Filter(TemplatesRoteirosManobra,manobra_nome=manobraComboBox.Selected.Value)).manobra_filtro in vao_manobra_filtro.Value
+                        ),
+                        vao_nome
+                    ),
+                    Value,
+                    SortOrder.Ascending
+                )
+            );
         PressedColor: =RGBA(255, 255, 255, 1)
         PressedFill: =RGBA(135, 190, 82, 1)
         SearchFields: =["Value"]
@@ -279,7 +286,7 @@
         DisabledColor: =RGBA(0, 0, 0, 1)
         DisabledFill: =RGBA(244, 244, 244, 1)
         DisplayFields: =["Value"]
-        DisplayMode: =If(IsBlank(subestacaoComboBox.Selected.Value),DisplayMode.Disabled,DisplayMode.Edit)
+        DisplayMode: =If(IsBlank(manobraComboBox.Selected.Value),DisplayMode.Disabled,DisplayMode.Edit)
         Font: =Font.'Lato Light'
         FontWeight: =FontWeight.Lighter
         Height: =70
