@@ -30,17 +30,20 @@
       "Editor": "Modificado por",
       "Editor#Claims": "Modificado por Claims",
       "ID": "ID",
-      "manobra_nome": "manobra_nome",
-      "manobra_subestacao": "manobra_subestacao",
-      "manobra_subestacao#Id": "manobra_subestacao Id",
       "Modified": "Modificado",
-      "Title": "Título"
+      "Title": "vao_nome",
+      "vao_controle_reativo": "vao_controle_reativo",
+      "vao_disj_do_meio": "vao_disj_do_meio",
+      "vao_linha": "vao_linha",
+      "vao_subestacao": "vao_subestacao",
+      "vao_subestacao#Id": "vao_subestacao Id",
+      "vao_tensao": "vao_tensao"
     },
     "DatasetName": "https://cemigbr.sharepoint.com/sites/GestodeAtivosdaTransmissaoQA",
     "EncodeDataset": true,
     "IsSampleData": false,
     "IsWritable": true,
-    "Name": "TemplatesRoteirosManobra",
+    "Name": "VaosSubestacoesTransmissao",
     "Type": "ConnectedDataSourceInfo"
   }
 ]

@@ -769,6 +769,9 @@
         "dataSources": {
           "TemplatesRoteirosManobra": {
             "tableName": "71d44459-3908-4f48-b859-ef89e4f4ffcf"
+          },
+          "VaosSubestacoesTransmissao": {
+            "tableName": "c9a88aac-c70e-44b9-991b-4197c1b9653f"
           }
         }
       },
@@ -803,7 +806,8 @@
       "destaques_noticias",
       "ativos_AT_v3",
       "ativos_AG_v1",
-      "TemplatesRoteirosManobra"
+      "TemplatesRoteirosManobra",
+      "VaosSubestacoesTransmissao"
     ],
     "dependencies": {},
     "dependents": [

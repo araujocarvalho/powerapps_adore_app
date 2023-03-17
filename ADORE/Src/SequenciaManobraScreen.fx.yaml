@@ -1,13 +1,13 @@
 "SequenciaManobraScreen As screen.'phoneDetailViewLayout_ver3.0'":
     LoadingSpinnerColor: =RGBA(12, 126, 44, 1)
     OnVisible: |-
-        =ClearCollect(colManobrasSubestacoes, Sort(Distinct(TemplatesRoteirosManobra,manobra_subestacao),Value,SortOrder.Ascending));
-        Reset(PTTextInput);
+        =Reset(PTTextInput);
         Reset(PLETextInput);
         Reset(subestacaoComboBox);
         Reset(manobraComboBox);
-        Reset(vaoTextInput);
-        UpdateContext({varDicaTimerStart: true})
+        Reset(vaoComboBox);
+        UpdateContext({varDicaTimerStart: true});
+        UpdateContext({varVao: Blank()})
 
     RectQuickActionBar2_13 As rectangle:
         BorderColor: =RGBA(135, 190, 82, 1)
@@ -40,12 +40,89 @@
         DisabledColor: =RGBA(166, 166, 166, 1)
         Font: =Font.'Lato Light'
         Height: =88
-        Size: =25
+        Size: =21
         Text: ="Emitir Sequência de Manobras"
         Width: =Parent.Width - Self.X
         Wrap: =false
         X: =80
         ZIndex: =3
+
+    infoVaoContainerVertical As groupContainer.verticalAutoLayoutContainer:
+        Height: =317
+        LayoutAlignItems: =LayoutAlignItems.Center
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =640
+        Y: =478
+        ZIndex: =4
+
+        tensaoLabel As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Lighter
+            Height: =70
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            Size: =21
+            Text: |-
+                ="Tensão: "&varVao.vao_tensao
+            Visible: =!IsBlank(varVao.vao_tensao)
+            Width: =560
+            ZIndex: =1
+
+        linhaLabel As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Lighter
+            Height: =70
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            Size: =21
+            Text: |-
+                ="Linha: "&varVao.vao_linha
+            Visible: =!IsBlank(varVao.vao_linha)
+            Width: =560
+            ZIndex: =2
+
+        controleReativoLabel As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Lighter
+            Height: =70
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            Size: =21
+            Text: |-
+                ="Controle Reativo: "&varVao.vao_controle_reativo
+            Visible: =!IsBlank(varVao.vao_controle_reativo)
+            Width: =560
+            ZIndex: =3
+
+        disjuntorDoMeio As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(135, 190, 82, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Lato Light'
+            FontWeight: =FontWeight.Lighter
+            Height: =70
+            LayoutMinHeight: =70
+            LayoutMinWidth: =560
+            Size: =21
+            Text: |-
+                ="Disjuntor central: "&varVao.vao_disj_do_meio
+            Visible: =!IsBlank(varVao.vao_disj_do_meio)
+            Width: =560
+            ZIndex: =4
 
     PTTextInput As text:
         BorderColor: =RGBA(135, 190, 82, 1)
@@ -69,7 +146,7 @@
         Width: =295
         X: =15
         Y: =111
-        ZIndex: =4
+        ZIndex: =5
 
     PLETextInput As text:
         BorderColor: =RGBA(135, 190, 82, 1)
@@ -93,28 +170,6 @@
         Width: =295
         X: =326
         Y: =111
-        ZIndex: =5
-
-    vaoTextInput As text:
-        BorderColor: =RGBA(135, 190, 82, 1)
-        BorderThickness: =2
-        Color: =RGBA(0, 0, 0, 1)
-        Default: =""
-        DisabledBorderColor: =RGBA(166, 166, 166, 1)
-        DisabledColor: =RGBA(166, 166, 166, 1)
-        DisabledFill: =RGBA(244, 244, 244, 1)
-        FocusedBorderThickness: =4
-        Font: =Font.'Lato Light'
-        FontWeight: =FontWeight.Lighter
-        Height: =64
-        HintText: ="Vão"
-        HoverBorderColor: =RGBA(135, 190, 82, 1)
-        HoverColor: =RGBA(255, 255, 255, 1)
-        HoverFill: =RGBA(53, 74, 36, 1)
-        Size: =20
-        Width: =606
-        X: =15
-        Y: =376
         ZIndex: =6
 
     subestacaoComboBox As combobox:
@@ -134,12 +189,44 @@
         HoverColor: =RGBA(255, 255, 255, 1)
         HoverFill: =RGBA(53, 74, 36, 1)
         InputTextPlaceholder: ="Subestação"
-        Items: =colManobrasSubestacoes
-        OnChange: =ClearCollect(colManobras,Sort(Distinct(Filter(TemplatesRoteirosManobra,manobra_subestacao=subestacaoComboBox.Selected.Value),manobra_nome),Value,SortOrder.Ascending))
+        Items: =Choices([@TemplatesRoteirosManobra].manobra_subestacao)
+        OnChange: |-
+            =ClearCollect(
+                colManobras,
+                Sort(
+                    Distinct(
+                        Filter(
+                            TemplatesRoteirosManobra,
+                            manobra_subestacao.Value = subestacaoComboBox.Selected.Value
+                        ),
+                        manobra_nome
+                    ),
+                    Value,
+                    SortOrder.Ascending
+                )
+            );
+            ClearCollect(
+                colVaos,
+                Sort(
+                    Distinct(
+                        Filter(
+                            VaosSubestacoesTransmissao,
+                            vao_subestacao.Value = subestacaoComboBox.Selected.Value
+                        ),
+                        vao_nome
+                    ),
+                    Value,
+                    SortOrder.Ascending
+                )
+            );
+            If(
+                !IsBlank(subestacaoComboBox.Selected) && IsEmpty(colManobras),
+                UpdateContext({varDicaTimerStart: true})
+            )
         PressedColor: =RGBA(255, 255, 255, 1)
         PressedFill: =RGBA(135, 190, 82, 1)
         SearchFields: =["Value"]
-        SearchItems: =Search(colManobrasSubestacoes,subestacaoComboBox.SearchText,"Value")
+        SearchItems: =Choices(TemplatesRoteirosManobra.manobra_subestacao,subestacaoComboBox.SearchText)
         SelectionFill: =RGBA(12, 126, 44, 1)
         SelectMultiple: =false
         Size: =21
@@ -168,7 +255,7 @@
         InputTextPlaceholder: =
         IsSearchable: =false
         Items: =colManobras
-        NoSelectionText: ="Manobra"
+        NoSelectionText: =If(Self.DisplayMode = DisplayMode.Edit && IsEmpty(colManobras),"Subestação sem templates cadastrados","Manobra")
         PressedColor: =RGBA(255, 255, 255, 1)
         PressedFill: =RGBA(135, 190, 82, 1)
         SearchFields: =["Value"]
@@ -180,6 +267,54 @@
         X: =15
         Y: =289
         ZIndex: =8
+
+    vaoComboBox As combobox:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        ChevronBackground: =RGBA(12, 126, 44, 1)
+        ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+        ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
+        ChevronHoverFill: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(0, 0, 0, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayFields: =["Value"]
+        DisplayMode: =If(IsBlank(subestacaoComboBox.Selected.Value),DisplayMode.Disabled,DisplayMode.Edit)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =70
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(53, 74, 36, 1)
+        InputTextPlaceholder: =
+        IsSearchable: =false
+        Items: =colVaos
+        NoSelectionText: =If(Self.DisplayMode = DisplayMode.Edit && IsEmpty(colManobras),"Subestação sem vãos cadastrados","Vão")
+        OnChange: |-
+            =If(
+                !IsBlank(vaoComboBox.Selected),
+                UpdateContext(
+                    {
+                        varVao: First(
+                            Filter(
+                                VaosSubestacoesTransmissao,
+                                vao_nome = vaoComboBox.Selected.Value,
+                                vao_subestacao.Value = subestacaoComboBox.Selected.Value
+                            )
+                        )
+                    }
+                )
+            )
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(135, 190, 82, 1)
+        SearchFields: =["Value"]
+        SearchItems: =[]
+        SelectionFill: =RGBA(12, 126, 44, 1)
+        SelectMultiple: =false
+        Size: =21
+        Width: =606
+        X: =15
+        Y: =379
+        ZIndex: =9
 
     novoTemplateIcon As icon.Add:
         BorderColor: =RGBA(135, 190, 82, 1)
@@ -196,6 +331,27 @@
         Y: =19
         ZIndex: =12
 
+    limparCamposIcon As icon.Add:
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(244, 244, 244, 1)
+        Height: =45
+        Icon: =Icon.Erase
+        OnSelect: |-
+            =Reset(PTTextInput);
+            Reset(PLETextInput);
+            Reset(subestacaoComboBox);
+            Reset(manobraComboBox);
+            Reset(vaoComboBox);
+            UpdateContext({varVao: Blank()})
+        Tooltip: ="Clique aqui para limpar os campos do formulário"
+        Visible: =!IsBlank(PTTextInput.Text) || !IsBlank(PLETextInput.Text) || !IsBlank(subestacaoComboBox.Selected) || !IsBlank(manobraComboBox.Selected) || !IsBlank(vaoComboBox.Selected)
+        Width: =45
+        X: =510
+        Y: =21
+        ZIndex: =13
+
     gerarManobraGroup As group:
         Height: =5
         Width: =5
@@ -210,7 +366,7 @@
             DisabledFill: =RGBA(244, 244, 244, 1)
             DisplayMode: |-
                 =If(
-                    IsBlank(PTTextInput.Text) || IsBlank(PLETextInput.Text) || IsBlank(subestacaoComboBox.Selected) || IsBlank(manobraComboBox.Selected) || IsBlank(vaoTextInput.Text),
+                    IsBlank(PTTextInput.Text) || IsBlank(PLETextInput.Text) || IsBlank(subestacaoComboBox.Selected) || IsBlank(manobraComboBox.Selected) || IsBlank(vaoComboBox.Selected),
                     DisplayMode.Disabled,
                     DisplayMode.Edit
                 )
@@ -232,7 +388,7 @@
             Tooltip: =" Clique para gerar e enviar a sequência de manobras para o seu e-mail."
             Width: =193
             X: =223
-            Y: =467
+            Y: =815
             ZIndex: =10
 
         gerarManobraIcon As icon.Paste:
@@ -242,7 +398,7 @@
             DisabledColor: =RGBA(202, 202, 202, 1)
             DisplayMode: |-
                 =If(
-                    IsBlank(PTTextInput.Text) || IsBlank(PLETextInput.Text) || IsBlank(subestacaoComboBox.Selected) || IsBlank(manobraComboBox.Selected) || IsBlank(vaoTextInput.Text),
+                    IsBlank(PTTextInput.Text) || IsBlank(PLETextInput.Text) || IsBlank(subestacaoComboBox.Selected) || IsBlank(manobraComboBox.Selected) || IsBlank(vaoComboBox.Selected),
                     DisplayMode.Disabled,
                     DisplayMode.Edit
                 )
@@ -253,7 +409,7 @@
             Tooltip: =" Clique para gerar e enviar a sequência de manobras para o seu e-mail."
             Width: =48
             X: =235
-            Y: =489
+            Y: =837
             ZIndex: =11
 
     dicaTimer_1 As timer:
@@ -272,7 +428,7 @@
         Width: =280
         X: =-300
         Y: =225
-        ZIndex: =18
+        ZIndex: =19
 
     popUpGroup2_5 As group:
         Height: =5
@@ -287,7 +443,7 @@
             Height: =1136
             Visible: =varPopUpVisible
             Width: =640
-            ZIndex: =13
+            ZIndex: =14
 
         popUpRectangle_8 As rectangle:
             BorderColor: =RGBA(166, 166, 166, 1)
@@ -298,7 +454,7 @@
             Width: =445
             X: =88
             Y: =425
-            ZIndex: =14
+            ZIndex: =15
 
         yesPopUpButton_7 As button:
             Color: =RGBA(8, 88, 31, 1)
@@ -317,30 +473,27 @@
                     PTTextInput.Text,
                     PLETextInput.Text,
                     Proper(User().FullName),
-                    vaoTextInput.Text,
-                    "LINHA",//Alterar estes campos buscando de tabela a ser criada
+                    varVao.vao_nome,
                     If(
-                        "F" in vaoTextInput.Text,
-                        "13,8kV",
-                        If(
-                            "K" in vaoTextInput.Text,
-                            "138kV",
-                            If(
-                                "M" in vaoTextInput.Text,
-                                "230kV",
-                                If(
-                                    "P" in vaoTextInput.Text,
-                                    "345kV",
-                                    If(
-                                        "U" in vaoTextInput.Text,
-                                        "500kV"
-                                    )
-                                )
-                            )
-                        )
+                        IsBlank(varVao.vao_linha),
+                        "",
+                        varVao.vao_linha
                     ),
-                    "BANCO",
-                    "DISJ_MEIO",
+                    If(
+                        IsBlank(varVao.vao_tensao),
+                        "",
+                        varVao.vao_tensao
+                    ),
+                    If(
+                        IsBlank(varVao.vao_controle_reativo),
+                        "",
+                        varVao.vao_controle_reativo
+                    ),
+                    If(
+                        IsBlank(varVao.vao_disj_do_meio),
+                        "",
+                        varVao.vao_disj_do_meio
+                    ),
                     User().Email,
                     manobraComboBox.Selected.Value,
                     subestacaoComboBox.Selected.Value
@@ -355,7 +508,7 @@
             Width: =155
             X: =147
             Y: =584
-            ZIndex: =15
+            ZIndex: =16
 
         cancelPopUpButton_7 As button:
             Color: =RGBA(39, 113, 194, 1)
@@ -376,7 +529,7 @@
             Width: =155
             X: =327
             Y: =584
-            ZIndex: =16
+            ZIndex: =17
 
         popupMessageLabel_8 As label:
             Align: =Align.Center
@@ -391,7 +544,7 @@
             Width: =410
             X: =104
             Y: =437
-            ZIndex: =17
+            ZIndex: =18
 
     dicaPopUpGroup_1 As group:
         Height: =5
@@ -408,7 +561,7 @@
             Width: =385
             X: =228
             Y: =129
-            ZIndex: =19
+            ZIndex: =20
 
         dicaTriangle_1 As triangle:
             BorderColor: =RGBA(0, 0, 0, 1)
@@ -418,7 +571,7 @@
             Width: =30
             X: =584
             Y: =59
-            ZIndex: =20
+            ZIndex: =21
 
         dicaLabel_1 As label:
             Align: =Align.Center
@@ -429,12 +582,17 @@
             FontWeight: =FontWeight.Lighter
             Height: =174
             Size: =17
-            Text: ="Deseja criar um novo template para automatizar a emissão de uma sequência de manobras? Entre em contato com o desenvolvedor para auxiliá-lo, clicando aqui!"
+            Text: |-
+                =If(
+                    !IsBlank(subestacaoComboBox.Selected) && IsEmpty(colManobras),
+                    "A subestação selecionada não possui templates cadastrados. Clique aqui para entrar em contato com o desenvolvedor caso deseje criar um novo template.",
+                    "Deseja criar um novo template para automatizar a emissão de uma sequência de manobras? Entre em contato com o desenvolvedor para auxiliá-lo, clicando aqui!"
+                )
             Visible: =varDicaTimerStart
             Width: =324
             X: =259
             Y: =147
-            ZIndex: =21
+            ZIndex: =22
 
         closePopUpIcon As icon.Cancel:
             BorderColor: =RGBA(166, 166, 166, 1)
@@ -454,5 +612,5 @@
             Width: =35
             X: =571
             Y: =143
-            ZIndex: =22
+            ZIndex: =23
 
