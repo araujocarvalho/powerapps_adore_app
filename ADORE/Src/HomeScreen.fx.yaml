@@ -1094,7 +1094,6 @@
             LayoutMinHeight: =112
             LayoutMinWidth: =250
             LayoutMode: =LayoutMode.Auto
-            Visible: =_varUserIsAdmin
             ZIndex: =12
 
             sequenciaManobrasIcon As icon.Search:
