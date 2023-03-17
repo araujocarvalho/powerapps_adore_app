@@ -1149,7 +1149,6 @@
             BorderColor: =RGBA(135, 190, 82, 1)
             Fill: =RGBA(12, 126, 44, 1)
             Height: =1
-            Visible: =_varUserIsAdmin
             Width: =555
             X: =40
             Y: =40
