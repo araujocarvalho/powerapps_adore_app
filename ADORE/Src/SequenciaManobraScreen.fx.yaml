@@ -324,6 +324,22 @@
         Y: =379
         ZIndex: =9
 
+    Label2 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(135, 190, 82, 1)
+        Color: =RGBA(255, 0, 0, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Lato Light'
+        FontWeight: =FontWeight.Lighter
+        Height: =70
+        Size: =18
+        Text: ="Preencha todos os campos."
+        Visible: =gerarManobraButton.DisplayMode = DisplayMode.Disabled
+        Width: =560
+        X: =40
+        Y: =924
+        ZIndex: =12
+
     novoTemplateIcon As icon.Add:
         BorderColor: =RGBA(135, 190, 82, 1)
         Color: =RGBA(255, 255, 255, 1)
@@ -337,7 +353,7 @@
         Width: =50
         X: =571
         Y: =19
-        ZIndex: =12
+        ZIndex: =13
 
     limparCamposIcon As icon.Add:
         BorderColor: =RGBA(135, 190, 82, 1)
@@ -358,7 +374,7 @@
         Width: =45
         X: =510
         Y: =21
-        ZIndex: =13
+        ZIndex: =14
 
     gerarManobraGroup As group:
         Height: =5
@@ -381,12 +397,12 @@
             Fill: =RGBA(102, 182, 227, 1)
             Font: =Font.'Lato Light'
             FontWeight: =FontWeight.Lighter
-            Height: =89
+            Height: =77
             HoverColor: =RGBA(255, 255, 255, 1)
             HoverFill: =ColorFade(RGBA(12, 126, 44, 1), -20%)
             OnSelect: |-
                 =UpdateContext({varPopUpVisible:true})
-            PaddingRight: =20
+            PaddingRight: =15
             RadiusBottomLeft: =25
             RadiusBottomRight: =25
             RadiusTopLeft: =25
@@ -394,8 +410,8 @@
             Size: =24
             Text: ="Gerar"
             Tooltip: =" Clique para gerar e enviar a sequência de manobras para o seu e-mail."
-            Width: =193
-            X: =223
+            Width: =157
+            X: =232
             Y: =815
             ZIndex: =10
 
@@ -410,14 +426,14 @@
                     DisplayMode.Disabled,
                     DisplayMode.Edit
                 )
-            Height: =45
+            Height: =39
             Icon: =Icon.Paste
             OnSelect: |-
                 =UpdateContext({varPopUpVisible:true})
             Tooltip: =" Clique para gerar e enviar a sequência de manobras para o seu e-mail."
-            Width: =48
-            X: =235
-            Y: =837
+            Width: =39
+            X: =gerarManobraButton.X+15
+            Y: =834
             ZIndex: =11
 
     dicaTimer_1 As timer:
@@ -436,7 +452,7 @@
         Width: =280
         X: =-300
         Y: =225
-        ZIndex: =19
+        ZIndex: =20
 
     popUpGroup2_5 As group:
         Height: =5
@@ -451,7 +467,7 @@
             Height: =1136
             Visible: =varPopUpVisible
             Width: =640
-            ZIndex: =14
+            ZIndex: =15
 
         popUpRectangle_8 As rectangle:
             BorderColor: =RGBA(166, 166, 166, 1)
@@ -462,7 +478,7 @@
             Width: =445
             X: =88
             Y: =425
-            ZIndex: =15
+            ZIndex: =16
 
         yesPopUpButton_7 As button:
             Color: =RGBA(8, 88, 31, 1)
@@ -516,7 +532,7 @@
             Width: =155
             X: =147
             Y: =584
-            ZIndex: =16
+            ZIndex: =17
 
         cancelPopUpButton_7 As button:
             Color: =RGBA(39, 113, 194, 1)
@@ -537,7 +553,7 @@
             Width: =155
             X: =327
             Y: =584
-            ZIndex: =17
+            ZIndex: =18
 
         popupMessageLabel_8 As label:
             Align: =Align.Center
@@ -552,7 +568,7 @@
             Width: =410
             X: =104
             Y: =437
-            ZIndex: =18
+            ZIndex: =19
 
     dicaPopUpGroup_1 As group:
         Height: =5
@@ -569,7 +585,7 @@
             Width: =385
             X: =228
             Y: =129
-            ZIndex: =20
+            ZIndex: =21
 
         dicaTriangle_1 As triangle:
             BorderColor: =RGBA(0, 0, 0, 1)
@@ -579,7 +595,7 @@
             Width: =30
             X: =584
             Y: =59
-            ZIndex: =21
+            ZIndex: =22
 
         dicaLabel_1 As label:
             Align: =Align.Center
@@ -600,7 +616,7 @@
             Width: =324
             X: =259
             Y: =147
-            ZIndex: =22
+            ZIndex: =23
 
         closePopUpIcon As icon.Cancel:
             BorderColor: =RGBA(166, 166, 166, 1)
@@ -620,5 +636,5 @@
             Width: =35
             X: =571
             Y: =143
-            ZIndex: =23
+            ZIndex: =24
 
