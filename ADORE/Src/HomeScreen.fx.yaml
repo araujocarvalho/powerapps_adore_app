@@ -1103,7 +1103,8 @@
                 DisabledColor: =RGBA(244, 244, 244, 1)
                 Height: =70
                 Icon: =Icon.Paste
-                OnSelect: =Navigate(SequenciaManobraScreen)
+                OnSelect: |-
+                    =Navigate(SequenciaManobraScreen,ScreenTransition.None,{varSubestacao:Blank()})
                 PaddingBottom: =10
                 PaddingLeft: =50
                 PaddingRight: =10
@@ -1130,7 +1131,8 @@
                 HoverFill: =RGBA(0, 0, 0, 0)
                 LayoutMinHeight: =70
                 LayoutMinWidth: =280
-                OnSelect: =Navigate(SequenciaManobraScreen)
+                OnSelect: |-
+                    =Navigate(SequenciaManobraScreen,ScreenTransition.None,{varSubestacao:Blank()})
                 PaddingBottom: =0
                 PaddingRight: =10
                 PaddingTop: =0

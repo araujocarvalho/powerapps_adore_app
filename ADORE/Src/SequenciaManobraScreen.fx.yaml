@@ -179,6 +179,7 @@
         ChevronDisabledFill: =RGBA(244, 244, 244, 1)
         ChevronHoverBackground: =ColorFade(RGBA(12, 126, 44, 1), -20%)
         ChevronHoverFill: =RGBA(255, 255, 255, 1)
+        DefaultSelectedItems: =If(!IsBlank(varSubestacao),LookUp(Choices([@TemplatesRoteirosManobra].manobra_subestacao),Value=varSubestacao))
         DisabledBorderColor: =RGBA(166, 166, 166, 1)
         DisabledColor: =RGBA(166, 166, 166, 1)
         DisabledFill: =RGBA(244, 244, 244, 1)
