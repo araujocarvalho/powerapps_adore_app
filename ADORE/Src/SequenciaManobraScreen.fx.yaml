@@ -319,6 +319,15 @@
         SelectionFill: =RGBA(12, 126, 44, 1)
         SelectMultiple: =false
         Size: =21
+        Visible: |-
+            =!IsBlank(manobraComboBox.Selected.Value) && !IsBlank(
+                First(
+                    Filter(
+                        TemplatesRoteirosManobra,
+                        manobra_nome = manobraComboBox.Selected.Value
+                    )
+                ).manobra_filtro
+            )
         Width: =606
         X: =15
         Y: =379
@@ -368,7 +377,12 @@
             Reset(subestacaoComboBox);
             Reset(manobraComboBox);
             Reset(vaoComboBox);
-            UpdateContext({varVao: Blank()})
+            UpdateContext(
+                {
+                    varVao: Blank(),
+                    varSubestacao: Blank()
+                }
+            )
         Tooltip: ="Clique aqui para limpar os campos do formulário"
         Visible: =!IsBlank(PTTextInput.Text) || !IsBlank(PLETextInput.Text) || !IsBlank(subestacaoComboBox.Selected) || !IsBlank(manobraComboBox.Selected) || !IsBlank(vaoComboBox.Selected)
         Width: =45
@@ -390,7 +404,7 @@
             DisabledFill: =RGBA(244, 244, 244, 1)
             DisplayMode: |-
                 =If(
-                    IsBlank(PTTextInput.Text) || IsBlank(PLETextInput.Text) || IsBlank(subestacaoComboBox.Selected) || IsBlank(manobraComboBox.Selected) || IsBlank(vaoComboBox.Selected),
+                    IsBlank(PTTextInput.Text) || IsBlank(PLETextInput.Text) || IsBlank(subestacaoComboBox.Selected) || IsBlank(manobraComboBox.Selected) || (vaoComboBox.Visible &&IsBlank(vaoComboBox.Selected)),
                     DisplayMode.Disabled,
                     DisplayMode.Edit
                 )
@@ -422,7 +436,7 @@
             DisabledColor: =RGBA(202, 202, 202, 1)
             DisplayMode: |-
                 =If(
-                    IsBlank(PTTextInput.Text) || IsBlank(PLETextInput.Text) || IsBlank(subestacaoComboBox.Selected) || IsBlank(manobraComboBox.Selected) || IsBlank(vaoComboBox.Selected),
+                    IsBlank(PTTextInput.Text) || IsBlank(PLETextInput.Text) || IsBlank(subestacaoComboBox.Selected) || IsBlank(manobraComboBox.Selected) || (vaoComboBox.Visible &&IsBlank(vaoComboBox.Selected)),
                     DisplayMode.Disabled,
                     DisplayMode.Edit
                 )
@@ -497,7 +511,11 @@
                     PTTextInput.Text,
                     PLETextInput.Text,
                     Proper(User().FullName),
-                    varVao.vao_nome,
+                    If(
+                        IsBlank(varVao.vao_nome),
+                        "",
+                        varVao.vao_nome
+                    ),
                     If(
                         IsBlank(varVao.vao_linha),
                         "",
